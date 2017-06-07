@@ -4,11 +4,11 @@ import { HostService} from '../host.service';
 
 @Component({
   selector: 'app-start',
-  templateUrl: './start.component.html',
-  styleUrls: ['./start.component.css'],
+  templateUrl: './host.component.html',
+  styleUrls: ['./host.component.css'],
   providers: [HostService]
 })
-export class StartComponent implements OnInit {
+export class HostComponent implements OnInit {
   games: FirebaseListObservable<any[]>;
 
   constructor(private hostService: HostService) { }
