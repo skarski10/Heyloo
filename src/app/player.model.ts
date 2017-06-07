@@ -1,3 +1,6 @@
 export class Player {
-  constructor(public name: string){ }
+  public ratio: number;
+  constructor(public name: string, public correct: number, public wrong: number){
+    this.ratio = (this.correct / this.wrong);
+  }
 }
