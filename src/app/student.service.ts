@@ -12,6 +12,6 @@ export class StudentService {
   constructor(private database: AngularFireDatabase, private studentService: StudentService) { }
 
   getStudent(id: number){
-
+    
   }
 }

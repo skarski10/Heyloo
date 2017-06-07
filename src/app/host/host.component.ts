@@ -13,6 +13,10 @@ export class HostComponent implements OnInit {
 
   constructor(private hostService: HostService) { }
 
+  createGame(){
+    this.HostService.createGame();
+  }
+
   ngOnInit() {
     this.games = this.hostService.getGames();
   }

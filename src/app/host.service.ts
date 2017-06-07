@@ -22,7 +22,12 @@ export class HostService {
     return this.database.object('games/' + chosenGameId);
   }
 
-  createGame(newGame: Game){
-    this.games.push(newGame);
+  randomId(){
+    return Math.floor(Math.random()*90000) + 10000;
+  }
+
+  createGame(){
+    var freshGame: Game = new Game(this.randomId(), "starting", false, [], []);
+    this.games.push(freshGame);
   }
 }
