@@ -1,0 +1,9 @@
+{ "games": [{
+  "id": 123456,
+  "game_state": "start",
+  "game_over": false,
+  "player_list": ["player"],
+  "question_list": ["question1"],
+  "current_question": 1
+  }]
+}
