@@ -8,6 +8,9 @@ import { AngularFireModule } from 'angularfire2';
 import { AppComponent } from './app.component';
 import { HostComponent } from './host/host.component';
 import { StudentComponent } from './student/student.component';
+import { RegisterComponent } from './register/register.component';
+import { routing } from './app.routing';
+
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -20,14 +23,16 @@ export const firebaseConfig = {
   declarations: [
     AppComponent,
     HostComponent,
-    StudentComponent
+    StudentComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    routing
   ],
   providers: [],
   bootstrap: [AppComponent]

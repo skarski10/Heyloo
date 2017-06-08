@@ -2,6 +2,7 @@ import { ModuleWithProviders }  from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HostComponent } from './host/host.component';
 import { StudentComponent } from './student/student.component';
+import { RegisterComponent } from './register/register.component';
 
 const appRoutes: Routes = [
 {
@@ -11,6 +12,10 @@ const appRoutes: Routes = [
 {
   path: '',
   component: StudentComponent
+},
+{
+  path: 'register',
+  component: RegisterComponent
 }
 ];
 

@@ -10,6 +10,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 @Injectable()
 export class HostService {
   games: FirebaseListObservable<any[]>;
+  
   questionData;
 
   constructor(private database: AngularFireDatabase, private http: Http) {
