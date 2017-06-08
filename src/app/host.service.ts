@@ -13,11 +13,19 @@ export class HostService {
   constructor(private database: AngularFireDatabase) {
     this.games = database.list('games');
   }
+<<<<<<< HEAD
   
   getGames(){
     return this.games;
   }
 
+=======
+
+  getGames(){
+    return this.games;
+  }
+
+>>>>>>> 6589ef9eda8878640f4d19594902d473ac2f220c
   getGame(chosenGameId: string){
     return this.database.object('games/' + chosenGameId);
   }

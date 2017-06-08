@@ -4,3 +4,6 @@ export class Player {
     this.ratio = (this.correct / this.wrong);
   }
 }
+
+// should we add a player score?
+// what about player id?
