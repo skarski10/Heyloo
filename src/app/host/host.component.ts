@@ -9,16 +9,16 @@ import { HostService} from '../host.service';
   providers: [HostService]
 })
 export class HostComponent {
-  // games: FirebaseListObservable<any[]>;
-  //
-  // constructor(private hostService: HostService) { }
-  //
-  // ngOnInit() {
-  //   this.games = this.hostService.getGames();
-  // }
-  //
-  // createGame(){
-  //   this.hostService.createGame();
-  // }
+  games: FirebaseListObservable<any[]>;
+
+  constructor(private hostService: HostService) { }
+
+  ngOnInit() {
+    this.games = this.hostService.getGames();
+  }
+
+  createGame(){
+    this.hostService.createGame();
+  }
 
 }

@@ -11,23 +11,23 @@ export class HostService {
   games: FirebaseListObservable<any[]>;
 
   constructor(private database: AngularFireDatabase) {
-    // this.games = database.list('games');
+    this.games = database.list('games');
   }
-  //
-  // getGames(){
-  //   return this.games;
-  // }
-  //
-  // getGame(chosenGameId: string){
-  //   return this.database.object('games/' + chosenGameId);
-  // }
+  
+  getGames(){
+    return this.games;
+  }
 
-  // randomId(){
-  //   return Math.floor(Math.random()*90000) + 10000;
-  // }
-  //
-  // createGame(){
-  //   var freshGame: Game = new Game(this.randomId(), "starting", false, [], []);
-  //   this.games.push(freshGame);
-  // }
+  getGame(chosenGameId: string){
+    return this.database.object('games/' + chosenGameId);
+  }
+
+  randomId(){
+    return Math.floor(Math.random()*90000) + 10000;
+  }
+
+  createGame(){
+    var freshGame: Game = new Game(this.randomId(), "starting", false, [], []);
+    this.games.push(freshGame);
+  }
 }
