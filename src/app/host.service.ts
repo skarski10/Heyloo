@@ -10,9 +10,9 @@ import { AngularFireAuth } from 'angularfire2/auth';
 export class HostService {
   games: FirebaseListObservable<any[]>;
 
-  // constructor(private database: AngularFireDatabase, private hostService: HostService) {
-  //   this.games = database.list('games');
-  // }
+  constructor(private database: AngularFireDatabase) {
+    // this.games = database.list('games');
+  }
   //
   // getGames(){
   //   return this.games;
