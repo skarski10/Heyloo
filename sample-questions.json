@@ -2,5 +2,9 @@
   "question": "What color is the sky?",
   "right_answer": "Blue",
   "wrong_answers": ["Green", "Yellow", "Purple"]
+},{
+  "question": "What is 2 + 2?",
+  "right_answer": "4",
+  "wrong_answers": ["0", "5", "3"]
   }]
 }
