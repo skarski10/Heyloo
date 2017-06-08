@@ -29,7 +29,11 @@ export class HostComponent {
   }
 
   startGame(){
-    var newGame: Game = new Game(this.randomId(), "starting", false, this.students, this.questions);
+    var newGame: Game = new Game(this.randomId(), "starting", false, [], []);
     this.hostService.createGame(newGame);
   }
+  // startGame(){
+  //   var newGame: Game = new Game(this.randomId(), "starting", false, this.students, this.questions);
+  //   this.hostService.createGame(newGame);
+  // }
 }

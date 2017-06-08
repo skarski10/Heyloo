@@ -10,7 +10,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 @Injectable()
 export class HostService {
   games: FirebaseListObservable<any[]>;
-  
+
   questionData;
 
   constructor(private database: AngularFireDatabase, private http: Http) {
@@ -35,7 +35,7 @@ export class HostService {
   }
 
   getQuestions(){
-    return this.http.request('./sample-questions.json')
-                 .subscribe(result => result.json());
+    return this.http.get('data/data.json')
+        .subscribe(res => res.json());
   }
 }
