@@ -11,7 +11,7 @@ import { FirebaseListObservable } from 'angularfire2/database';
   providers: [StudentService]
 })
 export class StudentComponent implements OnInit {
-  players: FirebaseListObservable<any[]>;
+  students: FirebaseListObservable<any[]>;
   studentId: string;
   studentToDisplay: Player;
 
@@ -27,10 +27,10 @@ export class StudentComponent implements OnInit {
          dataLastEmittedFromObserver.correct,
          dataLastEmittedFromObserver.wrong)
        })
-       this.players = this.studentService.getStudents();
+       this.students = this.studentService.getStudents();
   }
-  createPlayer(name: string, correct: number, wrong: number) {
+  createStudent(name: string, correct: number, wrong: number) {
       var newStudent: Player = new Player(name, correct, wrong);
-      this.studentService.addPlayer(newStudent);
+      this.studentService.addStudent(newStudent);
     }
 }

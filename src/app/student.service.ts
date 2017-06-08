@@ -21,7 +21,7 @@ export class StudentService {
     return this.players;
   }
 
-  addPlayer(newPlayer: Player) {
+  addStudent(newPlayer: Player) {
     this.players.push(newPlayer);
   }
 }
