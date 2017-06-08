@@ -10,24 +10,24 @@ import { AngularFireAuth } from 'angularfire2/auth';
 export class HostService {
   games: FirebaseListObservable<any[]>;
 
-  // constructor(private database: AngularFireDatabase, private hostService: HostService) {
-  //   this.games = database.list('games');
-  // }
-  //
-  // getGames(){
-  //   return this.games;
-  // }
-  //
-  // getGame(chosenGameId: string){
-  //   return this.database.object('games/' + chosenGameId);
-  // }
+  constructor(private database: AngularFireDatabase) {
+    this.games = database.list('games');
+  }
 
-  // randomId(){
-  //   return Math.floor(Math.random()*90000) + 10000;
-  // }
-  //
-  // createGame(){
-  //   var freshGame: Game = new Game(this.randomId(), "starting", false, [], []);
-  //   this.games.push(freshGame);
-  // }
+  getGames(){
+    return this.games;
+  }
+
+  getGame(chosenGameId: string){
+    return this.database.object('games/' + chosenGameId);
+  }
+
+  randomId(){
+    return Math.floor(Math.random()*90000) + 10000;
+  }
+
+  createGame(){
+    var freshGame: Game = new Game(this.randomId(), "starting", false, [], []);
+    this.games.push(freshGame);
+  }
 }
