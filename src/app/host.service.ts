@@ -10,12 +10,12 @@ import { AngularFireAuth } from 'angularfire2/auth';
 @Injectable()
 export class HostService {
   games: FirebaseListObservable<any[]>;
-  var data;
+  questionData;
 
   constructor(private database: AngularFireDatabase, private http: Http) {
     this.games = database.list('games');
     this.http.get('../../sample-game.json')
-      .subscribe(result => this.data = result.json());
+      .subscribe(result => this.questionData = result.json());
   }
 
   getGames(){
