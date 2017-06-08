@@ -3,19 +3,17 @@ import { FirebaseListObservable } from 'angularfire2/database';
 import { HostService} from '../host.service';
 
 @Component({
-  selector: 'host-component',
-  templateUrl: './host.component.html',
-  styleUrls: ['./host.component.css'],
+  selector: 'app-start',
+  templateUrl: './start.component.html',
+  styleUrls: ['./start.component.css'],
   providers: [HostService]
 })
-export class HostComponent {
+export class StartComponent implements OnInit {
   games: FirebaseListObservable<any[]>;
-  var currentGame;
+
   constructor(private hostService: HostService) { }
 
   ngOnInit() {
     this.games = this.hostService.getGames();
-    this.currentgame = this.hostService.createGame();
-
   }
 }

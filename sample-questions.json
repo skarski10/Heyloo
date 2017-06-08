@@ -1,0 +1,6 @@
+{ "question": [{
+  "question": "What color is the sky?",
+  "right_answer": "Blue",
+  "wrong_answers": ["Green", "Yellow", "Purple"]
+  }]
+}
