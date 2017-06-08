@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseListObservable } from 'angularfire2/database';
 import { HostService} from '../host.service';
+import { Question } from '../question.model';
+import { Game } from '../game.model';
+
 
 @Component({
   selector: 'host-component',
@@ -11,11 +14,22 @@ import { HostService} from '../host.service';
 export class HostComponent {
   games: FirebaseListObservable<any[]>;
   currentGame;
+  questions;
+  students:any[] = ["kory", "melvin", "scott", "loren"];
+
   constructor(private hostService: HostService) { }
 
   ngOnInit() {
+    this.questions = this.hostService.getQuestions();
     this.games = this.hostService.getGames();
-    this.currentGame = this.hostService.createGame();
+  }
 
+  randomId(){
+    return Math.floor(Math.random()*90000) + 10000;
+  }
+
+  startGame(){
+    var newGame: Game = new Game(this.randomId(), "starting", false, this.students, this.questions);
+    this.hostService.createGame(newGame);
   }
 }

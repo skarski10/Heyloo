@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Response } from '@angular/http';
 import { Game } from './game.model';
 import { Player } from './player.model';
 import { Question } from './question.model';
@@ -15,8 +15,6 @@ export class HostService {
 
   constructor(private database: AngularFireDatabase, private http: Http) {
     this.games = database.list('games');
-    this.http.get('../../sample-game.json')
-      .subscribe(result => this.questionData = result.json());
   }
 
   getGames(){
@@ -31,9 +29,13 @@ export class HostService {
     return Math.floor(Math.random()*90000) + 10000;
   }
 
-  createGame(){
-    var freshGame: Game = new Game(this.randomId(), "starting", false, [], []);
-    this.games.push(freshGame);
-    return freshGame;
+  createGame(newGame: Game){
+    this.games.push(newGame);
+    return newGame;
+  }
+
+  getQuestions(){
+    return this.http.request('./sample-questions.json')
+                 .subscribe(result => result.json());
   }
 }
