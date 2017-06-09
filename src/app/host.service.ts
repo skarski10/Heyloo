@@ -6,11 +6,13 @@ import { Question } from './question.model';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireAuth } from 'angularfire2/auth';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class HostService {
   games: FirebaseListObservable<any[]>;
   questionData;
+  result: Object;
 
   constructor(private database: AngularFireDatabase, private http: Http) {
     this.games = database.list('games');
@@ -34,7 +36,9 @@ export class HostService {
   }
 
   getQuestions(){
-    return this.http.request('./sample-questions.json')
-                 .subscribe(result => result.json());
+    this.result = {questions:[]};
+    return this.http.get('./src/assest/sample-questions.json')
+                 .map((res:Response) => res.json())
+                 .subscribe(res => this.result = res);
   }
 }

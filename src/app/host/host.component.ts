@@ -22,6 +22,7 @@ export class HostComponent {
   ngOnInit() {
     this.questions = this.hostService.getQuestions();
     this.games = this.hostService.getGames();
+    console.log(this.questions);
   }
 
   randomId(){
@@ -29,6 +30,7 @@ export class HostComponent {
   }
 
   startGame(){
+    console.log(this.questions);
     var newGame: Game = new Game(this.randomId(), "starting", false, this.students, this.questions);
     this.hostService.createGame(newGame);
   }
