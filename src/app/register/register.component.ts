@@ -21,21 +21,14 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.games = this.hostService.getGames();
-    console.log(this.games);
-    this.games.subscribe(data => {this.subGames = data;
-    console.log(this.subGames
-    )
-  });
   }
 
   register(username: string, roomcode: number){
-    console.log(this.subGames);
-    for(let i=0; i<this.subGames.length;i++){
-      if(this.subGames[i].id = roomcode){
-        this.currentGame = this.subGames[i];
-      }
-    }
+    this.currentGame = this.hostService.getGameFromCode(roomcode);
+    var newPlayer = new Player(username, 0, 0);
     console.log(this.currentGame);
+    this.currentGame.player_list.push(newPlayer);
+    // https://stackoverflow.com/questions/39401228/get-child-of-firebaseobjectobservable-angularfire2
   }
 
 }
