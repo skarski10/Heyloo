@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FirebaseListObservable } from 'angularfire2/database';
 import { HostService} from '../host.service';
 import { Question } from '../question.model';
@@ -13,25 +14,39 @@ import { Game } from '../game.model';
 })
 export class HostComponent {
   games: FirebaseListObservable<any[]>;
-  currentGame;
+  currentGame: Game;
+  gameId: number;
   questions;
-  students:any[] = ["kory", "melvin", "scott", "loren"];
+  // students:any[] = ["kory", "melvin", "scott", "loren"];
+  currentRoute: string = this.router.url;
 
-  constructor(private hostService: HostService) { }
+  constructor(private route: ActivatedRoute, private hostService: HostService, private router: Router) { }
 
   ngOnInit() {
-    this.questions = this.hostService.getQuestions();
-    this.games = this.hostService.getGames();
-    console.log(this.questions);
+    // this.questions = this.hostService.getQuestions();
+    // this.games = this.hostService.getGames();
+    this.route.params.forEach((urlParameters) => {
+      this.gameId = urlParameters["id"];
+    });
+      this.hostService.getGame(this.gameId).subscribe(dataLastEmittedFromObserver => {
+        this.currentGame = new Game
+        (dataLastEmittedFromObserver.id,
+        dataLastEmittedFromObserver.game_state,
+        dataLastEmittedFromObserver.game_over,
+        dataLastEmittedFromObserver.player_list,
+        dataLastEmittedFromObserver.question_list,)
+      })
+    console.log(this.gameId);
   }
 
   randomId(){
     return Math.floor(Math.random()*90000) + 10000;
   }
 
-  startGame(){
-    console.log(this.questions);
-    var newGame: Game = new Game(this.randomId(), "starting", false, this.students, this.questions);
-    this.hostService.createGame(newGame);
-  }
+  // startGame(){
+  //   console.log(this.questions);
+  //   var newGame: Game = new Game(this.randomId(), "starting", false, this.students, this.questions);
+  //   this.hostService.createGame(newGame);
+  //   this.getCurrentGame();
+  // }
 }

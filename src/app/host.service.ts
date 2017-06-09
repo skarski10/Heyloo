@@ -11,7 +11,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class HostService {
   games: FirebaseListObservable<any[]>;
-  
+
   questionData;
   result: Object;
 
@@ -23,23 +23,28 @@ export class HostService {
     return this.games;
   }
 
-  getGame(chosenGameId: string){
-    return this.database.object('games/' + chosenGameId);
+  getGame(chosenGameId: number){
+    return this.database.object('host/' + chosenGameId);
   }
 
   randomId(){
     return Math.floor(Math.random()*90000) + 10000;
   }
 
-  createGame(newGame: Game){
-    this.games.push(newGame);
-    return newGame;
-  }
+  createGame(){
+    var freshGame: Game = new Game(this.randomId(), "starting", false, [], []);
+    this.games.push(freshGame);
+    return freshGame;
+}
+  // createGame(newGame: Game){
+  //   this.games.push(newGame);
+  //   return newGame;
+  // }
 
-  getQuestions(){
-    this.result = {questions:[]};
-    return this.http.get('./src/assest/sample-questions.json')
-                 .map((res:Response) => res.json())
-                 .subscribe(res => this.result = res);
-  }
+  // getQuestions(){
+  //   this.result = {questions:[]};
+  //   return this.http.get('./src/assest/sample-questions.json')
+  //                .map((res:Response) => res.json())
+  //                .subscribe(res => this.result = res);
+  // }
 }
