@@ -13,3 +13,7 @@
     </form>
   </div>
 </div>
+
+<div *ngFor="let game of games | async">
+  {{game.id}}
+</div>
