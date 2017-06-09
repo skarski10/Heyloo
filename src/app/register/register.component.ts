@@ -29,7 +29,13 @@ export class RegisterComponent implements OnInit {
   }
 
   register(username: string, roomcode: number){
-
+    console.log(this.subGames);
+    for(let i=0; i<this.subGames.length;i++){
+      if(this.subGames[i].id = roomcode){
+        this.currentGame = this.subGames[i];
+      }
+    }
+    console.log(this.currentGame);
   }
 
 }
