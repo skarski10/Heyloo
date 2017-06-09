@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class HostService {
   games: FirebaseListObservable<any[]>;
+  
   questionData;
   result: Object;
 

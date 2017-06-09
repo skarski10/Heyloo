@@ -24,4 +24,8 @@ export class StudentService {
   addStudent(newPlayer: Player) {
     this.players.push(newPlayer);
   }
+
+  // answerQeustion(answer: string, currentPlayer: Player){
+  //   currentPlayer.
+  // }
 }
