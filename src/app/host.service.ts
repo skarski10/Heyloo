@@ -40,7 +40,7 @@ export class HostService {
   //   this.games.push(newGame);
   //   return newGame;
   // }
-
+  
   // getQuestions(){
   //   this.result = {questions:[]};
   //   return this.http.get('./src/assest/sample-questions.json')

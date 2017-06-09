@@ -29,6 +29,7 @@ export class StudentComponent implements OnInit {
        })
        this.students = this.studentService.getStudents();
   }
+
   createStudent(name: string, correct: number, wrong: number) {
       var newStudent: Player = new Player(name, correct, wrong);
       this.studentService.addStudent(newStudent);
