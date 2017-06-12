@@ -13,8 +13,6 @@ import { HostService } from '../host.service';
 })
 export class StartComponent implements OnInit {
   games:FirebaseListObservable<any[]>;
-  currentRoute: string = this.router.url;
-  currentGame: Game;
 
   constructor(private router: Router, private hostService: HostService) { }
 

@@ -26,12 +26,8 @@ export const firebaseConfig = {
     AppComponent,
     HostComponent,
     StudentComponent,
-<<<<<<< HEAD
     RegisterComponent,
     StartComponent
-=======
-    RegisterComponent
->>>>>>> d29a63666dd2461b349f24f7fc3e4459c4a07d96
   ],
   imports: [
     BrowserModule,
