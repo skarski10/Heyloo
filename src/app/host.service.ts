@@ -42,7 +42,14 @@ export class HostService {
   }
 
   getCurrentGamePlayerList(id: string){
-    return this.database.list('games/' + id + '/player_list')
+    var theList = [];
+    this.database.list('games/' + id + '/player_list').subscribe(data=>{
+      console.log(data);
+      for(let i = 0; i<data.length; i++){
+        theList.push(data[i])
+      }
+    })
+    return theList;
   }
 
   randomId(){

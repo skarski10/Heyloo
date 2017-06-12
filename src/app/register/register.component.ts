@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
   games: FirebaseListObservable<any[]>;
   subGames: Game[];
   currentGame: FirebaseObjectObservable<any[]>;
-  playerList: FirebaseListObservable<any[]>;
+  playerList: any[];
 
   constructor(private studentService:StudentService, private hostService: HostService) { }
 
@@ -29,9 +29,11 @@ export class RegisterComponent implements OnInit {
     // console.log(this.currentGame);
     this.currentGame.subscribe(data=>{console.log(data)});
     var newPlayer = new Player(username, 0, 0);
-    this.currentGame.subscribe(data=>{this.playerList = this.hostService.getCurrentGamePlayerList(data["$key"])});
-    console.log(this.playerList + "this is player list");
-    console.log('before playerlist');
+    this.currentGame.subscribe(data=>{
+      this.playerList = this.hostService.getCurrentGamePlayerList(data["$key"]);
+      console.log(this.playerList);
+    });
+
     // https://stackoverflow.com/questions/39401228/get-child-of-firebaseobjectobservable-angularfire2
   }
 
