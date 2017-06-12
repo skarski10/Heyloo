@@ -11,7 +11,6 @@
 			<h3>Who's here:</h3>
 			<ul>
 				<li>
-					{{currentGame?.player_list}}
 				</li>
 			</ul>
 		</div>
@@ -25,5 +24,11 @@
 </div>
 
 <div class="row">
-	<h1>The next question will start in {{currentGame?.countdown}}....</h1>
+	<h1>The next question will start in ....</h1>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		{{currentGame?.question_list}}
+	</div>
 </div>
