@@ -33,7 +33,12 @@ export class RegisterComponent implements OnInit {
       this.playerList = this.hostService.getCurrentGamePlayerList(data["$key"]);
       console.log(this.playerList);
     });
-
+    console.log('before push')
+    this.playerList.push(newPlayer);
+    console.log(this.playerList);
+    console.log('after push')
+    this.currentGame.update({"player_list": this.playerList});
+    console.log('after update')
     // https://stackoverflow.com/questions/39401228/get-child-of-firebaseobjectobservable-angularfire2
   }
 
