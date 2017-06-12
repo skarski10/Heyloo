@@ -19,7 +19,6 @@ export class HostService {
     this.games.subscribe(data => {this.subGames = data
     console.log(this.subGames);
   })
-
   }
 
   getGames(){
@@ -32,14 +31,18 @@ export class HostService {
 
   getGameFromCode(roomcode: number){
     var thisGame;
-    console.log(this.subGames);
+    // console.log(this.subGames);
     for(let i=0;i<this.subGames.length;i++){
       if(this.subGames[i].id = roomcode){
         thisGame = this.getGame(this.subGames[i]['$key']);
-        console.log(thisGame);
+        // console.log(thisGame);
       }
     }
     return thisGame;
+  }
+
+  getCurrentGamePlayerList(id: string){
+    return this.database.list('games/' + id + '/player_list')
   }
 
   randomId(){

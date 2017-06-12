@@ -4,7 +4,7 @@ import { Player } from '../player.model';
 import { Game } from '../game.model';
 import { HostService } from '../host.service';
 import { StudentService } from '../student.service';
-import { FirebaseListObservable } from 'angularfire2/database';
+import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +15,8 @@ import { FirebaseListObservable } from 'angularfire2/database';
 export class RegisterComponent implements OnInit {
   games: FirebaseListObservable<any[]>;
   subGames: Game[];
-  currentGame: Game;
+  currentGame: FirebaseObjectObservable<any[]>;
+  playerList: FirebaseListObservable<any[]>;
 
   constructor(private studentService:StudentService, private hostService: HostService) { }
 
@@ -25,9 +26,12 @@ export class RegisterComponent implements OnInit {
 
   register(username: string, roomcode: number){
     this.currentGame = this.hostService.getGameFromCode(roomcode);
+    // console.log(this.currentGame);
+    this.currentGame.subscribe(data=>{console.log(data)});
     var newPlayer = new Player(username, 0, 0);
-    console.log(this.currentGame);
-    this.currentGame.player_list.push(newPlayer);
+    this.currentGame.subscribe(data=>{this.playerList = this.hostService.getCurrentGamePlayerList(data["$key"])});
+    console.log(this.playerList + "this is player list");
+    console.log('before playerlist');
     // https://stackoverflow.com/questions/39401228/get-child-of-firebaseobjectobservable-angularfire2
   }
 
