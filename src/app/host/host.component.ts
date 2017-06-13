@@ -23,7 +23,7 @@ export class HostComponent {
   constructor(private route: ActivatedRoute, private hostService: HostService, private router: Router, private location: Location) { }
 
   ngOnInit() {
-    // this.questions = this.hostService.getQuestions();
+    this.questions = this.hostService.getQuestions();
     this.games = this.hostService.getGames();
     this.route.params.forEach((urlParameters) => {
       this.gameId = urlParameters["id"];
@@ -37,7 +37,7 @@ export class HostComponent {
         dataLastEmittedFromObserver.question_list)
       });
       console.log(this.currentGame);
-      // console.log(this.questions);
+      console.log(this.questions);
   }
 
   randomId(){
