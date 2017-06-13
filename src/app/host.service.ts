@@ -34,16 +34,17 @@ export class HostService {
 
   getGameFromCode(roomcode: number){
     var thisGame;
-    console.log(roomcode);
+    // console.log(roomcode);
+    // console.log(this.subGames);
     for(let i=0; i<this.subGames.length; i++){
-      console.log(this.subGames[i].id)
+      // console.log(this.subGames[i].id)
       if(this.subGames[i].id == roomcode){
         // console.log(roomcode);
-        console.log(this.subGames[i].id);
+        // console.log(this.subGames[i].id);
         thisGame = this.getGame(this.subGames[i]['$key']);
       }
     }
-    console.log(thisGame);
+    // console.log(thisGame);
     return thisGame;
   }
 

@@ -28,7 +28,7 @@ export class RegisterComponent implements OnInit {
     this.currentGame = this.hostService.getGameFromCode(roomcode);
     var newPlayer = new Player(username, 0, 0);
     this.currentGame.subscribe(data=>{
-      // console.log(data);
+      // console.log(data)
       this.playerList = this.hostService.getCurrentGamePlayerList(data["$key"]);
       // console.log(this.playerList);
     },
