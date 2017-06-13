@@ -7,6 +7,7 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireAuth } from 'angularfire2/auth';
 import 'rxjs/add/operator/map';
+import { QUESTIONS } from './sample-questions';
 
 
 @Injectable()
@@ -60,10 +61,13 @@ export class HostService {
     return newGame;
   }
 
+  // getQuestions() {
+  //   this.result = {questions:[]};
+  //   return this.http.get(this.questionUrl)
+  //                .map((res:Response) => res.json())
+  //                .subscribe(res => this.result = res)
+  // }
   getQuestions() {
-    this.result = {questions:[]};
-    return this.http.get(this.questionUrl)
-                 .map((res:Response) => res.json())
-                 .subscribe(res => this.result = res)
+    return QUESTIONS;
   }
 }

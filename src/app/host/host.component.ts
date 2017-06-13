@@ -17,7 +17,7 @@ export class HostComponent {
   games: FirebaseListObservable<any[]>;
   currentGame;
   gameId;
-  questions;
+  questions: Question[];
   students:any[] = ["kory", "melvin", "scott", "loren"];
 
   constructor(private route: ActivatedRoute, private hostService: HostService, private router: Router, private location: Location) { }
