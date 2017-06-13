@@ -1,23 +1,26 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 import { Game } from './game.model';
 import { Player } from './player.model';
 import { Question } from './question.model';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireAuth } from 'angularfire2/auth';
+import 'rxjs/add/operator/map';
+
 
 @Injectable()
 export class HostService {
   games: FirebaseListObservable<any[]>;
   subGames: Game[];
-
+  result: Object;
   questionData;
+  questionUrl = 'src/assets/mock-data/sample-questions.json';
 
   constructor(private database: AngularFireDatabase, private http: Http) {
     this.games = database.list('games');
     this.games.subscribe(data => {this.subGames = data
-    console.log(this.subGames);
+    // console.log(this.subGames);
   })
   }
 
@@ -57,8 +60,10 @@ export class HostService {
     return newGame;
   }
 
-  getQuestions(){
-    return this.http.get('data/data.json')
-        .subscribe(res => res.json());
+  getQuestions() {
+    this.result = {questions:[]};
+    return this.http.get(this.questionUrl)
+                 .map((res:Response) => res.json())
+                 .subscribe(res => this.result = res)
   }
 }

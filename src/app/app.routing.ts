@@ -3,14 +3,19 @@ import { Routes, RouterModule } from '@angular/router';
 import { HostComponent } from './host/host.component';
 import { StudentComponent } from './student/student.component';
 import { RegisterComponent } from './register/register.component';
+import { StartComponent } from './start/start.component';
 
 const appRoutes: Routes = [
 {
-  path: '',
+  path: 'start',
+  component: StartComponent
+},
+{
+  path: 'host/:id',
   component: HostComponent
 },
 {
-  path: '',
+  path: 'student',
   component: StudentComponent
 },
 {

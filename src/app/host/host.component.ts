@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseListObservable } from 'angularfire2/database';
+import { Location } from '@angular/common';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { HostService} from '../host.service';
 import { Question } from '../question.model';
 import { Game } from '../game.model';
@@ -14,26 +16,36 @@ import { Game } from '../game.model';
 export class HostComponent {
   games: FirebaseListObservable<any[]>;
   currentGame;
+  gameId;
   questions;
   students:any[] = ["kory", "melvin", "scott", "loren"];
 
-  constructor(private hostService: HostService) { }
+  constructor(private route: ActivatedRoute, private hostService: HostService, private router: Router, private location: Location) { }
 
   ngOnInit() {
     this.questions = this.hostService.getQuestions();
     this.games = this.hostService.getGames();
+    this.route.params.forEach((urlParameters) => {
+      this.gameId = urlParameters["id"];
+    });
+      this.hostService.getGameFromCode(this.gameId).subscribe(dataLastEmittedFromObserver => {
+        this.currentGame = new Game
+        (dataLastEmittedFromObserver.id,
+        dataLastEmittedFromObserver.game_state,
+        dataLastEmittedFromObserver.game_over,
+        dataLastEmittedFromObserver.player_list,
+        dataLastEmittedFromObserver.question_list)
+      });
+      console.log(this.currentGame);
+      console.log(this.questions);
   }
 
   randomId(){
     return Math.floor(Math.random()*90000) + 10000;
   }
 
-  startGame(){
-    var newGame: Game = new Game(this.randomId(), "starting", false, [], []);
+  beginGame(){
+    var newGame: Game = new Game(this.randomId(), "starting", false, this.students, this.questions);
     this.hostService.createGame(newGame);
   }
-  // startGame(){
-  //   var newGame: Game = new Game(this.randomId(), "starting", false, this.students, this.questions);
-  //   this.hostService.createGame(newGame);
-  // }
 }

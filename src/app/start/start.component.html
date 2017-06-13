@@ -1,0 +1,5 @@
+<div class="row" *ngFor="let game of games | async">
+  <div (click)="startGame(game)">
+    {{game.id}}
+  </div>
+</div>

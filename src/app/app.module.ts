@@ -10,6 +10,8 @@ import { HostComponent } from './host/host.component';
 import { StudentComponent } from './student/student.component';
 import { RegisterComponent } from './register/register.component';
 import { routing } from './app.routing';
+import { StartComponent } from './start/start.component';
+
 
 
 export const firebaseConfig = {
@@ -24,7 +26,8 @@ export const firebaseConfig = {
     AppComponent,
     HostComponent,
     StudentComponent,
-    RegisterComponent
+    RegisterComponent,
+    StartComponent
   ],
   imports: [
     BrowserModule,

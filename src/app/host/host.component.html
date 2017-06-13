@@ -1,21 +1,35 @@
-<div class="row" *ngIf="game_state == 'start'">
+<div class="row">
+	{{currentGame?.game_state}}
 	<div class="jumbotron">
 		<h1>Join our game!</h1>
 		<h2>Go to https://Heyloo.firebaseapp.com on your smartphone</h2>
-		<h2>Our PIN code is {{game.id}}</h2>
-		<p><button class="btn btn-success">Let's begin!</button></p>
+		<h2>Our PIN code is {{currentGame?.id}}</h2>
+		<p><button class="btn btn-success" (click)="beginGame()">Let's begin!</button></p>
 	</div>
 	<div class="col-md-12">
 		<div class="well">
 			<h3>Who's here:</h3>
 			<ul>
 				<li>
-					{{game.player_list}}
 				</li>
 			</ul>
 		</div>
 	</div>
 </div>
-<div class="test">
-  <button type="button" (click)="startGame()">Test creating game</button>
+
+
+{{currentGame?.id}}
+<div class="" *ngIf="currentGame?.game_state == 'starting' ">
+	
+</div>
+
+
+<div class="row" *ngIf="currentGame?.game_state == 'starting' ">
+	<h1>The next question will start in ....</h1>
+</div>
+
+<div class="row">
+	<div class="col-md-12">
+		{{currentGame?.question_list}}
+	</div>
 </div>

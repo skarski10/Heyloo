@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FirebaseListObservable } from 'angularfire2/database';
-import { HostService} from '../host.service';
+import { Game } from '../game.model';
+import { HostService } from '../host.service';
+
 
 @Component({
   selector: 'app-start',
@@ -9,11 +12,17 @@ import { HostService} from '../host.service';
   providers: [HostService]
 })
 export class StartComponent implements OnInit {
-  games: FirebaseListObservable<any[]>;
+  games:FirebaseListObservable<any[]>;
 
-  constructor(private hostService: HostService) { }
+  constructor(private router: Router, private hostService: HostService) { }
 
   ngOnInit() {
     this.games = this.hostService.getGames();
+    // this.currentGame = this.hostService.createGame();
   }
+
+  startGame(clickedGame){
+    this.router.navigate(['host', clickedGame.id]);
+  }
+
 }

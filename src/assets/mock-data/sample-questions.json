@@ -1,0 +1,135 @@
+{
+  "title": "Heyloo Sample",
+  "problems": [
+
+    {
+      "title": "Writing Linear Equations",
+      "instructions": "<p>Select the equation of the line represented by the two points, table, or graph.</p>\r\n",
+      "prompt": "(2, -1) and (0, 2)",
+      "choices": [
+        "https://app.chalkdoc.com/cached_latex_images/a1ad7629db4689efd496afa936fe5281bed12a857ac74a570d3ea14b80f44358.png",
+        "https://app.chalkdoc.com/cached_latex_images/1c8a787c20dcf46c88cce25ebf62e0a53e6b0461137a131ff7d97584dba14aef.png",
+        "https://app.chalkdoc.com/cached_latex_images/1c8a787c20dcf46c88cce25ebf62e0a53e6b0461137a131ff7d97584dba14aef.png",
+        "https://app.chalkdoc.com/cached_latex_images/85e37542ea650d34c23a5467a12ae2f359ef595f80ecf3d652c51b52030ee980.png"
+      ],
+      "answer": 0
+    },
+
+    {
+      "title": "Writing Linear Equations",
+      "instructions": "<p>Select the equation of the line represented by the two points, table, or graph.</p>\r\n",
+      "prompt": "(0, 1) and (-1, 3)",
+      "choices": [
+        "https://app.chalkdoc.com/cached_latex_images/725bd913935b2c2a24e228f7dd344d20ceb67d8586f00495870bfbd0d1135b47.png",
+        "https://app.chalkdoc.com/cached_latex_images/ee43a174d3859a2e2ed88e3eb53e508d569133055b0a6c285c02372905f90d48.png",
+        "https://app.chalkdoc.com/cached_latex_images/562b4bf20a28b882e474736affdda12702c655b52c09a637157041d39568d2dd.png",
+        "https://app.chalkdoc.com/cached_latex_images/9e09628eec88d523ce5dba04f661b3ee16b8599b7d3f2a77e489e1a5ae3e20a5.png"
+      ],
+      "answer": 1
+    },
+
+    {
+      "title": "Writing Linear Equations",
+      "instructions": "<p>Select the equation of the line represented by the two points, table, or graph.</p>\r\n",
+      "prompt": "https://app.chalkdoc.com/cached_latex_images/f92053f28798c473926d91cc5451752d7bfcde8b8f09bbd166b606b24300872b.png",
+      "choices": [
+        "https://app.chalkdoc.com/cached_latex_images/ba74cf0525704c536b0ed13c118a33cd1e49e7782bc6f61881e2294f655bca7e.png",
+        "https://app.chalkdoc.com/cached_latex_images/d4d415a5d333833dd811dcb813d467b43c3c1c7594cb3f39cbf1933f8f27a101.png",
+        "https://app.chalkdoc.com/cached_latex_images/82c91962255ab414b54cfda687492728bf258d198519811b98a7761e39bb9866.png",
+        "https://app.chalkdoc.com/cached_latex_images/48828679d4620e9fbec374b6bfcb38ee954d8b835e0e36b72020e59cb65bc565.png"
+      ],
+      "answer": 0
+    },
+
+    {
+      "title": "Writing Linear Equations",
+      "instructions": "<p>Select the equation of the line represented by the two points, table, or graph.</p>\r\n",
+      "prompt": "(5, 4) and (0, -4)",
+      "choices": [
+        "https://app.chalkdoc.com/cached_latex_images/047ada7dedbf2b8d93362cdf9999da3ecac0faec692391a20390ce2d1c917770.png",
+        "https://app.chalkdoc.com/cached_latex_images/f7e3cc1fcbbf4aba0f0b6487d51eadbe82db05f1c55ad523a30d21947257a5e4.png",
+        "https://app.chalkdoc.com/cached_latex_images/c6241148b3456600ed6af68b1eac2d24548830bc518279fad8573c9a5dcddacd.png",
+        "https://app.chalkdoc.com/cached_latex_images/2f90e0f5624262acb96e5dcaf131ae9cb8802a71e63b67288243c45fb3196643.png"
+      ],
+      "answer": 1
+    },
+
+    {
+      "title": "Writing Linear Equations",
+      "instructions": "<p>Select the equation of the line represented by the two points, table, or graph.</p>\r\n",
+      "prompt": "(0, -4) and (-4, 5)",
+      "choices": [
+        "https://app.chalkdoc.com/cached_latex_images/f1bfc8ca1c09214a2bd50dcbe75ff041603f15073f8748cd35d2a1e0daf98bdf.png",
+        "https://app.chalkdoc.com/cached_latex_images/88a124e053dc2fcdf018edfd718bf8154681b9e01ba1b29e703ea205af1ee98e.png",
+        "https://app.chalkdoc.com/cached_latex_images/1072d75ff3ef8bc337197e3e45f58108df6a16219c508bae17e2c9bfb4487b4c.png",
+        "https://app.chalkdoc.com/cached_latex_images/aa982823a43760be52100b3d60f6984da5dd450fb5dd2a2706b3083f32e75801.png"
+      ],
+      "answer": 2
+    },
+
+    {
+      "title": "Writing Linear Equations",
+      "instructions": "<p>Select the equation of the line represented by the two points, table, or graph.</p>\r\n",
+      "prompt": "(4, -5) and (0, 0)",
+      "choices": [
+        "https://app.chalkdoc.com/cached_latex_images/4d77027cac506a9ce1ce1a3ab99fd689588f6db8dbbe26bb89166e8a3cdd0260.png",
+        "https://app.chalkdoc.com/cached_latex_images/97f2d651b5508ff4ffab64bc0b6c4140e7eb2ebbbbab8bb95cc7acee28daafc0.png",
+        "https://app.chalkdoc.com/cached_latex_images/d63c0e3747837f12bf3ef73fce247b54e6ca3661c5875cacb5e854f8c3386d49.png",
+        "https://app.chalkdoc.com/cached_latex_images/24556cfb76d57c923b6a5da00f4756003f35a8a828f5f989ac0258f7fd269373.png"
+      ],
+      "answer": 2
+    },
+
+    {
+      "title": "Graphing Absolute Value Functions",
+      "instructions": "<p>Which graph matches the equation?</p>\r\n",
+      "prompt": "y = |x + 4| + 1",
+      "choices": [
+        "https://app.chalkdoc.com/cached_latex_images/6d7452c03ecd45e288ffa156c17f1fdab46008659bdf25f24e8a4fe29011c65d.png",
+        "https://app.chalkdoc.com/cached_latex_images/482461f812a0a28263209e75f4a403393be515ec63d984d81de1226a230e1f81.png",
+        "https://app.chalkdoc.com/cached_latex_images/124c9daf20d78d4ef4e59bcc927c6c488eb8d050543b4a4892ecd4e647ab164d.png",
+        "https://app.chalkdoc.com/cached_latex_images/88a30d14ccc7df45c8ff61569f908ffcd20fad18885e12e0fb22961728d34489.png"
+      ],
+      "answer": 0
+    },
+
+    {
+      "title": "Graphing Absolute Value Functions",
+      "instructions": "<p>Which graph matches the equation?</p>\r\n",
+      "prompt": "y = |x + 3| - 3",
+      "choices": [
+        "https://app.chalkdoc.com/cached_latex_images/16781b63b4911cd31a24064dcab9bdcf7dcda08981ea7df5055e9ca0d4313023.png",
+        "https://app.chalkdoc.com/cached_latex_images/85114a3ddc733a7626435d82832b7cdd93d7f91e6d344c31cd8711d896f9791a.png",
+        "https://app.chalkdoc.com/cached_latex_images/8db7ac3f55a0b64d458486c8783f5eac486274550403b8febd54c15401738cb0.png",
+        "https://app.chalkdoc.com/cached_latex_images/43020f2cc6934227b906606733eb74bdb5cd4d00c2b94a5ec51c61ef960f5ac0.png"
+      ],
+      "answer": 3
+    },
+
+    {
+      "title": "Factoring Quadratics",
+      "instructions": "<p>Factor each quadratic expression</p>\r\n",
+      "prompt": "14g^2 - 78g - 36",
+      "choices": [
+        "https://app.chalkdoc.com/cached_latex_images/e7e2a52ff9208ecb81689cdb74040fed36a811d5a9b0022cc427b842687a57e9.png",
+        "https://app.chalkdoc.com/cached_latex_images/0bab79ac14b9ea8db078f588893a85fcb6ef857c52f923759f33401ec54fd6fc.png",
+        "https://app.chalkdoc.com/cached_latex_images/924777420587361a5e52f9def7c807915857ff7c056c2f6e6b64e955742b21ce.png",
+        "https://app.chalkdoc.com/cached_latex_images/d349212c55cf878a7f5d2d7b853c7ace349f89f9d0dda221ef4f62e288e99307.png"
+      ],
+      "answer": 1
+    },
+
+    {
+      "title": "Factoring Quadratics",
+      "instructions": "<p>Factor each quadratic expression</p>\r\n",
+      "prompt": "15x^2 - 84x - 147",
+      "choices": [
+        "https://app.chalkdoc.com/cached_latex_images/2e6a2f67a210c43d3e3ae313fe25b7afb10bc6eac2bcc5542cdf3b4ffef1a603.png",
+        "https://app.chalkdoc.com/cached_latex_images/d349212c55cf878a7f5d2d7b853c7ace349f89f9d0dda221ef4f62e288e99307.png",
+        "https://app.chalkdoc.com/cached_latex_images/de217c67ec05dd0651b90252fe4d333f89cd6db54c2f2bbdfb0facdd08dc55f3.png",
+        "https://app.chalkdoc.com/cached_latex_images/09b8af42f7c52551b4c5a6fe91060db25ab53009c19f4c20da8d0194c12ddacd.png"
+      ],
+      "answer": 1
+    }
+  ]
+}
