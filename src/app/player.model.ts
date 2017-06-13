@@ -1,7 +1,15 @@
 export class Player {
-  public ratio: number;
+  public ratio: number = 0;
   constructor(public name: string, public correct: number, public wrong: number){
-    this.ratio = (this.correct / this.wrong);
+    if(correct != 0 && wrong != 0){
+      this.ratio = (correct/wrong);
+    }
+    else if(correct > 0 && wrong === 0){
+      this.ratio = 1;
+    }
+    else {
+      this.ratio = 0;
+    }
   }
 }
 

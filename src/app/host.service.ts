@@ -10,7 +10,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 @Injectable()
 export class HostService {
   games: FirebaseListObservable<any[]>;
-  subGames
+  subGames: Game[];
 
   questionData;
 
@@ -31,25 +31,21 @@ export class HostService {
 
   getGameFromCode(roomcode: number){
     var thisGame;
-    // console.log(this.subGames);
-    for(let i=0;i<this.subGames.length;i++){
-      if(this.subGames[i].id = roomcode){
+    console.log(roomcode);
+    for(let i=0; i<this.subGames.length; i++){
+      console.log(this.subGames[i].id)
+      if(this.subGames[i].id == roomcode){
+        // console.log(roomcode);
+        console.log(this.subGames[i].id);
         thisGame = this.getGame(this.subGames[i]['$key']);
-        // console.log(thisGame);
       }
     }
+    console.log(thisGame);
     return thisGame;
   }
 
   getCurrentGamePlayerList(id: string){
-    var theList = [];
-    this.database.list('games/' + id + '/player_list').subscribe(data=>{
-      console.log(data);
-      for(let i = 0; i<data.length; i++){
-        theList.push(data[i])
-      }
-    })
-    return theList;
+    return this.database.list('games/' + id + '/player_list')
   }
 
   randomId(){
