@@ -7,44 +7,62 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireAuth } from 'angularfire2/auth';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+
 
 @Injectable()
 export class HostService {
   games: FirebaseListObservable<any[]>;
-  questionUrl: string =  'http://localhost:4200/src/assets/sample-question.json';
-  questionData;
+  subGames: Game[];
   result: Object;
+  questionData;
+  questionUrl = 'src/assets/mock-data/sample-questions.json';
 
   constructor(private database: AngularFireDatabase, private http: Http) {
     this.games = database.list('games');
+    this.games.subscribe(data => {this.subGames = data
+    // console.log(this.subGames);
+  })
   }
 
   getGames(){
     return this.games;
   }
 
-  getGame(gameId: number){
-    return this.database.object('host/' + gameId);
+  getGame(chosenGameId: string){
+    return this.database.object('games/' + chosenGameId);
+  }
+
+  getGameFromCode(roomcode: number){
+    var thisGame;
+    // console.log(roomcode);
+    for(let i=0; i<this.subGames.length; i++){
+      // console.log(this.subGames[i].id)
+      if(this.subGames[i].id == roomcode){
+        // console.log(roomcode);
+        // console.log(this.subGames[i].id);
+        thisGame = this.getGame(this.subGames[i]['$key']);
+      }
+    }
+    // console.log(thisGame);
+    return thisGame;
+  }
+
+  getCurrentGamePlayerList(id: string){
+    return this.database.list('games/' + id + '/player_list')
   }
 
   randomId(){
     return Math.floor(Math.random()*90000) + 10000;
   }
 
-//   createGame(){
-//     var freshGame: Game = new Game(this.randomId(), "starting", false, [], []);
-//     this.games.push(freshGame);
-//     return freshGame;
-// }
   createGame(newGame: Game){
     this.games.push(newGame);
     return newGame;
   }
 
-  getQuestions(){
+  getQuestions() {
     this.result = {questions:[]};
-    return this.http.get('./src/assets/sample-questions.json')
+    return this.http.get(this.questionUrl)
                  .map((res:Response) => res.json())
                  .subscribe(res => this.result = res)
   }

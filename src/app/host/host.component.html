@@ -17,13 +17,14 @@
 	</div>
 </div>
 
-<div class="" *ngFor="let game of games | async">
-	<div class="" *ngIf="game.game_state == 'start'">
-		{{game.game_state}}
-	</div>
+
+{{currentGame?.id}}
+<div class="" *ngIf="currentGame?.game_state == 'starting' ">
+	
 </div>
 
-<div class="row">
+
+<div class="row" *ngIf="currentGame?.game_state == 'starting' ">
 	<h1>The next question will start in ....</h1>
 </div>
 
