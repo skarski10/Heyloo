@@ -14,7 +14,6 @@ import { QUESTIONS } from './sample-questions';
 export class HostService {
   games: FirebaseListObservable<any[]>;
   subGames: Game[];
-  result: Object;
   questionData;
   questionUrl = 'src/assets/mock-data/sample-questions.json';
 
@@ -35,18 +34,18 @@ export class HostService {
 
   getGameFromCode(roomcode: number){
     var thisGame;
-    // console.log(roomcode);
-    // console.log(this.subGames);
     for(let i=0; i<this.subGames.length; i++){
-      // console.log(this.subGames[i].id)
       if(this.subGames[i].id == roomcode){
-        // console.log(roomcode);
-        // console.log(this.subGames[i].id);
         thisGame = this.getGame(this.subGames[i]['$key']);
       }
     }
-    // console.log(thisGame);
     return thisGame;
+  }
+
+  getGameKey(game){
+    game.subscribe(data => {
+      return data['$key'];
+    })
   }
 
   getCurrentGamePlayerList(id: string){
@@ -62,12 +61,6 @@ export class HostService {
     return newGame;
   }
 
-  // getQuestions() {
-  //   this.result = {questions:[]};
-  //   return this.http.get(this.questionUrl)
-  //                .map((res:Response) => res.json())
-  //                .subscribe(res => this.result = res)
-  // }
   getQuestions() {
     return QUESTIONS;
   }
