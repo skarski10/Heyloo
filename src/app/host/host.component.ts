@@ -44,8 +44,10 @@ export class HostComponent {
     return Math.floor(Math.random()*90000) + 10000;
   }
 
-  beginGame(){
-    var newGame: Game = new Game(this.randomId(), "starting", false, this.students, this.questions);
-    this.hostService.createGame(newGame);
+  beginGame(game){
+    this.hostService.editGameState(game);
+    // var newGame: Game = new Game(this.randomId(), "starting", false, this.students, this.questions);
+    // this.hostService.createGame(newGame);
+    this.hostService.preQuestionCountdown();
   }
 }
