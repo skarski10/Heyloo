@@ -5,7 +5,22 @@
 		<h2>Go to https://Heyloo.firebaseapp.com on your smartphone</h2>
 		<h2>Our PIN code is {{currentGame?.id}}</h2>
 		<div class="">
-			<p><button class="btn btn-success" (click)="beginGame()">Let's begin!</button></p>
+			<div class="form-group">
+				<input class="form-control" type="hidden" [(ngModel="currentGame?.id")] value="">
+			</div>
+			<div class="form-group">
+				<input class="form-control" type="hidden" value="countdown">
+			</div>
+			<div class="form-grouop">
+				<input class="form-control" type="hidden" value="false">
+			</div>
+			<div class="form-group">
+				<input class="form-control" type="hidden" [(ngModel="currentGame?.player_list")] value="">
+			</div>
+			<div class="formgroup">
+				<input class="form-control" type="hidden" [(ngModel="currentGame?.question_list.slice(0,1)")] value="">
+			</div>
+			<button class="btn btn-success" (click)="beginGame(currentGame)">Let's begin!</button>
 		</div>
 	</div>
 	<div class="col-md-12">
@@ -19,19 +34,29 @@
 	</div>
 </div>
 
+{{ time.getSeconds() }}
 
-<div class="" *ngIf="currentGame?.game_state == 'starting' ">
+<div class="" *ngIf="currentGame?.game_state == 'countdown' ">
 	{{currentGame?.id}}
-	{{ time.getSeconds() }}
 </div>
 
 
-<div class="row" *ngIf="currentGame?.game_state == 'starting' ">
-	<h1>The next question will start in ....</h1>
+<div class="row" *ngIf="currentGame?.game_state == 'question' ">
+	<h1>The next question will start in {{ time.getSeconds() }}....</h1>
+	<div class="" *ngIf="time.getSeconds() == 0 ">
+
+	</div>
 </div>
 
 <div class="row">
 	<div class="col-md-12">
 		{{currentGame?.question_list[0].instructions}}
+		<div class="" *ngFor="let question of questions">
+			<img src="question.choices" alt="">
+		</div>
 	</div>
+</div>
+
+<div class="row" *ngIf="currentGame?.game_state == 'answer' ">
+	The correct answer was {{currentGame?.question_list[0].answer}}
 </div>

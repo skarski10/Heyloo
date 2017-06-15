@@ -17,12 +17,13 @@ export class HostService {
   result: Object;
   questionData;
   questionUrl = 'src/assets/mock-data/sample-questions.json';
-  time = new Date(2000, 1, 1, 1, 0, 0);
+  time = new Date(500, 0, 0, 1, 0, 0);
 
   constructor(private database: AngularFireDatabase, private http: Http) {
     this.games = database.list('games');
     this.games.subscribe(data => {this.subGames = data
     // console.log(this.subGames);
+    this.preQuestionCountdown();
   })
   }
 
@@ -77,9 +78,12 @@ export class HostService {
     this.time.setSeconds(this.time.getSeconds(), -1);
     setTimeout(() => this.preQuestionCountdown(), 1000);
   }
+  resetCountdown(){
+    this.time = new Date(500, 0, 0, 1, 0, 0);
+  }
 
   editGameState(game){
     var currentGame = this.getGame(game.$key);
-    currentGame.update({id: game.id, game_state: game.game_state, game_over: false, player_list: game.player_list, question_list: game.question_list.splice(0,1)})
+    currentGame.update({id: game.id, game_state: game.game_state, game_over: false, player_list: game.player_list, question_list: game.question_list})
   }
 }
