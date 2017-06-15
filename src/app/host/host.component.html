@@ -7,20 +7,15 @@
 		<p><button class="btn btn-success" (click)='gameStateCountdown()'>Let's begin!</button></p>
 	</div>
 	<div class="col-md-12">
-		<div class="well" *ngFor='let player of currentGame.player_list'>
-			<h3>Who's here:</h3>
-			<ul>
-				<li>
-					{{player?.name}}
-				</li>
-			</ul>
+		<h3>Who's here:</h3>
+		<div class="well" *ngFor='let player of subGame.player_list | async'>
+			{{player.name}}
 		</div>
 	</div>
 </div>
 
 <div class="" *ngIf="currentGame?.game_state == 'countdown' ">
-	<h1>The next question will start in {{ time.getSeconds() }}....</h1>
-	{{currentGame?.id}}
+	<h1>The next question will start in {{time}}....</h1>
 </div>
 
 <div class="row" *ngIf="currentGame?.game_state == 'question' ">

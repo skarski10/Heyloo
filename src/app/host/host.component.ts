@@ -15,13 +15,13 @@ import { Game } from '../game.model';
 })
 export class HostComponent {
   games: FirebaseListObservable<any[]>;
+  subGame: FirebaseObjectObservable<any[]>;
   currentGame;
   gameId;
   questions: Question[];
-  time = new Date(500, 0, 0, 1, 0, 0);
+  time: number = 0;
 
   constructor(private route: ActivatedRoute, private hostService: HostService, private router: Router, private location: Location) {
-    this.preQuestionCountdown();
    }
 
   ngOnInit() {
@@ -38,16 +38,61 @@ export class HostComponent {
         dataLastEmittedFromObserver.player_list,
         dataLastEmittedFromObserver.question_list)
       });
+      this.subGame = this.hostService.getGameFromCode(this.currentGame.id);
   }
   gameStateCountdown(){
     this.hostService.editGameState('countdown', this.currentGame);
+    this.fiveSeconds();
   }
 
-  preQuestionCountdown() {
-    this.time.setSeconds(this.time.getSeconds(), -1);
-    setTimeout(() => this.preQuestionCountdown(), 1000);
+  gameStateQuestion(){
+    this.hostService.editGameState('question', this.currentGame);
+    this.thirtySeconds();
   }
-  resetCountdown(){
-    this.time = new Date(500, 0, 0, 1, 0, 0);
+
+  gameStateAnswer(){
+    this.hostService.editGameState('answer', this.currentGame);
   }
+
+  gameStateLeaderboard(){
+    this.hostService.editGameState('leaderboard', this.currentGame);
+  }
+
+  fiveSeconds(){
+    this.time = 5;
+    var interval = setInterval(data => {
+      if(this.time != 0){
+      console.log(this.time);
+        this.time --;
+      }
+      else {
+        console.log("done");
+        clearInterval(interval);
+        this.gameStateQuestion();
+      }
+    }, 1000);
+  }
+
+  thirtySeconds(){
+    this.time = 30;
+    console.log(this.time);
+    var interval = setInterval(data => {
+      console.log(this.time);
+      if(this.time != 0){
+        this.time --;
+      }
+      else {
+        clearInterval(interval);
+        this.gameStateAnswer();
+      }
+    }, 1000);
+  }
+
+  // preQuestionCountdown() {
+  //   this.time.setSeconds(this.time.getSeconds(), -1);
+  //   setTimeout(() => this.preQuestionCountdown(), 1000);
+  // }
+  // resetCountdown(){
+  //   this.time = new Date(250, 0, 0, 0, 30, 0);
+  // }
 }
