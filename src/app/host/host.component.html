@@ -1,59 +1,38 @@
-<div class="row">
+<div class="row" *ngIf="currentGame?.game_state == 'starting' ">
 	{{currentGame?.game_state}}
 	<div class="jumbotron">
 		<h1>Join our game!</h1>
 		<h2>Go to https://Heyloo.firebaseapp.com on your smartphone</h2>
 		<h2>Our PIN code is {{currentGame?.id}}</h2>
-		<div class="">
-			<div class="form-group">
-				<input class="form-control" type="hidden" [(ngModel="currentGame?.id")] value="">
-			</div>
-			<div class="form-group">
-				<input class="form-control" type="hidden" value="countdown">
-			</div>
-			<div class="form-grouop">
-				<input class="form-control" type="hidden" value="false">
-			</div>
-			<div class="form-group">
-				<input class="form-control" type="hidden" [(ngModel="currentGame?.player_list")] value="">
-			</div>
-			<div class="formgroup">
-				<input class="form-control" type="hidden" [(ngModel="currentGame?.question_list.slice(0,1)")] value="">
-			</div>
-			<button class="btn btn-success" (click)="beginGame(currentGame)">Let's begin!</button>
-		</div>
+		<p><button class="btn btn-success" (click)='gameStateCountdown()'>Let's begin!</button></p>
 	</div>
 	<div class="col-md-12">
-		<div class="well">
+		<div class="well" *ngFor='let player of currentGame.player_list'>
 			<h3>Who's here:</h3>
 			<ul>
 				<li>
+					{{player?.name}}
 				</li>
 			</ul>
 		</div>
 	</div>
 </div>
 
-{{ time.getSeconds() }}
-
 <div class="" *ngIf="currentGame?.game_state == 'countdown' ">
+	<h1>The next question will start in {{ time.getSeconds() }}....</h1>
 	{{currentGame?.id}}
 </div>
 
-
 <div class="row" *ngIf="currentGame?.game_state == 'question' ">
-	<h1>The next question will start in {{ time.getSeconds() }}....</h1>
-	<div class="" *ngIf="time.getSeconds() == 0 ">
-
-	</div>
-</div>
-
-<div class="row">
 	<div class="col-md-12">
 		{{currentGame?.question_list[0].instructions}}
-		<div class="" *ngFor="let question of questions">
-			<img src="question.choices" alt="">
-		</div>
+		<!-- <div class="" *ngFor="let question of currentGame?">
+			<div class="">
+				<img src="{{question.question_list[0].choices}}" alt="">
+
+			</div>
+			{{question.choices}}
+		</div> -->
 	</div>
 </div>
 

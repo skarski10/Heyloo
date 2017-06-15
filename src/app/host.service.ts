@@ -17,13 +17,10 @@ export class HostService {
   result: Object;
   questionData;
   questionUrl = 'src/assets/mock-data/sample-questions.json';
-  time = new Date(500, 0, 0, 1, 0, 0);
 
   constructor(private database: AngularFireDatabase, private http: Http) {
     this.games = database.list('games');
     this.games.subscribe(data => {this.subGames = data
-    // console.log(this.subGames);
-    this.preQuestionCountdown();
   })
   }
 
@@ -37,17 +34,11 @@ export class HostService {
 
   getGameFromCode(roomcode: number){
     var thisGame;
-    // console.log(roomcode);
-    // console.log(this.subGames);
     for(let i=0; i<this.subGames.length; i++){
-      // console.log(this.subGames[i].id)
       if(this.subGames[i].id == roomcode){
-        // console.log(roomcode);
-        // console.log(this.subGames[i].id);
         thisGame = this.getGame(this.subGames[i]['$key']);
       }
     }
-    // console.log(thisGame);
     return thisGame;
   }
 
@@ -70,20 +61,15 @@ export class HostService {
   //                .map((res:Response) => res.json())
   //                .subscribe(res => this.result = res)
   // }
+
   getQuestions() {
     return QUESTIONS;
   }
 
-  preQuestionCountdown() {
-    this.time.setSeconds(this.time.getSeconds(), -1);
-    setTimeout(() => this.preQuestionCountdown(), 1000);
-  }
-  resetCountdown(){
-    this.time = new Date(500, 0, 0, 1, 0, 0);
-  }
-
-  editGameState(game){
-    var currentGame = this.getGame(game.$key);
-    currentGame.update({id: game.id, game_state: game.game_state, game_over: false, player_list: game.player_list, question_list: game.question_list})
+  editGameState(gameState, game){
+    console.log(game);
+    var currentGame = this.getGameFromCode(game.id);
+    currentGame.subscribe(data => console.log(data));
+    currentGame.update({game_state: gameState});
   }
 }

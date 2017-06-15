@@ -18,9 +18,11 @@ export class HostComponent {
   currentGame;
   gameId;
   questions: Question[];
-  students:any[] = ["kory", "melvin", "scott", "loren"];
+  time = new Date(500, 0, 0, 1, 0, 0);
 
-  constructor(private route: ActivatedRoute, private hostService: HostService, private router: Router, private location: Location) { }
+  constructor(private route: ActivatedRoute, private hostService: HostService, private router: Router, private location: Location) {
+    this.preQuestionCountdown();
+   }
 
   ngOnInit() {
     this.questions = this.hostService.getQuestions();
@@ -36,18 +38,16 @@ export class HostComponent {
         dataLastEmittedFromObserver.player_list,
         dataLastEmittedFromObserver.question_list)
       });
-      console.log(this.currentGame);
-      console.log(this.questions);
+  }
+  gameStateCountdown(){
+    this.hostService.editGameState('countdown', this.currentGame);
   }
 
-  randomId(){
-    return Math.floor(Math.random()*90000) + 10000;
+  preQuestionCountdown() {
+    this.time.setSeconds(this.time.getSeconds(), -1);
+    setTimeout(() => this.preQuestionCountdown(), 1000);
   }
-
-  beginGame(game){
-    this.hostService.editGameState(game);
-    // var newGame: Game = new Game(this.randomId(), "starting", false, this.students, this.questions);
-    // this.hostService.createGame(newGame);
-    this.hostService.preQuestionCountdown();
+  resetCountdown(){
+    this.time = new Date(500, 0, 0, 1, 0, 0);
   }
 }
