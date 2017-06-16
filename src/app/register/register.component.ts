@@ -45,7 +45,8 @@ export class RegisterComponent implements OnInit {
     // https://stackoverflow.com/questions/39401228/get-child-of-firebaseobjectobservable-angularfire2
   }
 
-  timerRunsOut(){
+  startGame(){
+    this.hostService
     this.router.navigate(['student'], {roomcode: this.roomCode, })
   }
 
