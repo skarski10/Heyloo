@@ -4,28 +4,37 @@ import { Player } from './player.model';
 import { Question } from './question.model';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+import { HostService } from './host.service';
 
 @Injectable()
 export class StudentService {
   players: FirebaseListObservable<any[]>;
+  subPlayers: Player[];
+
 
   constructor(private database: AngularFireDatabase) { }
 
-  getStudent(id: string, gamekey: string){
-    return this.database.object('games/' + gamekey + 'player_list' + id);
-  }
+  // getStudent(id: string, gamekey: string){
+  //   return this.database.object('games/' + gamekey + 'player_list/' + id);
+  // }
 
   addStudent(newPlayer: Player) {
     this.players.push(newPlayer);
   }
 
   getStudentGameKeyAndId(key: string, id: number){
-    for(let i=0; i<this.subGames.length; i++){
-      if(this.subGames[i].id == roomcode){
-        thisGame = this.getGame(this.subGames[i]['$key']);
+    var retrievedStudent
+    this.players = this.database.list('games/' + key + 'player_list');
+    this.players.subscribe(data => {
+      this.subPlayers = data
+    })
+
+    for(let i=0; i<this.subPlayers.length; i++){
+      if(this.subPlayers[i].id == id){
+        retrievedStudent = this.getGame(this.subPlayers[i]['$key']);
       }
     }
-    return thisGame;
+    return retrievedStudent;
   }
   // answerQeustion(answer: string, currentPlayer: Player){
   //   currentPlayer.

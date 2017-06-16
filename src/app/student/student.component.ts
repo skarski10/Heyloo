@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Player } from '../player.model';
 import { StudentService } from '../student.service';
-import { FirebaseListObservable } from 'angularfire2/database';
+import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { HostService } from '../host.service';
 
 @Component({
@@ -12,17 +12,22 @@ import { HostService } from '../host.service';
   providers: [StudentService, HostService]
 })
 export class StudentComponent implements OnInit {
-  students: FirebaseListObservable<any[]>;
-  studentId: string;
-  studentToDisplay: Player;
-  thisGame: <FirebaseListObservable<any[]>;
+  currentGame: FirebaseObjectObservable<any[]>;
+  currentStudent: FirebaseObjectObservable<any[]>;
 
-  constructor(private route: ActivatedRoute, private studentService: StudentService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private studentService: StudentService, private router: Router, private hostService: HostService) { }
 
   ngOnInit() {
+    var currentGameKey;
+    var studentId;
     this.route.params.forEach(urlParameters => {
-      this.thisGame = this.hostService.getGameFromCode(urlParameters['roomcode']);
+      this.currentGame = this.hostService.getGameFromCode(urlParameters['roomcode']);
+      studentId = urlParameters['studentid'];
     })
+    this.currentGame.subscribe(data => {
+      currentGameKey = data['$key'];
+    })
+    this.currentStudent = this.studentService.getStudentGameKeyAndId(currentGameKey, studentId);
   }
 }
 

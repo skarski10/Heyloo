@@ -11,6 +11,8 @@ import { StudentComponent } from './student/student.component';
 import { RegisterComponent } from './register/register.component';
 import { routing } from './app.routing';
 import { StartComponent } from './start/start.component';
+import { HostService } from './host.service';
+import { StudentService } from './student.service';
 
 
 
@@ -37,7 +39,7 @@ export const firebaseConfig = {
     AngularFireDatabaseModule,
     routing
   ],
-  providers: [],
+  providers: [StudentService, hostService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

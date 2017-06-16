@@ -46,8 +46,7 @@ export class RegisterComponent implements OnInit {
   }
 
   startGame(){
-    this.hostService
-    this.router.navigate(['student'], {roomcode: this.roomCode, })
+    this.router.navigate(['student'], {roomcode: this.roomCode, studentid:currentPlayer.id})
   }
 
 }
