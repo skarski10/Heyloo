@@ -12,11 +12,11 @@ export class StudentService {
   subPlayers: Player[];
 
 
-  constructor(private database: AngularFireDatabase) { }
+  constructor(private database: AngularFireDatabase, private hostService: HostService) { }
 
-  // getStudent(id: string, gamekey: string){
-  //   return this.database.object('games/' + gamekey + 'player_list/' + id);
-  // }
+  getStudent(id: string, gamekey: string){
+    return this.database.object('games/' + gamekey + 'player_list/' + id);
+  }
 
   addStudent(newPlayer: Player) {
     this.players.push(newPlayer);
@@ -31,7 +31,7 @@ export class StudentService {
 
     for(let i=0; i<this.subPlayers.length; i++){
       if(this.subPlayers[i].id == id){
-        retrievedStudent = this.getGame(this.subPlayers[i]['$key']);
+        retrievedStudent = this.getStudent(this.subPlayers[i]['$key'], key);
       }
     }
     return retrievedStudent;

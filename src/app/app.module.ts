@@ -39,7 +39,7 @@ export const firebaseConfig = {
     AngularFireDatabaseModule,
     routing
   ],
-  providers: [StudentService, hostService],
+  providers: [StudentService, HostService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
