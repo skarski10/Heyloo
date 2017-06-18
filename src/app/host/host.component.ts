@@ -16,9 +16,12 @@ import { Game } from '../game.model';
 export class HostComponent {
   games: FirebaseListObservable<any[]>;
   subGame: FirebaseObjectObservable<any[]>;
-  currentGame;
+  playerList: FirebaseListObservable<any[]>;
   gameId;
+  currentGame;
   questions: Question[];
+  currentQuestion;
+  currentQuestionIndex: number = 0;
   time: number = 0;
 
   constructor(private route: ActivatedRoute, private hostService: HostService, private router: Router, private location: Location) {
@@ -39,7 +42,24 @@ export class HostComponent {
         dataLastEmittedFromObserver.question_list)
       });
       this.subGame = this.hostService.getGameFromCode(this.currentGame.id);
+      this.getPlayerList(this.currentGame.id);
+      this.currentQuestion = this.getQuestion();
   }
+
+  getPlayerList(gameId: number){
+    this.subGame = this.hostService.getGameFromCode(gameId);
+    this.subGame.subscribe(data=>{
+    this.playerList = this.hostService.getCurrentGamePlayerList(data["$key"]);
+  })
+  return this.playerList;
+}
+
+getQuestion(){
+    var currentIndex = this.currentQuestionIndex;
+    this.currentQuestion = this.questions[currentIndex];
+    return this.currentQuestion;
+}
+
   gameStateCountdown(){
     this.hostService.editGameState('countdown', this.currentGame);
     this.fiveSeconds();
@@ -56,6 +76,7 @@ export class HostComponent {
 
   gameStateLeaderboard(){
     this.hostService.editGameState('leaderboard', this.currentGame);
+    this.currentQuestionIndex ++;
   }
 
   fiveSeconds(){
@@ -69,6 +90,7 @@ export class HostComponent {
         console.log("done");
         clearInterval(interval);
         this.gameStateQuestion();
+        this.getQuestion();
       }
     }, 1000);
   }

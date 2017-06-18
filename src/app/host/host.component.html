@@ -1,5 +1,4 @@
 <div class="row" *ngIf="currentGame?.game_state == 'starting' ">
-	{{currentGame?.game_state}}
 	<div class="jumbotron">
 		<h1>Join our game!</h1>
 		<h2>Go to https://Heyloo.firebaseapp.com on your smartphone</h2>
@@ -8,7 +7,7 @@
 	</div>
 	<div class="col-md-12">
 		<h3>Who's here:</h3>
-		<div class="well" *ngFor='let player of subGame.player_list | async'>
+		<div class="well" *ngFor='let player of playerList | async'>
 			{{player.name}}
 		</div>
 	</div>
@@ -20,17 +19,16 @@
 
 <div class="row" *ngIf="currentGame?.game_state == 'question' ">
 	<div class="col-md-12">
-		{{currentGame?.question_list[0].instructions}}
-		<!-- <div class="" *ngFor="let question of currentGame?">
-			<div class="">
-				<img src="{{question.question_list[0].choices}}" alt="">
-
-			</div>
-			{{question.choices}}
-		</div> -->
+		{{time}}
+	</div>
+	<div class="col-md-12">
+		{{currentQuestion?.instructions}}
+		<div class="" *ngFor="let answer of currentQuestion.choices">
+			<img src="{{answer}}" alt="">
+		</div>
 	</div>
 </div>
 
 <div class="row" *ngIf="currentGame?.game_state == 'answer' ">
-	The correct answer was {{currentGame?.question_list[0].answer}}
+	The correct answer was {{currentGame?.question_list[currentQuestionIndex].answer}}
 </div>
