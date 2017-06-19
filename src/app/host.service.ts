@@ -19,8 +19,7 @@ export class HostService {
 
   constructor(private database: AngularFireDatabase, private http: Http) {
     this.games = database.list('games');
-    this.games.subscribe(data => {this.subGames = data
-  })
+    this.games.subscribe(data => {this.subGames = data})
   }
 
   getGames(){

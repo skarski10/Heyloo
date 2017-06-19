@@ -1,3 +1,7 @@
-<div class="question">
-  {{currentQuestion}}
+student view
+<div class="question-holder">
+  {{currentQuestion.title}}
+  <div class="questions" *ngFor="let choice of currentQuestion.choices">
+    <img src ="{{choice}}" />
+  </div>
 </div>

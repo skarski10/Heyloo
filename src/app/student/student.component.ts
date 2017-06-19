@@ -32,7 +32,7 @@ export class StudentComponent implements OnInit {
     this.currentStudent = this.studentService.getStudentGameKeyAndId(currentGameKey, studentId);
     this.currentGame.subscribe(data => {
       console.log(data);
-      // this.currentQuestion = data.question_list[data.current_question]
+      this.currentQuestion = data["question_list"][data["current_question"]]
     })
   }
 }
