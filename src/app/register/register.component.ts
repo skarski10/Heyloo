@@ -5,6 +5,7 @@ import { Game } from '../game.model';
 import { HostService } from '../host.service';
 import { StudentService } from '../student.service';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { RouterModule, Routes } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -17,23 +18,25 @@ export class RegisterComponent implements OnInit {
   subGames: Game[];
   currentGame: FirebaseObjectObservable<any[]>;
   playerList: FirebaseListObservable<any[]>;
+  roomCode: number;
+  currentPlayer: Player;
 
-  constructor(private studentService:StudentService, private hostService: HostService) { }
+  constructor(private studentService:StudentService, private hostService: HostService, private router: Router) { }
 
   ngOnInit() {
     this.games = this.hostService.getGames();
   }
 
   register(username: string, roomcode: number){
+    this.roomCode = roomcode;
     this.currentGame = this.hostService.getGameFromCode(roomcode);
-    var newPlayer = new Player(username, 0, 0);
+    var newPlayer = new Player(username, 0, 0, this.hostService.randomId());
+    this.currentPlayer = newPlayer;
     this.currentGame.subscribe(data=>{
-      // console.log(data)
       this.playerList = this.hostService.getCurrentGamePlayerList(data["$key"]);
-      // console.log(this.playerList);
     },
       function(err){
-        // console.log(err)
+        console.log(err)
       },
       function(){
         this.playerList.push(newPlayer)
@@ -41,5 +44,9 @@ export class RegisterComponent implements OnInit {
     this.playerList.push(newPlayer);
     // https://stackoverflow.com/questions/39401228/get-child-of-firebaseobjectobservable-angularfire2
   }
+
+  // startGame(){
+  //   this.router.navigate(['student'], {roomcode: this.roomCode, studentid:currentPlayer.id})
+  // }
 
 }

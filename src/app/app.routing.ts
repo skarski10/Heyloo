@@ -15,7 +15,7 @@ const appRoutes: Routes = [
   component: HostComponent
 },
 {
-  path: 'student',
+  path: 'student/:roomcode/:studentid',
   component: StudentComponent
 },
 {

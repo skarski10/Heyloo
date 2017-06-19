@@ -4,27 +4,38 @@ import { Player } from './player.model';
 import { Question } from './question.model';
 import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
+import { HostService } from './host.service';
 
 @Injectable()
 export class StudentService {
   players: FirebaseListObservable<any[]>;
+  subPlayers: Player[];
 
-  constructor(private database: AngularFireDatabase) {
-    this.players = database.list('players')
-   }
 
-  getStudent(id: string){
-    return this.database.object('players/' + id);
-  }
+  constructor(private database: AngularFireDatabase, private hostService: HostService) { }
 
-  getStudents(){
-    return this.players;
+  getStudent(id: string, gamekey: string){
+    return this.database.object('games/' + gamekey + 'player_list/' + id);
   }
 
   addStudent(newPlayer: Player) {
     this.players.push(newPlayer);
   }
 
+  getStudentGameKeyAndId(key: string, id: number){
+    var retrievedStudent
+    this.players = this.database.list('games/' + key + 'player_list');
+    this.players.subscribe(data => {
+      this.subPlayers = data
+    })
+
+    for(let i=0; i<this.subPlayers.length; i++){
+      if(this.subPlayers[i].id == id){
+        retrievedStudent = this.getStudent(this.subPlayers[i]['$key'], key);
+      }
+    }
+    return retrievedStudent;
+  }
   // answerQeustion(answer: string, currentPlayer: Player){
   //   currentPlayer.
   // }

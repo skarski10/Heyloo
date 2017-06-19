@@ -14,7 +14,6 @@ import { QUESTIONS } from './sample-questions';
 export class HostService {
   games: FirebaseListObservable<any[]>;
   subGames: Game[];
-  result: Object;
   questionData;
   questionUrl = 'src/assets/mock-data/sample-questions.json';
 
@@ -40,6 +39,12 @@ export class HostService {
       }
     }
     return thisGame;
+  }
+
+  getGameKey(game){
+    game.subscribe(data => {
+      return data['$key'];
+    })
   }
 
   getCurrentGamePlayerList(id: string){
