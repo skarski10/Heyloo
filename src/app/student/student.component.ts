@@ -28,7 +28,13 @@ export class StudentComponent implements OnInit {
       currentGameKey = data['$key'];
     })
     this.currentStudent = this.studentService.getStudentGameKeyAndId(currentGameKey, studentId);
+    console.log(this.currentStudent);
   }
+  // getStudentAnswer(answer: number){
+  //   if(){
+  //     this.currentStudent.
+  //   }
+  // }
 }
 
 
