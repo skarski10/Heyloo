@@ -4,6 +4,7 @@ import { Player } from '../player.model';
 import { StudentService } from '../student.service';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { HostService } from '../host.service';
+import { Question } from '../question.model';
 
 @Component({
   selector: 'app-student',
@@ -14,6 +15,7 @@ import { HostService } from '../host.service';
 export class StudentComponent implements OnInit {
   currentGame: FirebaseObjectObservable<any[]>;
   currentStudent: FirebaseObjectObservable<any[]>;
+  currentQuestion: Question[];
 
   constructor(private route: ActivatedRoute, private studentService: StudentService, private router: Router, private hostService: HostService) { }
 
@@ -28,19 +30,11 @@ export class StudentComponent implements OnInit {
       currentGameKey = data['$key'];
     })
     this.currentStudent = this.studentService.getStudentGameKeyAndId(currentGameKey, studentId);
+    this.currentGame.subscribe(data => {
+    this.currentQuestion = data.question_list[data.current_question]
+    })
   }
 }
 
-
-// this.route.params.forEach((urlParameters) => {
-//   this.studentId = urlParameters['id'];
-//     });
-//      this.studentService.getStudent(this.studentId).subscribe(dataLastEmittedFromObserver => {
-//     //  this.studentToDisplay = new Player
-//      (dataLastEmittedFromObserver.name,
-//      dataLastEmittedFromObserver.correct,
-//      dataLastEmittedFromObserver.wrong)
-//    })
-//    this.students = this.studentService.getStudents();
 
 //https://stackoverflow.com/questions/36320821/passing-multiple-route-params-in-angular2     HOW TO USE MULTIPLE ROUTER PARAMS
