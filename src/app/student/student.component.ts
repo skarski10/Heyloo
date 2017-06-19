@@ -31,6 +31,7 @@ export class StudentComponent implements OnInit {
   }
 }
 
+
 // this.route.params.forEach((urlParameters) => {
 //   this.studentId = urlParameters['id'];
 //     });

@@ -19,16 +19,29 @@
 
 <div class="row" *ngIf="currentGame?.game_state == 'question' ">
 	<div class="col-md-12">
+		{{currentQuestion?.title}}
+	</div>
+	<div class="col-md-12">
 		{{time}}
 	</div>
 	<div class="col-md-12">
 		{{currentQuestion?.instructions}}
-		<div class="" *ngFor="let answer of currentQuestion.choices">
-			<img src="{{answer}}" alt="">
+		{{currentQuestion?.prompt}}
+		<div class="row" *ngFor="let answer of currentQuestion.choices">
+			<div class="col-md-6">
+				<img src="{{answer}}" alt="">
+			</div>
 		</div>
 	</div>
 </div>
 
 <div class="row" *ngIf="currentGame?.game_state == 'answer' ">
-	The correct answer was {{currentGame?.question_list[currentQuestionIndex].answer}}
+	The correct answer was <img src="{{currentGame?.question_list[currentQuestionIndex].chices[currentGame?.question_list[currentQuestionIndex].answer]}}" alt="">
+</div>
+
+<div class="row" *ngIf="currentGame?.game_state == 'leaderboard' ">
+	<h1>Leaderboard:</h1>
+	<div class="col-md-12" *ngFor='let player of playerList | async'>
+		{{payer.points}}
+	</div>
 </div>

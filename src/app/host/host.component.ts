@@ -44,6 +44,7 @@ export class HostComponent {
       this.subGame = this.hostService.getGameFromCode(this.currentGame.id);
       this.getPlayerList(this.currentGame.id);
       this.currentQuestion = this.getQuestion();
+      console.log(this.playerList);
   }
 
   getPlayerList(gameId: number){
@@ -54,7 +55,7 @@ export class HostComponent {
   return this.playerList;
 }
 
-getQuestion(){
+  getQuestion(){
     var currentIndex = this.currentQuestionIndex;
     this.currentQuestion = this.questions[currentIndex];
     return this.currentQuestion;
