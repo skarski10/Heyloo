@@ -39,14 +39,11 @@ export class RegisterComponent implements OnInit {
         console.log(err)
       },
       function(){
-        this.playerList.push(newPlayer)
+        this.playerList.push(newPlayer);
       })
-    this.playerList.push(newPlayer);
+      this.playerList.push(newPlayer);
+      this.router.navigate(['student', this.roomCode, this.currentPlayer.id]);
     // https://stackoverflow.com/questions/39401228/get-child-of-firebaseobjectobservable-angularfire2
   }
-
-  // startGame(){
-  //   this.router.navigate(['student'], {roomcode: this.roomCode, studentid:currentPlayer.id})
-  // }
 
 }
