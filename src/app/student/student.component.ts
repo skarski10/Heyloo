@@ -16,6 +16,7 @@ export class StudentComponent implements OnInit, DoCheck {
   currentGame: FirebaseObjectObservable<any[]>;
   currentStudent: FirebaseObjectObservable<any[]>;
   currentQuestion: Question[];
+  startTime;
 
   constructor(private route: ActivatedRoute, private studentService: StudentService, private router: Router, private hostService: HostService) { }
 
@@ -31,7 +32,7 @@ export class StudentComponent implements OnInit, DoCheck {
     })
     this.currentStudent = this.studentService.getStudentGameKeyAndId(currentGameKey, studentId);
     this.currentGame.subscribe(data => {
-      console.log(data);
+      // console.log(data);
       this.currentQuestion = data["question_list"][data["current_question"]]
     })
   }
@@ -41,8 +42,10 @@ export class StudentComponent implements OnInit, DoCheck {
     this.currentGame.subscribe(data => {
       state = data['game_state'];
     });
-    if(state === "melvin"){
-      console.log('Melvin');
+
+    if(state === "questions"){
+      this.startTime = new Date().getTime();
+      console.log(this.startTime);
     }
   }
 
