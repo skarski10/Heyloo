@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Player } from '../player.model';
 import { StudentService } from '../student.service';
@@ -12,7 +12,7 @@ import { Question } from '../question.model';
   styleUrls: ['./student.component.css'],
   providers: [StudentService, HostService]
 })
-export class StudentComponent implements OnInit {
+export class StudentComponent implements OnInit, DoCheck {
   currentGame: FirebaseObjectObservable<any[]>;
   currentStudent: FirebaseObjectObservable<any[]>;
   currentQuestion: Question[];
@@ -35,6 +35,17 @@ export class StudentComponent implements OnInit {
       this.currentQuestion = data["question_list"][data["current_question"]]
     })
   }
+
+  ngDoCheck(){
+    var state;
+    this.currentGame.subscribe(data => {
+      state = data['game_state'];
+    });
+    if(state === "melvin"){
+      console.log('Melvin');
+    }
+  }
+
 }
 
 
