@@ -18,6 +18,7 @@ export class StudentComponent implements OnInit, DoCheck {
   currentStudent: FirebaseObjectObservable<any[]>;
   currentQuestion: Question[];
   startTime;
+  endTime;
   questions: Question[];
   currentQuestion;
   currentQuestionIndex: number = 0;
@@ -46,15 +47,6 @@ export class StudentComponent implements OnInit, DoCheck {
     this.currentQuestion = this.hostService.getQuestionKeyAndId(currentGameKey, currenGameQuestion)
   }
 
-  getStudentAnswer(answer: number){
-    if(answer == this.currentQuestion.answer){
-      this.studentService.editStudentPoints(this.currentStudent, this.currentGame, true);
-    }
-    else{
-      this.studentService.editStudentPoints(this.currentStudent, this.currentGame, false);
-    }
-  }
-
   ngDoCheck(){
     var state;
     this.currentGame.subscribe(data => {
@@ -66,6 +58,24 @@ export class StudentComponent implements OnInit, DoCheck {
       console.log(this.startTime);
     }
   }
+
+  getStudentAnswer(answer: number){
+    this.endTime = new Date().getTime();
+    if(answer == this.currentQuestion.answer){
+      this.studentService.editStudentPoints(this.currentStudent, this.currentGame, true);
+      this.scoringAlgorithm(this.endTime, this.startTime);
+    }
+    else{
+      this.studentService.editStudentPoints(this.currentStudent, this.currentGame, false);
+    }
+  }
+
+  scoringAlgorithm(end, start){
+    var diff = (end - start);
+    var score = (10*Math.log(30/diff))*200;
+    
+  }
+
 
 }
 
