@@ -14,8 +14,9 @@ import { QUESTIONS } from './sample-questions';
 export class HostService {
   games: FirebaseListObservable<any[]>;
   subGames: Game[];
-  questionData;
-  questionUrl = 'src/assets/mock-data/sample-questions.json';
+  questions: Question[];
+  gameQuestions: FirebaseListObservable<any[]>;
+  currentQuestion: Question[];
 
   constructor(private database: AngularFireDatabase, private http: Http) {
     this.games = database.list('games');
@@ -60,21 +61,38 @@ export class HostService {
     return newGame;
   }
 
-  // getQuestions() {
-  //   this.result = {questions:[]};
-  //   return this.http.get(this.questionUrl)
-  //                .map((res:Response) => res.json())
-  //                .subscribe(res => this.result = res)
-  // }
-
   getQuestions() {
     return QUESTIONS;
   }
 
+  getQuestion(id: string, gamekey: string){
+    return this.database.object('games/' + gamekey + 'question_list/' + id);
+  }
+
+  getQuestionKeyAndId(key: string, id: number){
+    var question
+    var currentQuestionIndex
+    console.log(key);
+    this.gameQuestions = this.database.list('games/' + key + 'question_list');
+    console.log(this.gameQuestions);
+    this.gameQuestions.subscribe(data => {
+      this.currentQuestion = data
+      currentQuestionIndex = data['current_question']
+      console.log(data);
+      console.log(data['current_question']);
+    })
+    for(let i=0; i<this.currentQuestion.length; i++){
+      if(this.currentQuestion[i] == this.currentQuestion[currentQuestionIndex]){
+        question = this.getQuestion(this.currentQuestion[i]['$key'], key);
+      }
+      console.log(question);
+    }
+    return question;
+  }
+
   editGameState(gameState, game){
-    console.log(game);
     var currentGame = this.getGameFromCode(game.id);
-    currentGame.subscribe(data => console.log(data));
+    // currentGame.subscribe(data => console.log(data));
     currentGame.update({game_state: gameState});
   }
 }

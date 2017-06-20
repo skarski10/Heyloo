@@ -28,6 +28,7 @@ export class HostComponent {
    }
 
   ngOnInit() {
+    var gameKey;
     this.questions = this.hostService.getQuestions();
     this.games = this.hostService.getGames();
     this.route.params.forEach((urlParameters) => {
@@ -43,8 +44,15 @@ export class HostComponent {
       });
       this.subGame = this.hostService.getGameFromCode(this.currentGame.id);
       this.getPlayerList(this.currentGame.id);
-      this.currentQuestion = this.getQuestion();
-      console.log(this.playerList);
+      // this.route.params.forEach(urlParameters => {
+      //   this.currentGame = this.hostService.getGameFromCode(urlParameters['id']);
+      // })
+      this.subGame.subscribe(data => {
+        gameKey = data['$key'];
+        // console.log(data);
+      })
+      this.currentQuestion = this.hostService.getQuestionKeyAndId(gameKey, this.currentGame.current_question);
+      // console.log(this.currentQuestion);
   }
 
   getPlayerList(gameId: number){
@@ -53,12 +61,6 @@ export class HostComponent {
     this.playerList = this.hostService.getCurrentGamePlayerList(data["$key"]);
   })
   return this.playerList;
-}
-
-  getQuestion(){
-    var currentIndex = this.currentQuestionIndex;
-    this.currentQuestion = this.questions[currentIndex];
-    return this.currentQuestion;
 }
 
   gameStateCountdown(){
@@ -84,23 +86,21 @@ export class HostComponent {
     this.time = 5;
     var interval = setInterval(data => {
       if(this.time != 0){
-      console.log(this.time);
+      // console.log(this.time);
         this.time --;
       }
       else {
-        console.log("done");
         clearInterval(interval);
         this.gameStateQuestion();
-        this.getQuestion();
+        // this.hostService.getQuestion();
       }
     }, 1000);
   }
 
   thirtySeconds(){
     this.time = 30;
-    console.log(this.time);
     var interval = setInterval(data => {
-      console.log(this.time);
+      // console.log(this.time);
       if(this.time != 0){
         this.time --;
       }
@@ -110,12 +110,4 @@ export class HostComponent {
       }
     }, 1000);
   }
-
-  // preQuestionCountdown() {
-  //   this.time.setSeconds(this.time.getSeconds(), -1);
-  //   setTimeout(() => this.preQuestionCountdown(), 1000);
-  // }
-  // resetCountdown(){
-  //   this.time = new Date(250, 0, 0, 0, 30, 0);
-  // }
 }

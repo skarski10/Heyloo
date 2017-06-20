@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Player } from '../player.model';
+import { Question } from '../question.model';
 import { StudentService } from '../student.service';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { HostService } from '../host.service';
@@ -14,27 +15,38 @@ import { HostService } from '../host.service';
 export class StudentComponent implements OnInit {
   currentGame: FirebaseObjectObservable<any[]>;
   currentStudent: FirebaseObjectObservable<any[]>;
+  questions: Question[];
+  currentQuestion;
+  currentQuestionIndex: number = 0;
 
   constructor(private route: ActivatedRoute, private studentService: StudentService, private router: Router, private hostService: HostService) { }
 
   ngOnInit() {
     var currentGameKey;
     var studentId;
+    var currenGameQuestion;
     this.route.params.forEach(urlParameters => {
       this.currentGame = this.hostService.getGameFromCode(urlParameters['roomcode']);
       studentId = urlParameters['studentid'];
     })
     this.currentGame.subscribe(data => {
       currentGameKey = data['$key'];
+      console.log(data)
+      currenGameQuestion = data['current_question'];
     })
     this.currentStudent = this.studentService.getStudentGameKeyAndId(currentGameKey, studentId);
-    console.log(this.currentStudent);
+    this.questions = this.hostService.getQuestions();
+    this.currentQuestion = this.hostService.getQuestionKeyAndId(currentGameKey, currenGameQuestion)
   }
-  // getStudentAnswer(answer: number){
-  //   if(){
-  //     this.currentStudent.
-  //   }
-  // }
+
+  getStudentAnswer(answer: number){
+    if(answer == this.currentQuestion.answer){
+      this.studentService.editStudentPoints(this.currentStudent, this.currentGame, true);
+    }
+    else{
+      this.studentService.editStudentPoints(this.currentStudent, this.currentGame, false);
+    }
+  }
 }
 
 

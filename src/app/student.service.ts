@@ -36,7 +36,15 @@ export class StudentService {
     }
     return retrievedStudent;
   }
-  // answerQeustion(answer: string, currentPlayer: Player){
-  //   currentPlayer.
-  // }
+  editStudentPoints(student, game, correct){
+    console.log(student);
+    var currentStudent = this.getStudent(student.id, game.id);
+    currentStudent.subscribe(data => console.log(data));
+    if(correct == true){
+      currentStudent.update({points: + 1000, correct: + 1});
+    }
+    else if(correct == false){
+      currentStudent.update({wrong: + 1});
+    }
+  }
 }
