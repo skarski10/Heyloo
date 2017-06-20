@@ -44,15 +44,10 @@ export class HostComponent {
       });
       this.subGame = this.hostService.getGameFromCode(this.currentGame.id);
       this.getPlayerList(this.currentGame.id);
-      // this.route.params.forEach(urlParameters => {
-      //   this.currentGame = this.hostService.getGameFromCode(urlParameters['id']);
-      // })
       this.subGame.subscribe(data => {
         gameKey = data['$key'];
-        // console.log(data);
       })
-      this.currentQuestion = this.hostService.getQuestionKeyAndId(gameKey, this.currentGame.current_question);
-      // console.log(this.currentQuestion);
+      this.currentQuestion = this.hostService.getQuestionId(gameKey, this.currentGame.current_question);
   }
 
   getPlayerList(gameId: number){

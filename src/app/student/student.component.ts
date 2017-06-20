@@ -31,12 +31,12 @@ export class StudentComponent implements OnInit {
     })
     this.currentGame.subscribe(data => {
       currentGameKey = data['$key'];
-      console.log(data)
       currenGameQuestion = data['current_question'];
+      console.log(data['current_question']);
     })
     this.currentStudent = this.studentService.getStudentGameKeyAndId(currentGameKey, studentId);
     this.questions = this.hostService.getQuestions();
-    this.currentQuestion = this.hostService.getQuestionKeyAndId(currentGameKey, currenGameQuestion)
+    this.currentQuestion = this.hostService.getQuestionId(currentGameKey, currenGameQuestion)
   }
 
   getStudentAnswer(answer: number){
