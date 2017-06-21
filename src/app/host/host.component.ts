@@ -73,7 +73,7 @@ export class HostComponent {
 
   gameStateLeaderboard(){
     this.hostService.editGameState('leaderboard', this.currentGame);
-    this.currentGame.current_question ++;
+    this.hostService.nextQuestion(this.currentGame);
   }
 
   fiveSeconds(){

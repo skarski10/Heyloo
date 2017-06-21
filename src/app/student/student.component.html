@@ -1,5 +1,5 @@
-<<<<<<< HEAD
 student component
+{{currentGame?.game_state}}
 <div class="question-holder">
   <div class="row">
     <div class="question">
@@ -18,13 +18,11 @@ student component
       </div>
     </div>
   </div>
-=======
 <div class="question">
   {{currentQuestion}}
->>>>>>> 1a668f81b812ef4be788c7da0d947aefd9833cb4
 </div>
 
-<div class="row">
+<div class="row" *ngIf="currentGame?.game_state == 'question' ">
   <div class="col-md-6">
     <input type="hidden" #inputPostion0 value="0">
     <i class="fa fa-paper-plane" aria-hidden="true" (click)='getStudentAnswer(inputPostion0.value)'></i>

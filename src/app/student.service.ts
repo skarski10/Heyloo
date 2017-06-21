@@ -11,7 +11,6 @@ export class StudentService {
   players: FirebaseListObservable<any[]>;
   subPlayers: Player[];
 
-
   constructor(private database: AngularFireDatabase, private hostService: HostService) { }
 
   getStudent(id: string, gamekey: string){

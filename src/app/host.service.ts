@@ -66,4 +66,9 @@ export class HostService {
     var currentGame = this.getGameFromCode(game.id);
     currentGame.update({game_state: gameState});
   }
+
+  nextQuestion(game){
+    var currentGame = this.getGameFromCode(game.id);
+    currentGame.update({current_question: + 1})
+  }
 }

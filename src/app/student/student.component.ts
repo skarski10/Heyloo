@@ -28,22 +28,17 @@ export class StudentComponent implements OnInit {
       this.currentGame = this.hostService.getGameFromCode(urlParameters['roomcode']);
       studentId = urlParameters['studentid'];
     })
-    console.log(this.currentGame);
     this.currentGame.subscribe(data => {
       currentGameKey = data['$key'];
       this.currentQuestion = data['question_list'][data['current_question']];
     })
     this.currentStudent = this.studentService.getStudentGameKeyAndId(currentGameKey, studentId);
-    console.log();
     this.questions = this.hostService.getQuestions();
-    console.log(this.currentStudent);
   }
 
   getStudentAnswer(answer: number){
     var questionAnswer;
-    console.log(this.currentStudent);
     if(answer == this.currentQuestion.answer){
-      console.log(this.currentStudent);
       this.studentService.editStudentPoints(this.currentStudent, true);
     }
     else{

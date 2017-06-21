@@ -37,11 +37,13 @@
 
 <div class="row" *ngIf="currentGame?.game_state == 'answer' ">
 	The correct answer was <img src="{{currentGame?.question_list[currentGame?.current_question].choices[currentGame?.question_list[currentGame?.current_question].answer]}}" alt="">
+	<button type="button" (click)='gameStateLeaderboard()'>Go to leaderboard</button>
 </div>
 
 <div class="row" *ngIf="currentGame?.game_state == 'leaderboard' ">
 	<h1>Leaderboard:</h1>
 	<div class="col-md-12" *ngFor='let player of playerList | async'>
-		{{payer.points}}
+		{{player.points}}
 	</div>
+	<button type="button" (click)='gameStateCountdown()'>Next question</button>
 </div>
