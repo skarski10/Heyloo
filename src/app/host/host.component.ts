@@ -20,31 +20,33 @@ export class HostComponent {
   gameId;
   currentGame;
   questions: Question[];
-  currentQuestion;
-  currentQuestionIndex: number = 0;
+  currentQuestion: Question;
   time: number = 0;
 
   constructor(private route: ActivatedRoute, private hostService: HostService, private router: Router, private location: Location) {
    }
 
   ngOnInit() {
+    var gameKey;
     this.questions = this.hostService.getQuestions();
     this.games = this.hostService.getGames();
     this.route.params.forEach((urlParameters) => {
       this.gameId = urlParameters["id"];
     });
-      this.hostService.getGameFromCode(this.gameId).subscribe(dataLastEmittedFromObserver => {
-        this.currentGame = new Game
-        (dataLastEmittedFromObserver.id,
-        dataLastEmittedFromObserver.game_state,
-        dataLastEmittedFromObserver.game_over,
-        dataLastEmittedFromObserver.player_list,
-        dataLastEmittedFromObserver.question_list)
+    this.hostService.getGameFromCode(this.gameId).subscribe(data => {
+      this.currentGame = new Game
+      (data.id,
+      data.game_state,
+      data.game_over,
+      data.player_list,
+      data.question_list)
       });
       this.subGame = this.hostService.getGameFromCode(this.currentGame.id);
       this.getPlayerList(this.currentGame.id);
-      this.currentQuestion = this.getQuestion();
-      console.log(this.playerList);
+      this.subGame.subscribe(data => {
+        gameKey = data['$key'];
+        this.currentQuestion = data['question_list'][data['current_question']];
+      })
   }
 
   getPlayerList(gameId: number){
@@ -53,12 +55,6 @@ export class HostComponent {
     this.playerList = this.hostService.getCurrentGamePlayerList(data["$key"]);
   })
   return this.playerList;
-}
-
-  getQuestion(){
-    var currentIndex = this.currentQuestionIndex;
-    this.currentQuestion = this.questions[currentIndex];
-    return this.currentQuestion;
 }
 
   gameStateCountdown(){
@@ -77,30 +73,27 @@ export class HostComponent {
 
   gameStateLeaderboard(){
     this.hostService.editGameState('leaderboard', this.currentGame);
-    this.currentQuestionIndex ++;
+    this.currentGame.current_question ++;
   }
 
   fiveSeconds(){
     this.time = 5;
     var interval = setInterval(data => {
       if(this.time != 0){
-      console.log(this.time);
+      // console.log(this.time);
         this.time --;
       }
       else {
-        console.log("done");
         clearInterval(interval);
         this.gameStateQuestion();
-        this.getQuestion();
       }
     }, 1000);
   }
 
   thirtySeconds(){
     this.time = 30;
-    console.log(this.time);
     var interval = setInterval(data => {
-      console.log(this.time);
+      // console.log(this.time);
       if(this.time != 0){
         this.time --;
       }
@@ -110,12 +103,4 @@ export class HostComponent {
       }
     }, 1000);
   }
-
-  // preQuestionCountdown() {
-  //   this.time.setSeconds(this.time.getSeconds(), -1);
-  //   setTimeout(() => this.preQuestionCountdown(), 1000);
-  // }
-  // resetCountdown(){
-  //   this.time = new Date(250, 0, 0, 0, 30, 0);
-  // }
 }

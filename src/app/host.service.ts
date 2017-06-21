@@ -14,8 +14,6 @@ import { QUESTIONS } from './sample-questions';
 export class HostService {
   games: FirebaseListObservable<any[]>;
   subGames: Game[];
-  questionData;
-  questionUrl = 'src/assets/mock-data/sample-questions.json';
 
   constructor(private database: AngularFireDatabase, private http: Http) {
     this.games = database.list('games');
@@ -60,21 +58,12 @@ export class HostService {
     return newGame;
   }
 
-  // getQuestions() {
-  //   this.result = {questions:[]};
-  //   return this.http.get(this.questionUrl)
-  //                .map((res:Response) => res.json())
-  //                .subscribe(res => this.result = res)
-  // }
-
   getQuestions() {
     return QUESTIONS;
   }
 
   editGameState(gameState, game){
-    console.log(game);
     var currentGame = this.getGameFromCode(game.id);
-    currentGame.subscribe(data => console.log(data));
     currentGame.update({game_state: gameState});
   }
 }

@@ -15,7 +15,7 @@ export class StudentService {
   constructor(private database: AngularFireDatabase, private hostService: HostService) { }
 
   getStudent(id: string, gamekey: string){
-    return this.database.object('games/' + gamekey + 'player_list/' + id);
+    return this.database.object('games/' + gamekey + '/player_list/' + id);
   }
 
   addStudent(newPlayer: Player) {
@@ -24,19 +24,24 @@ export class StudentService {
 
   getStudentGameKeyAndId(key: string, id: number){
     var retrievedStudent
-    this.players = this.database.list('games/' + key + 'player_list');
+    this.players = this.database.list('games/' + key + '/player_list');
     this.players.subscribe(data => {
       this.subPlayers = data
     })
-
     for(let i=0; i<this.subPlayers.length; i++){
-      if(this.subPlayers[i].id == id){
+      if(this.subPlayers[i]['id'] == id){
         retrievedStudent = this.getStudent(this.subPlayers[i]['$key'], key);
       }
     }
     return retrievedStudent;
   }
-  // answerQeustion(answer: string, currentPlayer: Player){
-  //   currentPlayer.
-  // }
+
+  editStudentPoints(student, correct){
+    if(correct == true){
+      student.update({points: + 1000, correct: + 1});
+    }
+    else if(correct == false){
+      student.update({wrong: + 1});
+    }
+  }
 }
