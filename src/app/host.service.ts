@@ -14,8 +14,6 @@ import { QUESTIONS } from './sample-questions';
 export class HostService {
   games: FirebaseListObservable<any[]>;
   subGames: Game[];
-  allQuestions: FirebaseListObservable<any[]>;
-  gameQuestions: Question[];
 
   constructor(private database: AngularFireDatabase, private http: Http) {
     this.games = database.list('games');
@@ -64,31 +62,8 @@ export class HostService {
     return QUESTIONS;
   }
 
-  getQuestion(indexPosition: number, gamekey: string){
-    return this.database.object('games/' + gamekey + 'question_list + [indexPosition]/');
-  }
-
-  getQuestionId(key: string, id: number){
-    var currentQuestion
-    this.allQuestions = this.database.list('games/' + key + 'question_list');
-    this.allQuestions.subscribe(data => {
-      this.gameQuestions = data
-    })
-    console.log(this.gameQuestions);
-    for(let i=0; i<this.gameQuestions.length; i++){
-      console.log(this.gameQuestions[i]);
-      console.log(this.gameQuestions[id]);
-      if(this.gameQuestions[i] == this.gameQuestions[id]){
-        currentQuestion = this.getQuestion(this.gameQuestions[i]['$key'], key);
-      }
-      // console.log(question);
-    }
-    return currentQuestion;
-  }
-
   editGameState(gameState, game){
     var currentGame = this.getGameFromCode(game.id);
-    // currentGame.subscribe(data => console.log(data));
     currentGame.update({game_state: gameState});
   }
 }
