@@ -24,7 +24,7 @@ export class StudentService {
 
   getStudentGameKeyAndId(key: string, id: number){
     var retrievedStudent
-    this.players = this.database.list('games/' + key + 'player_list');
+    this.players = this.database.list('games/' + key + '/player_list');
     this.players.subscribe(data => {
       this.subPlayers = data
     })

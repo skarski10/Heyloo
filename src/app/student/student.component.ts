@@ -27,6 +27,7 @@ export class StudentComponent implements OnInit {
       this.currentGame = this.hostService.getGameFromCode(urlParameters['roomcode']);
       studentId = urlParameters['studentid'];
     })
+    console.log(this.currentGame);
     this.currentGame.subscribe(data => {
       currentGameKey = data['$key'];
       this.currentQuestion = data['question_list'][data['current_question']];
