@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Player } from '../player.model';
+import { Game } from '../game.model';
 import { Question } from '../question.model';
 import { StudentService } from '../student.service';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
@@ -17,11 +18,11 @@ export class StudentComponent implements OnInit {
   currentStudent: FirebaseObjectObservable<any[]>;
   questions: Question[];
   currentQuestion: Question;
+  subGame;
 
   constructor(private route: ActivatedRoute, private studentService: StudentService, private router: Router, private hostService: HostService) { }
 
   ngOnInit() {
-    console.log('init')
     var currentGameKey;
     var studentId;
     this.route.params.forEach(urlParameters => {
@@ -34,6 +35,15 @@ export class StudentComponent implements OnInit {
     })
     this.currentStudent = this.studentService.getStudentGameKeyAndId(currentGameKey, studentId);
     this.questions = this.hostService.getQuestions();
+    this.currentGame.subscribe(data => {
+      this.subGame = data;
+    })
+  }
+
+  ngDoCheck(){
+    if(this.subGame['game_state'] == "answer"){
+      this.updateGame();
+    }
   }
 
   getStudentAnswer(answer: number){
@@ -45,7 +55,10 @@ export class StudentComponent implements OnInit {
       this.studentService.editStudentPoints(this.currentStudent, false);
     }
   }
+
+  updateGame(){
+    this.currentGame.subscribe(data => {
+      this.subGame = data;
+    })
+  }
 }
-
-
-//https://stackoverflow.com/questions/36320821/passing-multiple-route-params-in-angular2     HOW TO USE MULTIPLE ROUTER PARAMS
