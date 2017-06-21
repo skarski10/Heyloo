@@ -14,9 +14,8 @@ import { QUESTIONS } from './sample-questions';
 export class HostService {
   games: FirebaseListObservable<any[]>;
   subGames: Game[];
-  questions: Question[];
-  gameQuestions: FirebaseListObservable<any[]>;
-  currentQuestion: Question[];
+  allQuestions: FirebaseListObservable<any[]>;
+  gameQuestions: Question[];
 
   constructor(private database: AngularFireDatabase, private http: Http) {
     this.games = database.list('games');
@@ -64,29 +63,26 @@ export class HostService {
     return QUESTIONS;
   }
 
-  getQuestion(id: string, gamekey: string){
-    return this.database.object('games/' + gamekey + 'question_list/' + id);
+  getQuestion(indexPosition: number, gamekey: string){
+    return this.database.object('games/' + gamekey + 'question_list + [indexPosition]/');
   }
 
-  getQuestionKeyAndId(key: string, id: number){
-    var question
-    var currentQuestionIndex
-    console.log(key);
-    this.gameQuestions = this.database.list('games/' + key + 'question_list');
-    console.log(this.gameQuestions);
-    this.gameQuestions.subscribe(data => {
-      this.currentQuestion = data
-      currentQuestionIndex = data['current_question']
-      console.log(data);
-      console.log(data['current_question']);
+  getQuestionId(key: string, id: number){
+    var currentQuestion
+    this.allQuestions = this.database.list('games/' + key + 'question_list');
+    this.allQuestions.subscribe(data => {
+      this.gameQuestions = data
     })
-    for(let i=0; i<this.currentQuestion.length; i++){
-      if(this.currentQuestion[i] == this.currentQuestion[currentQuestionIndex]){
-        question = this.getQuestion(this.currentQuestion[i]['$key'], key);
+    console.log(this.gameQuestions);
+    for(let i=0; i<this.gameQuestions.length; i++){
+      console.log(this.gameQuestions[i]);
+      console.log(this.gameQuestions[id]);
+      if(this.gameQuestions[i] == this.gameQuestions[id]){
+        currentQuestion = this.getQuestion(this.gameQuestions[i]['$key'], key);
       }
-      console.log(question);
+      // console.log(question);
     }
-    return question;
+    return currentQuestion;
   }
 
   editGameState(gameState, game){

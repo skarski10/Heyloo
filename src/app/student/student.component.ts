@@ -1,7 +1,6 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Player } from '../player.model';
-import { Question } from '../question.model';
 import { StudentService } from '../student.service';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { HostService } from '../host.service';
@@ -20,7 +19,6 @@ export class StudentComponent implements OnInit, DoCheck {
   startTime;
   endTime;
   questions: Question[];
-  currentQuestion;
   currentQuestionIndex: number = 0;
 
   constructor(private route: ActivatedRoute, private studentService: StudentService, private router: Router, private hostService: HostService) { }
@@ -35,8 +33,8 @@ export class StudentComponent implements OnInit, DoCheck {
     })
     this.currentGame.subscribe(data => {
       currentGameKey = data['$key'];
-      console.log(data)
       currenGameQuestion = data['current_question'];
+      console.log(data['current_question']);
     })
     this.currentStudent = this.studentService.getStudentGameKeyAndId(currentGameKey, studentId);
     this.currentGame.subscribe(data => {
@@ -44,7 +42,7 @@ export class StudentComponent implements OnInit, DoCheck {
       this.currentQuestion = data["question_list"][data["current_question"]]
     })
     this.questions = this.hostService.getQuestions();
-    this.currentQuestion = this.hostService.getQuestionKeyAndId(currentGameKey, currenGameQuestion)
+    this.currentQuestion = this.hostService.getQuestionId(currentGameKey, currenGameQuestion)
   }
 
   ngDoCheck(){
@@ -59,22 +57,22 @@ export class StudentComponent implements OnInit, DoCheck {
     }
   }
 
-  getStudentAnswer(answer: number){
-    this.endTime = new Date().getTime();
-    if(answer == this.currentQuestion.answer){
-      this.studentService.editStudentPoints(this.currentStudent, this.currentGame, true);
-      this.scoringAlgorithm(this.endTime, this.startTime);
-    }
-    else{
-      this.studentService.editStudentPoints(this.currentStudent, this.currentGame, false);
-    }
-  }
-
-  scoringAlgorithm(end, start){
-    var diff = (end - start);
-    var score = (10*Math.log(30/diff))*200;
-    
-  }
+  // getStudentAnswer(answer: number){
+  //   this.endTime = new Date().getTime();
+  //   if(answer == this.currentQuestion.answer){
+  //     this.studentService.editStudentPoints(this.currentStudent, this.currentGame, true);
+  //     this.scoringAlgorithm(this.endTime, this.startTime);
+  //   }
+  //   else{
+  //     this.studentService.editStudentPoints(this.currentStudent, this.currentGame, false);
+  //   }
+  // }
+  //
+  // scoringAlgorithm(end, start){
+  //   var diff = (end - start);
+  //   var score = (10*Math.log(30/diff))*200;
+  //
+  // }
 
 
 }
