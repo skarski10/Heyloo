@@ -21,6 +21,7 @@ export class StudentComponent implements OnInit {
   constructor(private route: ActivatedRoute, private studentService: StudentService, private router: Router, private hostService: HostService) { }
 
   ngOnInit() {
+    console.log('init')
     var currentGameKey;
     var studentId;
     this.route.params.forEach(urlParameters => {
@@ -31,15 +32,18 @@ export class StudentComponent implements OnInit {
     this.currentGame.subscribe(data => {
       currentGameKey = data['$key'];
       this.currentQuestion = data['question_list'][data['current_question']];
-      console.log(this.currentQuestion);
+      // console.log(this.currentQuestion);
     })
     this.currentStudent = this.studentService.getStudentGameKeyAndId(currentGameKey, studentId);
     this.questions = this.hostService.getQuestions();
+    console.log(this.currentStudent);
   }
 
   getStudentAnswer(answer: number){
     var questionAnswer;
+    console.log(this.currentStudent);
     if(answer == this.currentQuestion.answer){
+      console.log(this.currentStudent);
       this.studentService.editStudentPoints(this.currentStudent, this.currentGame, true);
     }
     else{

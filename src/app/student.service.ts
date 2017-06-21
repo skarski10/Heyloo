@@ -30,12 +30,13 @@ export class StudentService {
     })
 
     for(let i=0; i<this.subPlayers.length; i++){
-      if(this.subPlayers[i].id == id){
+      if(this.subPlayers[i]['id'] == id){
         retrievedStudent = this.getStudent(this.subPlayers[i]['$key'], key);
       }
     }
     return retrievedStudent;
   }
+
   editStudentPoints(student, game, correct){
     console.log(student);
     var currentStudent = this.getStudent(student.id, game.id);
