@@ -30,9 +30,9 @@ export class StudentComponent implements OnInit {
     this.currentGame.subscribe(data => {
       currentGameKey = data['$key'];
       this.currentQuestion = data['question_list'][data['current_question']];
-      console.log(this.currentQuestion);
     })
     this.currentStudent = this.studentService.getStudentGameKeyAndId(currentGameKey, studentId);
+    console.log();
     this.questions = this.hostService.getQuestions();
   }
 
