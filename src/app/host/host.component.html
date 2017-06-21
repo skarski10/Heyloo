@@ -36,7 +36,7 @@
 </div>
 
 <div class="row" *ngIf="currentGame?.game_state == 'answer' ">
-	The correct answer was <img src="{{currentGame?.question_list[currentQuestionIndex].chices[currentGame?.question_list[currentQuestionIndex].answer]}}" alt="">
+	The correct answer was <img src="{{currentGame?.question_list[currentGame?.current_question].choices[currentGame?.question_list[currentGame?.current_question].answer]}}" alt="">
 </div>
 
 <div class="row" *ngIf="currentGame?.game_state == 'leaderboard' ">

@@ -1,12 +1,28 @@
-student view
+student component
+<div class="" *ngIf="subGame?.game_state == 'answer'">
+  answer time
+</div>
 <div class="question-holder">
-  {{currentQuestion.title}}
-  <div class="questions" *ngFor="let choice of currentQuestion.choices">
-    <img src ="{{choice}}" />
+  <div class="row">
+    <div class="question">
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="row">
+      <div class="questions-r1">
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="questions-r2">
+
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="row" *ngIf="currentGame?.game_state == 'question' ">
+<div class="row">
   <div class="col-md-6">
     <input type="hidden" #inputPostion0 value="0">
     <i class="fa fa-paper-plane" aria-hidden="true" (click)='getStudentAnswer(inputPostion0.value)'></i>

@@ -20,8 +20,7 @@ export class HostComponent {
   gameId;
   currentGame;
   questions: Question[];
-  currentQuestion;
-  currentQuestionIndex: number = 0;
+  currentQuestion: Question;
   time: number = 0;
 
   constructor(private route: ActivatedRoute, private hostService: HostService, private router: Router, private location: Location) {
@@ -34,20 +33,20 @@ export class HostComponent {
     this.route.params.forEach((urlParameters) => {
       this.gameId = urlParameters["id"];
     });
-      this.hostService.getGameFromCode(this.gameId).subscribe(dataLastEmittedFromObserver => {
-        this.currentGame = new Game
-        (dataLastEmittedFromObserver.id,
-        dataLastEmittedFromObserver.game_state,
-        dataLastEmittedFromObserver.game_over,
-        dataLastEmittedFromObserver.player_list,
-        dataLastEmittedFromObserver.question_list)
+    this.hostService.getGameFromCode(this.gameId).subscribe(data => {
+      this.currentGame = new Game
+      (data.id,
+      data.game_state,
+      data.game_over,
+      data.player_list,
+      data.question_list)
       });
       this.subGame = this.hostService.getGameFromCode(this.currentGame.id);
       this.getPlayerList(this.currentGame.id);
       this.subGame.subscribe(data => {
         gameKey = data['$key'];
+        this.currentQuestion = data['question_list'][data['current_question']];
       })
-      this.currentQuestion = this.hostService.getQuestionId(gameKey, this.currentGame.current_question);
   }
 
   getPlayerList(gameId: number){
@@ -74,7 +73,7 @@ export class HostComponent {
 
   gameStateLeaderboard(){
     this.hostService.editGameState('leaderboard', this.currentGame);
-    this.currentQuestionIndex ++;
+    this.currentGame.current_question ++;
   }
 
   fiveSeconds(){
@@ -87,7 +86,6 @@ export class HostComponent {
       else {
         clearInterval(interval);
         this.gameStateQuestion();
-        // this.hostService.getQuestion();
       }
     }, 1000);
   }

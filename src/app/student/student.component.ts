@@ -1,10 +1,11 @@
-import { Component, OnInit, DoCheck } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Player } from '../player.model';
+import { Game } from '../game.model';
+import { Question } from '../question.model';
 import { StudentService } from '../student.service';
 import { FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
 import { HostService } from '../host.service';
-import { Question } from '../question.model';
 
 @Component({
   selector: 'app-student',
@@ -12,70 +13,54 @@ import { Question } from '../question.model';
   styleUrls: ['./student.component.css'],
   providers: [StudentService, HostService]
 })
-export class StudentComponent implements OnInit, DoCheck {
+export class StudentComponent implements OnInit {
   currentGame: FirebaseObjectObservable<any[]>;
   currentStudent: FirebaseObjectObservable<any[]>;
-  currentQuestion: Question[];
-  startTime;
-  endTime;
   questions: Question[];
-  currentQuestionIndex: number = 0;
+  currentQuestion: Question;
+  subGame;
 
   constructor(private route: ActivatedRoute, private studentService: StudentService, private router: Router, private hostService: HostService) { }
 
   ngOnInit() {
     var currentGameKey;
     var studentId;
-    var currenGameQuestion;
     this.route.params.forEach(urlParameters => {
       this.currentGame = this.hostService.getGameFromCode(urlParameters['roomcode']);
       studentId = urlParameters['studentid'];
     })
     this.currentGame.subscribe(data => {
       currentGameKey = data['$key'];
-      currenGameQuestion = data['current_question'];
-      console.log(data['current_question']);
+      this.currentQuestion = data['question_list'][data['current_question']];
     })
     this.currentStudent = this.studentService.getStudentGameKeyAndId(currentGameKey, studentId);
-    this.currentGame.subscribe(data => {
-      // console.log(data);
-      this.currentQuestion = data["question_list"][data["current_question"]]
-    })
     this.questions = this.hostService.getQuestions();
-    this.currentQuestion = this.hostService.getQuestionId(currentGameKey, currenGameQuestion)
+    this.currentGame.subscribe(data => {
+      this.subGame = data;
+    })
   }
 
   ngDoCheck(){
-    var state;
-    this.currentGame.subscribe(data => {
-      state = data['game_state'];
-    });
-
-    if(state === "questions"){
-      this.startTime = new Date().getTime();
-      console.log(this.startTime);
+    if(this.subGame['game_state'] == "answer"){
+      this.updateGame();
     }
   }
 
-  // getStudentAnswer(answer: number){
-  //   this.endTime = new Date().getTime();
-  //   if(answer == this.currentQuestion.answer){
-  //     this.studentService.editStudentPoints(this.currentStudent, this.currentGame, true);
-  //     this.scoringAlgorithm(this.endTime, this.startTime);
-  //   }
-  //   else{
-  //     this.studentService.editStudentPoints(this.currentStudent, this.currentGame, false);
-  //   }
-  // }
-  //
-  // scoringAlgorithm(end, start){
-  //   var diff = (end - start);
-  //   var score = (10*Math.log(30/diff))*200;
-  //
-  // }
+  getStudentAnswer(answer: number){
+    var questionAnswer;
+    console.log(this.currentStudent);
+    if(answer == this.currentQuestion.answer){
+      console.log(this.currentStudent);
+      this.studentService.editStudentPoints(this.currentStudent, true);
+    }
+    else{
+      this.studentService.editStudentPoints(this.currentStudent, false);
+    }
+  }
 
-
+  updateGame(){
+    this.currentGame.subscribe(data => {
+      this.subGame = data;
+    })
+  }
 }
-
-
-//https://stackoverflow.com/questions/36320821/passing-multiple-route-params-in-angular2     HOW TO USE MULTIPLE ROUTER PARAMS
