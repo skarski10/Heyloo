@@ -31,12 +31,13 @@ export class StudentService {
     console.log(id);
 
     for(let i=0; i<this.subPlayers.length; i++){
-      if(this.subPlayers[i].id == id){
+      if(this.subPlayers[i]['id'] == id){
         retrievedStudent = this.getStudent(this.subPlayers[i]['$key'], key);
       }
     }
     return retrievedStudent;
   }
+
   editStudentPoints(student, game, correct){
     if(correct == true){
       student.update({points: + 1000, correct: + 1});
