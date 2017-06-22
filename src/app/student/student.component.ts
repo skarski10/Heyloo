@@ -19,6 +19,7 @@ export class StudentComponent implements OnInit {
   questions: Question[];
   currentQuestion: Question;
   subGame;
+  subStudent;
 
   constructor(private route: ActivatedRoute, private studentService: StudentService, private router: Router, private hostService: HostService) { }
 
@@ -34,6 +35,9 @@ export class StudentComponent implements OnInit {
       this.currentQuestion = data['question_list'][data['current_question']];
     })
     this.currentStudent = this.studentService.getStudentGameKeyAndId(currentGameKey, studentId);
+    this.currentStudent.subscribe(data => {
+      this.subStudent = data;
+    })
     this.questions = this.hostService.getQuestions();
     this.currentGame.subscribe(data => {
       this.subGame = data;

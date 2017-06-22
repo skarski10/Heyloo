@@ -103,4 +103,22 @@ export class HostComponent {
       }
     }, 1000);
   }
+
+  deleteStudent(player){
+    var players;
+    this.playerList.subscribe(data => {
+      players = data;
+    })
+    for(let i = 0; i < players.length; i++){
+      if(players[i].id == player.id){
+        players.splice(i, 1);
+      }
+    }
+    this.hostService.updatePlayerList(players, this.currentGame);
+  }
+
+  endGame(){
+    this.hostService.gameOver(this.currentGame);
+    this.gameStateLeaderboard();
+  }
 }

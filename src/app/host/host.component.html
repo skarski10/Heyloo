@@ -8,7 +8,9 @@
 	<div class="col-md-12">
 		<h3>Who's here:</h3>
 		<div class="well" *ngFor='let player of playerList | async'>
-			{{player.name}}
+			<div class="" (click)='deleteStudent(player)'>
+				{{player.name}}
+			</div>
 		</div>
 	</div>
 </div>
@@ -38,6 +40,7 @@
 <div class="row" *ngIf="currentGame?.game_state == 'answer' ">
 	The correct answer was <img src="{{currentGame?.question_list[currentGame?.current_question].choices[currentGame?.question_list[currentGame?.current_question].answer]}}" alt="">
 	<button type="button" (click)='gameStateLeaderboard()'>Go to leaderboard</button>
+	<button type="button" (click)='endGame()'>End Game</button>
 </div>
 
 <div class="row" *ngIf="currentGame?.game_state == 'leaderboard' ">
