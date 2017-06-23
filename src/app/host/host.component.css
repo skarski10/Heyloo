@@ -1,0 +1,18 @@
+.starting, .countdown, .questions, .answer {
+  text-align: center;
+  font-family: 'Acme', sans-serif;
+}
+
+.heyloo {
+  font-family: 'Frijole', cursive;
+}
+
+#current-question {
+  font-family: 'Patrick Hand SC', cursive;
+  font-size: 30px;
+}
+
+#timer {
+  font-family: 'Bowlby One', cursive;
+  font-size: 30px;
+}
