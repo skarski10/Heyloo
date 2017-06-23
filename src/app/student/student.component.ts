@@ -48,6 +48,7 @@ export class StudentComponent implements OnInit {
     if(this.subGame['game_state'] == "answer"){
       this.updateGame();
     }else if(this.subGame['game_state'] == 'question'){
+      this.answered = false;
       this.startTime = new Date().getTime();
     }
   }
