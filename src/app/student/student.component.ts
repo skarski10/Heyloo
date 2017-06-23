@@ -54,14 +54,15 @@ export class StudentComponent implements OnInit {
   }
 
   getStudentAnswer(answer: number){
+    console.log('answered a question');
     var questionAnswer;
     this.endTime = new Date().getTime();
     this.answered = true;
     if(answer == this.currentQuestion.answer){
-      this.studentService.editStudentPoints(this.scoringAlgorithm(this.endTime, this.startTime), true);
+      this.studentService.editStudentPoints(this.currentStudent, true, this.scoringAlgorithm(this.endTime, this.startTime));
     }
     else{
-      this.studentService.editStudentPoints(this.currentStudent, false);
+      this.studentService.editStudentPoints(this.currentStudent, false, 0);
     }
   }
 
