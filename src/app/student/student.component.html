@@ -2,25 +2,6 @@ student component
 <div class="" *ngIf="subGame?.game_state == 'answer'">
   answer time
 </div>
-<div class="question-holder">
-  <div class="row">
-    <div class="question">
-
-    </div>
-  </div>
-  <div class="row">
-    <div class="row">
-      <div class="questions-r1">
-
-      </div>
-    </div>
-    <div class="row">
-      <div class="questions-r2">
-
-      </div>
-    </div>
-  </div>
-</div>
 
 <div class="question-holder" *ngIf="answered == false">
   <div class="row">
@@ -41,4 +22,8 @@ student component
       <i class="fa fa-rocket" aria-hidden="true" (click)='getStudentAnswer(inputPostion3.value)'></i>
     </div>
   </div>
+</div>
+
+<div class="answered" *ngIf="answered == true">
+  answered the question
 </div>
