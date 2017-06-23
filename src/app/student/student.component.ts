@@ -19,6 +19,9 @@ export class StudentComponent implements OnInit {
   questions: Question[];
   currentQuestion: Question;
   subGame;
+  startTime;
+  endTime;
+  answered: boolean;
 
   constructor(private route: ActivatedRoute, private studentService: StudentService, private router: Router, private hostService: HostService) { }
 
@@ -38,24 +41,33 @@ export class StudentComponent implements OnInit {
     this.currentGame.subscribe(data => {
       this.subGame = data;
     })
+    this.answered = false;
   }
 
   ngDoCheck(){
     if(this.subGame['game_state'] == "answer"){
       this.updateGame();
+    }else if(this.subGame['game_state'] == 'question'){
+      this.startTime = new Date().getTime();
     }
   }
 
   getStudentAnswer(answer: number){
     var questionAnswer;
-    console.log(this.currentStudent);
+    this.endTime = new Date().getTime();
+    this.answered = true;
     if(answer == this.currentQuestion.answer){
-      console.log(this.currentStudent);
-      this.studentService.editStudentPoints(this.currentStudent, true);
+      this.studentService.editStudentPoints(this.scoringAlgorithm(this.endTime, this.startTime), true);
     }
     else{
       this.studentService.editStudentPoints(this.currentStudent, false);
     }
+  }
+
+  scoringAlgorithm(end, start){
+    var dif = (end - start);
+    var score = (((1 / 2) * Math.log(-(dif-60))) * 500) + 500;
+    return score;
   }
 
   updateGame(){
