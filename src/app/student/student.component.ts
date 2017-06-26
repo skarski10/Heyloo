@@ -42,6 +42,7 @@ export class StudentComponent implements OnInit {
       this.subGame = data;
     })
     this.answered = false;
+    console.log(this.currentGame, this.currentStudent);
   }
 
   ngDoCheck(){
@@ -54,10 +55,10 @@ export class StudentComponent implements OnInit {
   }
 
   getStudentAnswer(answer: number){
-    console.log('answered a question');
     var questionAnswer;
     this.endTime = new Date().getTime();
     this.answered = true;
+    console.log(this.answered);
     if(answer == this.currentQuestion.answer){
       this.studentService.editStudentPoints(this.currentStudent, true, this.scoringAlgorithm(this.endTime, this.startTime));
     }
@@ -67,8 +68,10 @@ export class StudentComponent implements OnInit {
   }
 
   scoringAlgorithm(end, start){
-    var dif = (end - start);
-    var score = (((1 / 2) * Math.log(-(dif-60))) * 500) + 500;
+    var dif = (end - start) / 1000
+    var score = (-150 * Math.log(30/(-dif + 30))) + 1000
+    // var score = (((1 / 2) * Math.log(-(dif-60))) * 500) + 500;
+    console.log(end, start, dif, score);
     return score;
   }
 
