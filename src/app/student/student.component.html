@@ -23,6 +23,27 @@
     <div class="col-md-6">
       <input type="hidden" #inputPostion3 value="3">
       <i class="fa fa-rocket fa-5x" aria-hidden="true" (click)='getStudentAnswer(inputPostion3.value)'></i>
+<div class="" *ngIf="subGame?.game_state == 'answer'">
+  answer time
+</div>
+
+<div class="question-holder" *ngIf="answered == false">
+  <div class="row">
+    <div class="col-md-6">
+      <input type="hidden" #inputPostion0 value="0">
+      <i class="fa fa-paper-plane" aria-hidden="true" (click)='getStudentAnswer(inputPostion0.value)'></i>
+    </div>
+    <div class="col-md-6">
+      <input type="hidden" #inputPostion1 value="1">
+      <i class="fa fa-star" aria-hidden="true" (click)='getStudentAnswer(inputPostion1.value)'></i>
+    </div>
+    <div class="col-md-6">
+      <input type="hidden" #inputPostion2 value="2">
+      <i class="fa fa-heart" aria-hidden="true" (click)='getStudentAnswer(inputPostion2.value)'></i>
+    </div>
+    <div class="col-md-6">
+      <input type="hidden" #inputPostion3 value="3">
+      <i class="fa fa-rocket" aria-hidden="true" (click)='getStudentAnswer(inputPostion3.value)'></i>
     </div>
   </div>
 </div>
@@ -31,4 +52,6 @@
   <div class="">
     {{subStudent?.points}}
   </div>
+<div class="answered" *ngIf="answered == true">
+  answered the question
 </div>

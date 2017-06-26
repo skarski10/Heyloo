@@ -35,9 +35,9 @@ export class StudentService {
     return retrievedStudent;
   }
 
-  editStudentPoints(student, correct){
+  editStudentPoints(student, correct, score){
     if(correct == true){
-      student.update({points: + 1000, correct: + 1});
+      student.update({points: + score, correct: + 1});
     }
     else if(correct == false){
       student.update({wrong: + 1});
