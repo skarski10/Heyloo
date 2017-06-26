@@ -22,6 +22,7 @@ export class StudentComponent implements OnInit {
   startTime;
   endTime;
   answered: boolean;
+  subStudent;
 
   constructor(private route: ActivatedRoute, private studentService: StudentService, private router: Router, private hostService: HostService) { }
 
@@ -37,6 +38,9 @@ export class StudentComponent implements OnInit {
       this.currentQuestion = data['question_list'][data['current_question']];
     })
     this.currentStudent = this.studentService.getStudentGameKeyAndId(currentGameKey, studentId);
+    this.currentStudent.subscribe(data => {
+      this.subStudent = data;
+    })
     this.questions = this.hostService.getQuestions();
     this.currentGame.subscribe(data => {
       this.subGame = data;
@@ -58,7 +62,7 @@ export class StudentComponent implements OnInit {
     var questionAnswer;
     this.endTime = new Date().getTime();
     this.answered = true;
-    console.log(this.answered);
+    console.log(this.answered, "set answered to true");
     if(answer == this.currentQuestion.answer){
       this.studentService.editStudentPoints(this.currentStudent, true, this.scoringAlgorithm(this.endTime, this.startTime));
     }

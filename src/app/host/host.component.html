@@ -1,47 +1,82 @@
-<div class="row" *ngIf="currentGame?.game_state == 'starting' ">
-	<div class="jumbotron">
-		<h1>Join our game!</h1>
-		<h2>Go to https://Heyloo.firebaseapp.com on your smartphone</h2>
-		<h2>Our PIN code is {{currentGame?.id}}</h2>
-		<p><button class="btn btn-success" (click)='gameStateCountdown()'>Let's begin!</button></p>
-	</div>
-	<div class="col-md-12">
-		<h3>Who's here:</h3>
-		<div class="well" *ngFor='let player of playerList | async'>
-			{{player.name}}
+<div class="container" id='host'>
+	<div class="row starting" *ngIf="currentGame?.game_state == 'starting' ">
+		<div class="jumbotron">
+			<h1><span class="heyloo">Heyloo!</span></h1>
+			<h2>Go to https://Heyloo.firebaseapp.com on your smartphone</h2>
+			<h2>Our PIN code is {{currentGame?.id}}</h2>
+			<p><button class="btn btn-success" (click)='gameStateCountdown()'>Let's begin!</button></p>
 		</div>
-	</div>
-</div>
-
-<div class="" *ngIf="currentGame?.game_state == 'countdown' ">
-	<h1>The next question will start in {{time}}....</h1>
-</div>
-
-<div class="row" *ngIf="currentGame?.game_state == 'question' ">
-	<div class="col-md-12">
-		{{currentQuestion?.title}}
-	</div>
-	<div class="col-md-12">
-		{{time}}
-	</div>
-	<div class="col-md-12">
-		{{currentQuestion?.instructions}}
-		{{currentQuestion?.prompt}}
-		<div class="row" *ngFor="let answer of currentQuestion.choices">
-			<div class="col-md-6">
-				<img src="{{answer}}" alt="">
+		<div class="col-md-12">
+			<h3>Who's here:</h3>
+			<div class="player-list" *ngFor='let player of playerList | async'>
+				<div class="names" (click)='deleteStudent(player)'>
+					{{player.name}}
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 
-<div class="row" *ngIf="currentGame?.game_state == 'answer' ">
-	The correct answer was <img src="{{currentGame?.question_list[currentGame?.current_question].choices[currentGame?.question_list[currentGame?.current_question].answer]}}" alt="">
-</div>
+	<div class="row countdown" *ngIf="currentGame?.game_state == 'countdown' ">
+		<h1>The next question will start in {{time}}....</h1>
+	</div>
 
-<div class="row" *ngIf="currentGame?.game_state == 'leaderboard' ">
-	<h1>Leaderboard:</h1>
-	<div class="col-md-12" *ngFor='let player of playerList | async'>
-		{{payer.points}}
+	<div class="row questions" *ngIf="currentGame?.game_state == 'question' ">
+		<div class="jumbotron">
+			<div class="row">
+				<h1>{{currentQuestion?.title}}</h1>
+			</div>
+			<div class="row" id="current-question">
+				{{currentQuestion?.instructions}}
+				<br><br>
+				{{currentQuestion?.prompt}}
+			</div>
+		</div>
+		<div class="col-md-12">
+			<span id='timer'>{{time}}</span>
+		</div>
+			<div class="row">
+				<div class="col-md-6 answer1">
+					<i class="fa fa-paper-plane fa-5x" aria-hidden="true"></i>
+					<img src="{{currentQuestion?.choices[0]}}">
+				</div>
+				<div class="col-md-6 answer2">
+					<i class="fa fa-star fa-5x" aria-hidden="true"></i>
+					<img src="{{currentQuestion?.choices[1]}}">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 answer3">
+					<i class="fa fa-heart fa-5x" aria-hidden="true"></i>
+					<img src="{{currentQuestion?.choices[2]}}">
+				</div>
+				<div class="col-md-6 answer4">
+					<i class="fa fa-rocket fa-5x" aria-hidden="true"></i>
+					<img src="{{currentQuestion?.choices[3]}}">
+				</div>
+			</div>
+		<button class="btn" type="button" (click)='gameStateLeaderboard()'>Skip question</button>
+	</div>
+
+	<div class="row answer" *ngIf="currentGame?.game_state == 'answer' ">
+		The correct answer was <img src="{{currentGame?.question_list[currentGame?.current_question].choices[currentGame?.question_list[currentGame?.current_question].answer]}}" alt="">
+		<button type="button" (click)='gameStateLeaderboard()'>Go to leaderboard</button>
+		<button type="button" (click)='endGame()'>End Game</button>
+	</div>
+
+	<div class="row leaderboard" *ngIf="currentGame?.game_state == 'leaderboard' ">
+		<div class="" *ngIf="currentGame?.game_over == false">
+			<h1>Leaderboard:</h1>
+			<div class="col-md-12" *ngFor='let player of playerList | async'>
+				{{player.points}}
+			</div>
+			<button type="button" (click)='gameStateCountdown()'>Next question</button>
+			<button type="button" (click)='endGame()'>End Game</button>
+		</div>
+		<div class="" *ngIf="currentGame?.game_over == true">
+			<h1>Final Scores:</h1>
+			<div class="col-md-12" *ngFor='let player of playerList | async'>
+				{{player.points}}
+			</div>
+		</div>
 	</div>
 </div>

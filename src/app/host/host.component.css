@@ -1,0 +1,42 @@
+#host {
+  background-color: #9B90C8;
+}
+
+.starting, .countdown, .questions, .answer {
+  text-align: center;
+  font-family: 'Acme', sans-serif;
+}
+
+.heyloo {
+  font-family: 'Frijole', cursive;
+}
+
+#current-question {
+  font-family: 'Patrick Hand SC', cursive;
+  font-size: 30px;
+}
+
+#timer {
+  font-family: 'Bowlby One', cursive;
+  font-size: 30px;
+}
+
+.answer1 {
+  background-color: rgb(114, 49, 87);
+  border-radius: 10%;
+}
+
+.answer2 {
+  background-color: rgb(91, 121, 97);
+  border-radius: 10%;
+}
+
+.answer3 {
+  background-color: rgb(46, 77, 167);
+  border-radius: 10%;
+}
+
+.answer4 {
+  background-color: rgb(224, 73, 81);
+  border-radius: 10%;
+}

@@ -1,0 +1,20 @@
+{
+  "name": "heyloo",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Kory <koryskarbek@yahoo.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/skarski10/Heyloo",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

@@ -65,4 +65,19 @@ export class HostService {
     var currentGame = this.getGameFromCode(game.id);
     currentGame.update({game_state: gameState});
   }
+
+  nextQuestion(game){
+    var currentGame = this.getGameFromCode(game.id);
+    currentGame.update({current_question: + 1});
+  }
+
+  gameOver(game){
+    var currentGame = this.getGameFromCode(game.id);
+    currentGame.update({game_over: true});
+  }
+
+  updatePlayerList(players, game){
+    var currentGame = this.getGameFromCode(game.id);
+    currentGame.update({player_list: players});
+  }
 }
