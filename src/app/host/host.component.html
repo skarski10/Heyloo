@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" id='host'>
 	<div class="row starting" *ngIf="currentGame?.game_state == 'starting' ">
 		<div class="jumbotron">
 			<h1><span class="heyloo">Heyloo!</span></h1>
@@ -35,21 +35,21 @@
 			<span id='timer'>{{time}}</span>
 		</div>
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-6 answer1">
 					<i class="fa fa-paper-plane fa-5x" aria-hidden="true"></i>
 					<img src="{{currentQuestion?.choices[0]}}">
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6 answer2">
 					<i class="fa fa-star fa-5x" aria-hidden="true"></i>
 					<img src="{{currentQuestion?.choices[1]}}">
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-6 answer3">
 					<i class="fa fa-heart fa-5x" aria-hidden="true"></i>
 					<img src="{{currentQuestion?.choices[2]}}">
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6 answer4">
 					<i class="fa fa-rocket fa-5x" aria-hidden="true"></i>
 					<img src="{{currentQuestion?.choices[3]}}">
 				</div>
