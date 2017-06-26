@@ -46,15 +46,19 @@ export class StudentComponent implements OnInit {
       this.subGame = data;
     })
     this.answered = false;
-    console.log(this.currentGame, this.currentStudent);
+    this.startTime = 0;
+    this.endTime = 0;
+    console.log(this.answered);
   }
 
   ngDoCheck(){
     if(this.subGame['game_state'] == "answer"){
+      console.log('game state now answer')
       this.updateGame();
     }else if(this.subGame['game_state'] == 'question'){
-      this.answered = false;
-      this.startTime = new Date().getTime();
+      console.log('game state now question')
+      this.setAnsweredToFalse();
+      this.setStartTime();
     }
   }
 
@@ -69,13 +73,15 @@ export class StudentComponent implements OnInit {
     else{
       this.studentService.editStudentPoints(this.currentStudent, false, 0);
     }
+    this.startTime = 0;
+    this.endTime = 0;
   }
 
   scoringAlgorithm(end, start){
     var dif = (end - start) / 1000
     var score = (-150 * Math.log(30/(-dif + 30))) + 1000
     // var score = (((1 / 2) * Math.log(-(dif-60))) * 500) + 500;
-    console.log(end, start, dif, score);
+    // console.log(end, start, dif, score);
     return score;
   }
 
@@ -83,5 +89,17 @@ export class StudentComponent implements OnInit {
     this.currentGame.subscribe(data => {
       this.subGame = data;
     })
+  }
+
+  setAnsweredToFalse(){
+    if(this.endTime != 0){
+      this.answered = false;
+    }
+  }
+
+  setStartTime(){
+    if (this.startTime == 0){
+      this.startTime = new Date().getTime();
+    }
   }
 }

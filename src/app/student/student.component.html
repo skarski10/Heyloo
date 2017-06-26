@@ -4,7 +4,7 @@
   </div>
 </div>
 
-<div class="row" *ngIf="subGame?.game_state == 'question' && answered == false">
+<div class="row" *ngIf="subGame?.game_state == 'question' && !answered">
   <div class="row">
     <div class="col-md-6">
       <input type="hidden" #inputPostion0 value="0">
