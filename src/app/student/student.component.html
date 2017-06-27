@@ -1,11 +1,11 @@
-<div class="question-holder" *ngIf="subGame?.game_state == 'starting' ">
+<div class="starting" *ngIf="subGame?.game_state == 'starting' ">
   <div class="row">
     Game will start soon
   </div>
 </div>
 
 <div class="row" *ngIf="subGame?.game_state == 'question' && !answered">
-  <div class="row">
+  <div class="row top">
     <div class="col-md-6">
       <input type="hidden" #inputPostion0 value="0">
       <i class="fa fa-paper-plane fa-5x" aria-hidden="true" (click)='getStudentAnswer(inputPostion0.value)'></i>
@@ -15,7 +15,7 @@
       <i class="fa fa-star fa-5x" aria-hidden="true" (click)='getStudentAnswer(inputPostion1.value)'></i>
     </div>
   </div>
-  <div class="row">
+  <div class="row bottom">
     <div class="col-md-6">
       <input type="hidden" #inputPostion2 value="2">
       <i class="fa fa-heart fa-5x" aria-hidden="true" (click)='getStudentAnswer(inputPostion2.value)'></i>

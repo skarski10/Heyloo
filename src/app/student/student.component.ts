@@ -92,7 +92,7 @@ export class StudentComponent implements OnInit {
   }
 
   setAnsweredToFalse(){
-    if(this.endTime != 0){
+    if(this.endTime == 0){
       this.answered = false;
     }
   }
