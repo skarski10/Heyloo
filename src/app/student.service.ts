@@ -36,6 +36,10 @@ export class StudentService {
   }
 
   editStudentPoints(student, correct, score){
+    console.log(score);
+    student.subscribe(data => {
+      console.log(data);
+    })
     if(correct == true){
       student.update({points: + score, correct: + 1});
     }

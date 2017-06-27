@@ -22,6 +22,7 @@ export class StudentComponent implements OnInit {
   startTime;
   endTime;
   answered: boolean;
+  subStudent;
 
   constructor(private route: ActivatedRoute, private studentService: StudentService, private router: Router, private hostService: HostService) { }
 
@@ -42,33 +43,42 @@ export class StudentComponent implements OnInit {
       this.subGame = data;
     })
     this.answered = false;
+    this.startTime = 0;
+    this.endTime = 0;
+    console.log(this.answered);
   }
 
   ngDoCheck(){
     if(this.subGame['game_state'] == "answer"){
+      console.log('game state now answer')
       this.updateGame();
     }else if(this.subGame['game_state'] == 'question'){
-      this.answered = false;
-      this.startTime = new Date().getTime();
+      console.log('game state now question')
+      this.setAnsweredToFalse();
+      this.setStartTime();
     }
   }
 
   getStudentAnswer(answer: number){
-    console.log('answered a question');
     var questionAnswer;
     this.endTime = new Date().getTime();
     this.answered = true;
+    console.log(this.answered, "set answered to true");
     if(answer == this.currentQuestion.answer){
       this.studentService.editStudentPoints(this.currentStudent, true, this.scoringAlgorithm(this.endTime, this.startTime));
     }
     else{
       this.studentService.editStudentPoints(this.currentStudent, false, 0);
     }
+    this.startTime = 0;
+    this.endTime = 0;
   }
 
   scoringAlgorithm(end, start){
-    var dif = (end - start);
-    var score = (((1 / 2) * Math.log(-(dif-60))) * 500) + 500;
+    var dif = (end - start) / 1000
+    var score = (-150 * Math.log(30/(-dif + 30))) + 1000
+    // var score = (((1 / 2) * Math.log(-(dif-60))) * 500) + 500;
+    // console.log(end, start, dif, score);
     return score;
   }
 
@@ -76,5 +86,17 @@ export class StudentComponent implements OnInit {
     this.currentGame.subscribe(data => {
       this.subGame = data;
     })
+  }
+
+  setAnsweredToFalse(){
+    if(this.endTime == 0){
+      this.answered = false;
+    }
+  }
+
+  setStartTime(){
+    if (this.startTime == 0){
+      this.startTime = new Date().getTime();
+    }
   }
 }

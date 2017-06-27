@@ -22,7 +22,7 @@ export class HostComponent {
   questions: Question[];
   currentQuestion: Question;
   time: number = 0;
-  leaderboard;
+  topPlayers;
 
   constructor(private route: ActivatedRoute, private hostService: HostService, private router: Router, private location: Location) {
    }
@@ -48,6 +48,7 @@ export class HostComponent {
         gameKey = data['$key'];
         this.currentQuestion = data['question_list'][data['current_question']];
       })
+      // this.getLeaderboard();
   }
 
   getPlayerList(gameId: number){
@@ -122,4 +123,15 @@ export class HostComponent {
     this.hostService.gameOver(this.currentGame);
     this.gameStateLeaderboard();
   }
+  // getLeaderboard(){
+  //   var leaderboard;
+  //   var players;
+  //   this.playerList.subscribe(data => {
+  //     players = data;
+  //     leaderboard = data['points'];
+  //     console.log(data['points']);
+  //   })
+  //   console.log(leaderboard);
+  //   leaderboard.sort();
+  // }
 }
