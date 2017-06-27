@@ -61,7 +61,7 @@
 		<div class="row answer" *ngIf="currentGame?.game_state == 'answer' ">
 			The correct answer was <img src="{{currentGame?.question_list[currentGame?.current_question].choices[currentGame?.question_list[currentGame?.current_question].answer]}}" alt="">
 			<div class="">
-				<app-bar-graph></app-bar-graph>
+				<app-bar-graph [thisQuestion]="currentQuestion"></app-bar-graph>
 			</div>
 			<button type="button" (click)='gameStateLeaderboard()'>Go to leaderboard</button>
 			<button type="button" (click)='endGame()'>End Game</button>

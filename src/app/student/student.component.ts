@@ -61,6 +61,9 @@ export class StudentComponent implements OnInit {
 
   getStudentAnswer(answer: number){
     var questionAnswer;
+    this.currentQuestion.student_choices[answer] ++;
+    this.questions[this.subGame.current_question] = this.currentQuestion;
+    this.hostService.updatePlayerChoice(this.questions, this.subGame);
     this.endTime = new Date().getTime();
     this.answered = true;
     // console.log(this.answered, "set answered to true");

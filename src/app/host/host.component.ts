@@ -48,7 +48,7 @@ export class HostComponent {
         gameKey = data['$key'];
         this.currentQuestion = data['question_list'][data['current_question']];
       })
-      this.getLeaderboard();
+      // this.getLeaderboard();
   }
 
   getPlayerList(gameId: number){
@@ -123,16 +123,16 @@ export class HostComponent {
     this.hostService.gameOver(this.currentGame);
     this.gameStateLeaderboard();
   }
-  getLeaderboard(){
-    var leaderboard;
-    var players;
-    this.playerList.subscribe(data => {
-      players = data;
-      leaderboard = data['points'];
-      console.log(data);
-      console.log(data["points"]);
-    })
-    console.log(leaderboard);
-    leaderboard.sort();
-  }
+  // getLeaderboard(){
+  //   var leaderboard;
+  //   var players;
+  //   this.playerList.subscribe(data => {
+  //     players = data;
+  //   })
+  //   // console.log(players);
+  //   players.forEach(function(points){
+  //     leaderboard.push(points)
+  //   })
+  //   // console.log(leaderboard);
+  // }
 }

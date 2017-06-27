@@ -27,20 +27,24 @@ body {
 
 .answer1 {
   background-color: rgb(114, 49, 87);
-  border-radius: 10%;
+  border-radius: 25%;
+  margin: 10px;
 }
 
 .answer2 {
   background-color: rgb(91, 121, 97);
-  border-radius: 10%;
+  border-radius: 25%;
+  margin: 10px;
 }
 
 .answer3 {
   background-color: rgb(46, 77, 167);
-  border-radius: 10%;
+  border-radius: 25%;
+  margin: 10px;
 }
 
 .answer4 {
   background-color: rgb(224, 73, 81);
-  border-radius: 10%;
+  border-radius: 25%;
+  margin: 10px;
 }

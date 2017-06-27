@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ChartsModule } from 'ng2-charts';
 import { HostService} from '../host.service';
 import { StudentService } from '../student.service';
+import { Question } from '../question.model';
 
 @Component({
   selector: 'app-bar-graph',
@@ -10,10 +11,11 @@ import { StudentService } from '../student.service';
   providers: [HostService, StudentService]
 })
 export class BarGraphComponent implements OnInit {
-
+  @Input() thisQuestion;
   constructor() { }
 
   ngOnInit() {
+    console.log(this.thisQuestion);
   }
 
   public barChartOptions:any = {
@@ -23,9 +25,10 @@ export class BarGraphComponent implements OnInit {
   public barChartLabels:string[] = ['A', 'B', 'C', 'D'];
   public barChartType:string = 'bar';
   public barChartLegend:boolean = true;
-  public barChartData:any[] = [
-    {data: [10, 5, 8, 2], label: 'Series A'}
-  ];
+  public barChartData:any[] = this.thisQuestion.student_choices;
+  // public barChartData:any[] = [
+  //   {data: [10, 5, 8, 2], label: 'Series A'}
+  // ];
 
   // events
   public chartClicked(e:any):void {
