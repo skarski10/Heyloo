@@ -45,15 +45,15 @@ export class StudentComponent implements OnInit {
     this.answered = false;
     this.startTime = 0;
     this.endTime = 0;
-    console.log(this.answered);
+    // console.log(this.answered);
   }
 
   ngDoCheck(){
     if(this.subGame['game_state'] == "answer"){
-      console.log('game state now answer')
+      // console.log('game state now answer')
       this.updateGame();
     }else if(this.subGame['game_state'] == 'question'){
-      console.log('game state now question')
+      // console.log('game state now question')
       this.setAnsweredToFalse();
       this.setStartTime();
     }
@@ -63,7 +63,7 @@ export class StudentComponent implements OnInit {
     var questionAnswer;
     this.endTime = new Date().getTime();
     this.answered = true;
-    console.log(this.answered, "set answered to true");
+    // console.log(this.answered, "set answered to true");
     if(answer == this.currentQuestion.answer){
       this.studentService.editStudentPoints(this.currentStudent, true, this.scoringAlgorithm(this.endTime, this.startTime));
     }
