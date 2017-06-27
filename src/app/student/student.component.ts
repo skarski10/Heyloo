@@ -48,7 +48,6 @@ export class StudentComponent implements OnInit {
     this.answered = false;
     this.startTime = 0;
     this.endTime = 0;
-    console.log(this.answered);
   }
 
   ngDoCheck(){
@@ -56,7 +55,7 @@ export class StudentComponent implements OnInit {
       console.log('game state now answer')
       this.updateGame();
     }else if(this.subGame['game_state'] == 'question'){
-      console.log('game state now question')
+      console.log('game state now question', this.answered, this.endTime)
       this.setAnsweredToFalse();
       this.setStartTime();
     }
