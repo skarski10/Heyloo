@@ -24,7 +24,9 @@ export class StudentComponent implements OnInit {
   answered: boolean;
   subStudent;
 
-  constructor(private route: ActivatedRoute, private studentService: StudentService, private router: Router, private hostService: HostService) { }
+  constructor(private route: ActivatedRoute, private studentService: StudentService, private router: Router, private hostService: HostService) {
+
+  }
 
   ngOnInit() {
     var currentGameKey;
@@ -50,16 +52,17 @@ export class StudentComponent implements OnInit {
     this.endTime = 0;
   }
 
-  ngDoCheck(){
-    if(this.subGame['game_state'] == "answer"){
-      console.log('game state now answer')
-      this.updateGame();
-    }else if(this.subGame['game_state'] == 'question'){
-      console.log('game state now question', this.answered, this.endTime)
-      this.setAnsweredToFalse();
-      this.setStartTime();
-    }
-  }
+  // ngDoCheck(){
+  //   console.log(this.subGame);
+  //   if(this.subGame['game_state'] == "answer"){
+  //     console.log('game state now answer')
+  //     this.updateGame();
+  //   }else if(this.subGame['game_state'] == 'question'){
+  //     console.log('game state now question', this.answered, this.endTime)
+  //     this.setAnsweredToFalse();
+  //     this.setStartTime();
+  //   }
+  // }
 
   getStudentAnswer(answer: number){
     var questionAnswer;

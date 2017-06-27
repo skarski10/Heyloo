@@ -17,7 +17,9 @@ export class HostService {
 
   constructor(private database: AngularFireDatabase, private http: Http) {
     this.games = database.list('games');
-    this.games.subscribe(data => {this.subGames = data})
+    this.games.subscribe(data => {this.subGames = data
+    console.log(this.subGames, "sub games")
+  })
   }
 
   getGames(){
@@ -30,6 +32,7 @@ export class HostService {
 
   getGameFromCode(roomcode: number){
     var thisGame;
+    console.log(this.subGames);
     for(let i=0; i<this.subGames.length; i++){
       if(this.subGames[i].id == roomcode){
         thisGame = this.getGame(this.subGames[i]['$key']);
