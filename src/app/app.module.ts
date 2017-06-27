@@ -13,8 +13,8 @@ import { routing } from './app.routing';
 import { StartComponent } from './start/start.component';
 import { HostService } from './host.service';
 import { StudentService } from './student.service';
-
-
+import { BarGraphComponent } from './bar-graph/bar-graph.component';
+import { ChartsModule } from 'ng2-charts';
 
 export const firebaseConfig = {
   apiKey: masterFirebaseConfig.apiKey,
@@ -29,7 +29,8 @@ export const firebaseConfig = {
     HostComponent,
     StudentComponent,
     RegisterComponent,
-    StartComponent
+    StartComponent,
+    BarGraphComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +38,8 @@ export const firebaseConfig = {
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    routing
+    routing,
+    ChartsModule
   ],
   providers: [StudentService, HostService],
   bootstrap: [AppComponent]

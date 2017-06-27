@@ -1,5 +1,9 @@
-#host {
-  background-color: #9B90C8;
+body {
+  background-color: rgb(155, 144, 200);
+}
+
+.jumbotron {
+  background-color: rgb(224, 73, 81);
 }
 
 .starting, .countdown, .questions, .answer {

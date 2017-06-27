@@ -22,6 +22,7 @@ export class HostComponent {
   questions: Question[];
   currentQuestion: Question;
   time: number = 0;
+  leaderboard;
 
   constructor(private route: ActivatedRoute, private hostService: HostService, private router: Router, private location: Location) {
    }
