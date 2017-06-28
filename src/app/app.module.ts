@@ -9,10 +9,12 @@ import { AppComponent } from './app.component';
 import { HostComponent } from './host/host.component';
 import { StudentComponent } from './student/student.component';
 import { RegisterComponent } from './register/register.component';
-import { routing } from './app.routing';
+// import { routing } from './app.routing';
 import { StartComponent } from './start/start.component';
 import { HostService } from './host.service';
 import { StudentService } from './student.service';
+import { StudentloadService } from './studentload.service';
+import { AppRoutingModule } from './app-routing.module';
 
 
 
@@ -37,9 +39,9 @@ export const firebaseConfig = {
     HttpModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    routing
+    AppRoutingModule
   ],
-  providers: [StudentService, HostService],
+  providers: [StudentService, HostService, StudentloadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

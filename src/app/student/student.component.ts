@@ -29,24 +29,27 @@ export class StudentComponent implements OnInit {
   }
 
   ngOnInit() {
-    var currentGameKey;
-    var studentId;
-    this.route.params.forEach(urlParameters => {
-      this.currentGame = this.hostService.getGameFromCode(urlParameters['roomcode']);
-      studentId = urlParameters['studentid'];
+    this.route.data.subscribe(data => {
+      console.log(data, 'on student');
     })
-    this.currentGame.subscribe(data => {
-      currentGameKey = data['$key'];
-      this.currentQuestion = data['question_list'][data['current_question']];
-    })
-    this.currentStudent = this.studentService.getStudentGameKeyAndId(currentGameKey, studentId);
-    this.currentStudent.subscribe(data => {
-      this.subStudent = data;
-    })
-    this.questions = this.hostService.getQuestions();
-    this.currentGame.subscribe(data => {
-      this.subGame = data;
-    })
+    // var currentGameKey;
+    // var studentId;
+    // this.route.params.forEach(urlParameters => {
+    //   this.currentGame = this.hostService.getGameFromCode(urlParameters['roomcode']);
+    //   studentId = urlParameters['studentid'];
+    // })
+    // this.currentGame.subscribe(data => {
+    //   currentGameKey = data['$key'];
+    //   this.currentQuestion = data['question_list'][data['current_question']];
+    // })
+    // this.currentStudent = this.studentService.getStudentGameKeyAndId(currentGameKey, studentId);
+    // this.currentStudent.subscribe(data => {
+    //   this.subStudent = data;
+    // })
+    // this.questions = this.hostService.getQuestions();
+    // this.currentGame.subscribe(data => {
+    //   this.subGame = data;
+    // })
     this.answered = false;
     this.startTime = 0;
     this.endTime = 0;
