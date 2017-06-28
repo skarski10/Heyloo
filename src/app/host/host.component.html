@@ -70,8 +70,8 @@
 		<div class="row leaderboard" *ngIf="currentGame?.game_state == 'leaderboard' ">
 			<div class="" *ngIf="currentGame?.game_over == false">
 				<h1>Leaderboard:</h1>
-				<div class="col-md-12" *ngFor='let player of playerList | async'>
-					{{player.points}}
+				<div class="col-md-12" *ngFor='let points of topPlayers'>
+					{{points}}
 				</div>
 				<button type="button" (click)='gameStateCountdown()'>Next question</button>
 				<button type="button" (click)='endGame()'>End Game</button>

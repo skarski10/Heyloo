@@ -48,7 +48,7 @@ export class HostComponent {
         gameKey = data['$key'];
         this.currentQuestion = data['question_list'][data['current_question']];
       })
-      // this.getLeaderboard();
+      this.getLeaderboard();
   }
 
   getPlayerList(gameId: number){
@@ -93,7 +93,7 @@ export class HostComponent {
   }
 
   thirtySeconds(){
-    this.time = 30;
+    this.time = 2;
     var interval = setInterval(data => {
       // console.log(this.time);
       if(this.time != 0){
@@ -123,16 +123,17 @@ export class HostComponent {
     this.hostService.gameOver(this.currentGame);
     this.gameStateLeaderboard();
   }
-  // getLeaderboard(){
-  //   var leaderboard;
-  //   var players;
-  //   this.playerList.subscribe(data => {
-  //     players = data;
-  //   })
-  //   // console.log(players);
-  //   players.forEach(function(points){
-  //     leaderboard.push(points)
-  //   })
-  //   // console.log(leaderboard);
-  // }
+  getLeaderboard(){
+    var leaderboard = [];
+    var players;
+    var current = this;
+    this.playerList.subscribe(data => {
+      players = data;
+    })
+    for(var i = 0; i < players.length; i ++){
+      leaderboard.push(players[i].points.toFixed());
+    }
+    leaderboard.sort(function(a, b){return b-a});
+    this.topPlayers = leaderboard.slice(0, 5);
+  }
 }

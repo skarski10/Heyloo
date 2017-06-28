@@ -12,10 +12,13 @@ import { Question } from '../question.model';
 })
 export class BarGraphComponent implements OnInit {
   @Input() thisQuestion;
+  studentChoices = [];
+
   constructor() { }
 
   ngOnInit() {
-    console.log(this.thisQuestion);
+    this.studentChoices = this.thisQuestion.student_choices;
+    console.log(this.studentChoices);
   }
 
   public barChartOptions:any = {
@@ -25,10 +28,8 @@ export class BarGraphComponent implements OnInit {
   public barChartLabels:string[] = ['A', 'B', 'C', 'D'];
   public barChartType:string = 'bar';
   public barChartLegend:boolean = true;
-  public barChartData:any[] = this.thisQuestion.student_choices;
-  // public barChartData:any[] = [
-  //   {data: [10, 5, 8, 2], label: 'Series A'}
-  // ];
+  public barChartData:any[] = [{data: this.studentChoices, label: 'Answer Distribution'}];
+  // public barChartData:any[] = [{data: [10, 5, 8, 2], label: 'Series A'}];
 
   // events
   public chartClicked(e:any):void {
