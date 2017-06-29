@@ -1,4 +1,4 @@
-<body>
+<html>
 	<div class="container" id='host'>
 		<div class="row starting" *ngIf="currentGame?.game_state == 'starting' ">
 			<div class="jumbotron">
@@ -11,7 +11,7 @@
 				<h3>Who's here:</h3>
 				<div class="player-list" *ngFor='let player of playerList | async'>
 					<div class="names" (click)='deleteStudent(player)'>
-						{{player.name}}
+						<span class='players'>{{player.name}}</span>
 					</div>
 				</div>
 			</div>
@@ -59,7 +59,10 @@
 		</div>
 
 		<div class="row answer" *ngIf="currentGame?.game_state == 'answer' ">
-			The correct answer was <img src="{{currentGame?.question_list[currentGame?.current_question].choices[currentGame?.question_list[currentGame?.current_question].answer]}}" alt="">
+			The correct answer was
+			<br>
+			<img src="{{currentGame?.question_list[currentGame?.current_question].choices[currentGame?.question_list[currentGame?.current_question].answer]}}" alt="">
+			<br>
 			<div class="">
 				<app-bar-graph [thisQuestion]="currentQuestion"></app-bar-graph>
 			</div>
@@ -84,4 +87,4 @@
 			</div>
 		</div>
 	</div>
-</body>
+</html>

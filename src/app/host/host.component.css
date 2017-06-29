@@ -1,5 +1,9 @@
-body {
-  background-color: rgb(155, 144, 200);
+html {
+  background-color: rgb(159, 156, 153);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .jumbotron {
@@ -25,6 +29,10 @@ body {
   font-size: 30px;
 }
 
+.answer {
+  font-size: 20px;
+}
+
 .answer1 {
   background-color: rgb(114, 49, 87);
   /*border-radius: 75%;*/
@@ -44,7 +52,6 @@ body {
   /*border-radius: 75%;*/
   margin: 10px;
   padding: 25px;
-
 }
 
 .answer4 {
@@ -52,5 +59,8 @@ body {
   /*border-radius: 75%;*/
   margin: 10px;
   padding: 25px;
+}
 
+.players {
+  font-size: 18px;
 }

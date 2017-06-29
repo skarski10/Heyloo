@@ -13,23 +13,40 @@ import { Question } from '../question.model';
 export class BarGraphComponent implements OnInit {
   @Input() thisQuestion;
   studentChoices = [];
+  public barChartData:any[]
 
   constructor() { }
 
   ngOnInit() {
     this.studentChoices = this.thisQuestion.student_choices;
-    console.log(this.studentChoices);
+    this.barChartData = [
+      {
+        data: this.studentChoices,
+        label: 'Answer Distribution'
+      }
+    ];
   }
 
   public barChartOptions:any = {
     scaleShowVerticalLines: false,
-    responsive: true
+    responsive: true,
+    scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
   };
+
   public barChartLabels:string[] = ['A', 'B', 'C', 'D'];
   public barChartType:string = 'bar';
   public barChartLegend:boolean = true;
-  public barChartData:any[] = [{data: this.studentChoices, label: 'Answer Distribution'}];
-  // public barChartData:any[] = [{data: [10, 5, 8, 2], label: 'Series A'}];
+  public barChartColor:Array<any> = [
+    {
+      backgroundColor: 'rgb(151, 195, 162)'
+    }
+  ]
 
   // events
   public chartClicked(e:any):void {
