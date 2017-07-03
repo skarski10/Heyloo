@@ -23,6 +23,8 @@ export class HostComponent {
   currentQuestion: Question;
   time: number = 0;
   topPlayers;
+  private showQuestion = false;
+  private hideBarGraph = true;
 
   constructor(private route: ActivatedRoute, private hostService: HostService, private router: Router, private location: Location) {
    }
@@ -93,7 +95,7 @@ export class HostComponent {
   }
 
   thirtySeconds(){
-    this.time = 2;
+    this.time = 30;
     var interval = setInterval(data => {
       // console.log(this.time);
       if(this.time != 0){
