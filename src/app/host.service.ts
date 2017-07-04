@@ -67,7 +67,9 @@ export class HostService {
 
   nextQuestion(game){
     var currentGame = this.getGameFromCode(game.id);
-    currentGame.update({current_question: + 1});
+    console.log(game.current_question);
+    var nextQuestion = game.current_question + 1;
+    currentGame.update({current_question: nextQuestion});
   }
 
   gameOver(game){

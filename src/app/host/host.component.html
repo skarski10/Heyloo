@@ -1,5 +1,5 @@
-<html id='host'>
-	<div class="container" id='host'>
+<html class='host'>
+	<div class="container host">
 		<div class="row starting" *ngIf="currentGame?.game_state == 'starting' ">
 			<div class="jumbotron">
 				<h1><span class="heyloo">Heyloo!</span></h1>
@@ -21,17 +21,36 @@
 			<h1>The next question will start in {{time}}....</h1>
 		</div>
 
+		<div class="row pre-question" *ngIf="currentGame?.game_state == 'prequestion' ">
+			<div class="jumbotron">
+				<div class="row">
+					<h1>{{currentQuestion?.title}}</h1>
+				</div>
+				<div class="row current-question" *ngIf="currentQuestionSubstring == 'https'">
+					{{currentQuestion?.instructions}}
+					<br><br>
+					<img src="{{currentQuestion?.prompt}}">
+				</div>
+				<div class="row current-question" *ngIf="currentQuestionSubstring != 'https'">
+					{{currentQuestion?.instructions}}
+					<br><br>
+					{{currentQuestion?.prompt}}
+				</div>
+			</div>
+			<button class="btn" type="button" (click)='gameStateLeaderboard()'>Skip question</button>
+		</div>
+
 		<div class="row questions" *ngIf="currentGame?.game_state == 'question' ">
 			<div class="jumbotron">
 				<div class="row">
 					<h1>{{currentQuestion?.title}}</h1>
 				</div>
-				<div class="row current-question" *ngIf="currentQuestion?.prompt.substring(0, 5) == 'http'">
+				<div class="row current-question" *ngIf="currentQuestionSubstring == 'https'">
 					{{currentQuestion?.instructions}}
 					<br><br>
 					<img src="{{currentQuestion?.prompt}}">
 				</div>
-				<div class="row current-question" *ngIf="currentQuestion?.prompt.substring(0, 5) != 'http'">
+				<div class="row current-question" *ngIf="currentQuestionSubstring != 'https'">
 					{{currentQuestion?.instructions}}
 					<br><br>
 					{{currentQuestion?.prompt}}
@@ -60,7 +79,6 @@
 						<img src="{{currentQuestion?.choices[3]}}">
 					</div>
 				</div>
-			<button class="btn" type="button" (click)='gameStateLeaderboard()'>Skip question</button>
 		</div>
 
 		<div class="row answer" *ngIf="currentGame?.game_state == 'answer' ">
@@ -70,9 +88,16 @@
 			<img src="{{currentGame?.question_list[currentGame?.current_question].choices[currentGame?.question_list[currentGame?.current_question].answer]}}" alt="">
 			<br>
 			<div class="row" *ngIf='showQuestion'>
-				{{currentQuestion?.instructions}}
-				<br><br>
-				{{currentQuestion?.prompt}}
+				<div class="row current-question" *ngIf="currentQuestionSubstring == 'https'">
+					{{currentQuestion?.instructions}}
+					<br><br>
+					<img src="{{currentQuestion?.prompt}}">
+				</div>
+				<div class="row current-question" *ngIf="currentQuestionSubstring != 'https'">
+					{{currentQuestion?.instructions}}
+					<br><br>
+					{{currentQuestion?.prompt}}
+				</div>
 			</div>
 			<div class="bar-graph" *ngIf='hideBarGraph'>
 				<app-bar-graph [thisQuestion]="currentQuestion"></app-bar-graph>

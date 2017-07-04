@@ -1,4 +1,4 @@
-#host {
+.host {
   background-color: rgb(159, 156, 153);
   background-size: cover;
   -webkit-background-size: cover;
@@ -10,7 +10,7 @@
   background-color: rgb(224, 73, 81);
 }
 
-.starting, .countdown, .questions, .answer {
+.starting, .countdown, .questions, .answer, .pre-question {
   text-align: center;
   font-family: 'Acme', sans-serif;
 }
@@ -19,7 +19,7 @@
   font-family: 'Frijole', cursive;
 }
 
-.current-question {
+.current-question, .pre-question {
   font-family: 'Patrick Hand SC', cursive;
   font-size: 30px;
 }
