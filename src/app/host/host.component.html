@@ -60,21 +60,21 @@
 				<span id='timer'>{{time}}</span>
 			</div>
 				<div class="row">
-					<div class="col-md-6 answer1">
+					<div class="col-md-6" id="answer1">
 						<i class="fa fa-paper-plane fa-5x" aria-hidden="true"></i>
 						<img src="{{currentQuestion?.choices[0]}}">
 					</div>
-					<div class="col-md-6 answer2">
+					<div class="col-md-6" id="answer2">
 						<i class="fa fa-star fa-5x" aria-hidden="true"></i>
 						<img src="{{currentQuestion?.choices[1]}}">
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-6 answer3">
+					<div class="col-md-6" id="answer3">
 						<i class="fa fa-heart fa-5x" aria-hidden="true"></i>
 						<img src="{{currentQuestion?.choices[2]}}">
 					</div>
-					<div class="col-md-6 answer4">
+					<div class="col-md-6" id="answer4">
 						<i class="fa fa-rocket fa-5x" aria-hidden="true"></i>
 						<img src="{{currentQuestion?.choices[3]}}">
 					</div>
@@ -109,8 +109,8 @@
 		<div class="row leaderboard" *ngIf="currentGame?.game_state == 'leaderboard' ">
 			<div class="" *ngIf="currentGame?.game_over == false">
 				<h1>Leaderboard:</h1>
-				<div class="col-md-12" *ngFor='let points of topPlayers'>
-					{{points}}
+				<div class="col-md-12" *ngFor='let player of topPlayers'>
+					{{player.name}} - {{player.points}}
 				</div>
 				<button type="button" (click)='gameStateCountdown()'>Next question</button>
 				<button type="button" (click)='endGame()'>End Game</button>

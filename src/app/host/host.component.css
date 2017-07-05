@@ -10,13 +10,18 @@
   background-color: rgb(224, 73, 81);
 }
 
-.starting, .countdown, .questions, .answer, .pre-question {
+.starting, .countdown, .questions, .answer, .pre-question, .leaderboard {
   text-align: center;
   font-family: 'Acme', sans-serif;
 }
 
 .heyloo {
   font-family: 'Frijole', cursive;
+}
+
+.leaderboard {
+  font-size: 24px;
+  text-align: center;
 }
 
 .current-question, .pre-question {
@@ -29,34 +34,30 @@
   font-size: 30px;
 }
 
-.answer {
+#answer {
   font-size: 20px;
 }
 
-.answer1 {
+#answer1 {
   background-color: rgb(114, 49, 87);
-  /*border-radius: 75%;*/
   margin: 10px;
   padding: 25px;
 }
 
-.answer2 {
+#answer2 {
   background-color: rgb(91, 121, 97);
-  /*border-radius: 75%;*/
   margin: 10px;
   padding: 25px;
 }
 
-.answer3 {
+#answer3 {
   background-color: rgb(46, 77, 167);
-  /*border-radius: 75%;*/
   margin: 10px;
   padding: 25px;
 }
 
 .answer4 {
   background-color: rgb(224, 73, 81);
-  /*border-radius: 75%;*/
   margin: 10px;
   padding: 25px;
 }

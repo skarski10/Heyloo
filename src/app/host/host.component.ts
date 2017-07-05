@@ -154,11 +154,9 @@ export class HostComponent {
     this.playerList.subscribe(data => {
       players = data;
     })
-    for(var i = 0; i < players.length; i ++){
-      leaderboard.push(players[i].points.toFixed());
-    }
-    console.log(leaderboard);
-    leaderboard.sort(function(a, b){return b-a});
+    leaderboard = players.sort(function(a, b){
+      return b.points-a.points
+    })
     this.topPlayers = leaderboard.slice(0, 5);
   }
 }
