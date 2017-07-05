@@ -1,3 +1,61 @@
-.starting {
-  border: solid;
+body {
+  height: 100vh;
+  background-color: green;
+  /*background-color: #A8B3AF;*/
+}
+
+#airplane {
+  background-color: rgb(114, 49, 87);
+}
+
+#star {
+  background-color: rgb(91, 121, 97);
+}
+
+#heart {
+  background-color: rgb(46, 77, 167);
+}
+
+#rocket {
+  background-color: rgb(224, 73, 81);
+}
+
+.master {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(159, 156, 153);
+}
+
+.player-starting {
+  position: fixed;
+  left: 50vw;
+  top: 10vh;
+  /*border: solid;*/
+}
+
+.icon-holder {
+  border-radius: 2px;
+  padding: 1vw;
+  width: 100vw;
+  position: fixed;
+  top: 2vh;
+  background-color: pink;
+}
+
+.icon-holder div div {
+  /*width: 100%;*/
+  border-radius: 2px;
+  margin-left: 2.2vw;
+  height: 15vh;
+  width: 48vw;
+  padding-top: 3.5vh;
+  padding-left: 19vw;
+  /*border: solid;*/
+  position: relative;
+}
+
+.bottom {
+  margin-top: 1vh;
 }

@@ -31,11 +31,16 @@ export class HostService {
   }
 
   getGameFromCode(roomcode: number){
+    var subGames;
     var thisGame;
+    this.games.subscribe(data => {
+      subGames = data;
+      console.log(subGames, "in the function sub games")
+    })
     console.log(this.subGames);
-    for(let i=0; i<this.subGames.length; i++){
-      if(this.subGames[i].id == roomcode){
-        thisGame = this.getGame(this.subGames[i]['$key']);
+    for(let i=0; i<subGames.length; i++){
+      if(subGames[i].id == roomcode){
+        thisGame = this.getGame(subGames[i]['$key']);
       }
     }
     return thisGame;

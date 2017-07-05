@@ -18,6 +18,8 @@ export class StudentComponent implements OnInit {
   currentStudent: FirebaseObjectObservable<any[]>;
   questions: Question[];
   currentQuestion: Question;
+  games;
+  subGames;
   subGame;
   startTime;
   endTime;
@@ -25,44 +27,46 @@ export class StudentComponent implements OnInit {
   subStudent;
 
   constructor(private route: ActivatedRoute, private studentService: StudentService, private router: Router, private hostService: HostService) {
-
   }
 
   ngOnInit() {
-    var currentGameKey;
-    var studentId;
-    this.route.params.forEach(urlParameters => {
-      this.currentGame = this.hostService.getGameFromCode(urlParameters['roomcode']);
-      studentId = urlParameters['studentid'];
-    })
-    this.currentGame.subscribe(data => {
-      currentGameKey = data['$key'];
-      this.currentQuestion = data['question_list'][data['current_question']];
-    })
-    this.currentStudent = this.studentService.getStudentGameKeyAndId(currentGameKey, studentId);
-    this.currentStudent.subscribe(data => {
-      this.subStudent = data;
-    })
-    this.questions = this.hostService.getQuestions();
-    this.currentGame.subscribe(data => {
-      this.subGame = data;
-    })
+    // this.games = this.hostService.getGames();
+    // this.games.subscribe(data => this.subGames = data);
+    // console.log(this.subGames, 'student sub games');
+    // var currentGameKey;
+    // var studentId;
+    // this.route.params.forEach(urlParameters => {
+    //   this.currentGame = this.hostService.getGameFromCode(urlParameters['roomcode']);
+    //   studentId = urlParameters['studentid'];
+    // })
+    // this.currentGame.subscribe(data => {
+    //   currentGameKey = data['$key'];
+    //   this.currentQuestion = data['question_list'][data['current_question']];
+    // })
+    // this.currentStudent = this.studentService.getStudentGameKeyAndId(currentGameKey, studentId);
+    // this.currentStudent.subscribe(data => {
+    //   this.subStudent = data;
+    // })
+    // this.questions = this.hostService.getQuestions();
+    // this.currentGame.subscribe(data => {
+    //   this.subGame = data;
+    // })
     this.answered = false;
     this.startTime = 0;
     this.endTime = 0;
   }
 
-  // ngDoCheck(){
-  //   console.log(this.subGame);
-  //   if(this.subGame['game_state'] == "answer"){
-  //     console.log('game state now answer')
-  //     this.updateGame();
-  //   }else if(this.subGame['game_state'] == 'question'){
-  //     console.log('game state now question', this.answered, this.endTime)
-  //     this.setAnsweredToFalse();
-  //     this.setStartTime();
-  //   }
-  // }
+  ngDoCheck(){
+    // console.log(this.subGame);
+    // if(this.subGame['game_state'] == "answer"){
+    //   console.log('game state now answer')
+    //   this.updateGame();
+    // }else if(this.subGame['game_state'] == 'question'){
+    //   console.log('game state now question', this.answered, this.endTime)
+    //   this.setAnsweredToFalse();
+    //   this.setStartTime();
+    // }
+  }
 
   getStudentAnswer(answer: number){
     var questionAnswer;
