@@ -1,12 +1,16 @@
-body {
-  background-color: rgb(155, 144, 200);
+.host {
+  background-color: rgb(159, 156, 153);
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
 }
 
 .jumbotron {
   background-color: rgb(224, 73, 81);
 }
 
-.starting, .countdown, .questions, .answer {
+.starting, .countdown, .questions, .answer, .pre-question, .leaderboard {
   text-align: center;
   font-family: 'Acme', sans-serif;
 }
@@ -15,7 +19,12 @@ body {
   font-family: 'Frijole', cursive;
 }
 
-#current-question {
+.leaderboard {
+  font-size: 24px;
+  text-align: center;
+}
+
+.current-question, .pre-question {
   font-family: 'Patrick Hand SC', cursive;
   font-size: 30px;
 }
@@ -25,22 +34,34 @@ body {
   font-size: 30px;
 }
 
-.answer1 {
+#answer {
+  font-size: 20px;
+}
+
+#answer1 {
   background-color: rgb(114, 49, 87);
-  border-radius: 10%;
+  margin: 10px;
+  padding: 25px;
 }
 
-.answer2 {
+#answer2 {
   background-color: rgb(91, 121, 97);
-  border-radius: 10%;
+  margin: 10px;
+  padding: 25px;
 }
 
-.answer3 {
+#answer3 {
   background-color: rgb(46, 77, 167);
-  border-radius: 10%;
+  margin: 10px;
+  padding: 25px;
 }
 
 .answer4 {
   background-color: rgb(224, 73, 81);
-  border-radius: 10%;
+  margin: 10px;
+  padding: 25px;
+}
+
+.players {
+  font-size: 18px;
 }

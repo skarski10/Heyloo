@@ -23,6 +23,9 @@ export class HostComponent {
   currentQuestion: Question;
   time: number = 0;
   topPlayers;
+  private showQuestion = false;
+  private hideBarGraph = true;
+  currentQuestionSubstring;
 
   constructor(private route: ActivatedRoute, private hostService: HostService, private router: Router, private location: Location) {
    }
@@ -48,7 +51,6 @@ export class HostComponent {
         gameKey = data['$key'];
         this.currentQuestion = data['question_list'][data['current_question']];
       })
-      this.getLeaderboard();
   }
 
   getPlayerList(gameId: number){
@@ -63,6 +65,13 @@ export class HostComponent {
     this.hostService.editGameState('countdown', this.currentGame);
     this.fiveSeconds();
   }
+  gameStatePreQuestion(){
+    var substring;
+    this.hostService.editGameState('prequestion', this.currentGame);
+    substring = this.currentQuestion.prompt;
+    this.currentQuestionSubstring = substring.substring(0, 5);
+    this.preQuestionCountdown();
+  }
 
   gameStateQuestion(){
     this.hostService.editGameState('question', this.currentGame);
@@ -74,12 +83,27 @@ export class HostComponent {
   }
 
   gameStateLeaderboard(){
-    this.hostService.editGameState('leaderboard', this.currentGame);
     this.hostService.nextQuestion(this.currentGame);
+    this.getLeaderboard();
+    this.hostService.editGameState('leaderboard', this.currentGame);
   }
 
   fiveSeconds(){
     this.time = 5;
+    var interval = setInterval(data => {
+      if(this.time != 0){
+      // console.log(this.time);
+        this.time --;
+      }
+      else {
+        clearInterval(interval);
+        this.gameStatePreQuestion();
+      }
+    }, 1000);
+  }
+
+  preQuestionCountdown(){
+    this.time = 10;
     var interval = setInterval(data => {
       if(this.time != 0){
       // console.log(this.time);
@@ -93,7 +117,7 @@ export class HostComponent {
   }
 
   thirtySeconds(){
-    this.time = 30;
+    this.time = 2;
     var interval = setInterval(data => {
       // console.log(this.time);
       if(this.time != 0){
@@ -124,15 +148,15 @@ export class HostComponent {
     this.gameStateLeaderboard();
   }
   getLeaderboard(){
-    var leaderboard;
+    var leaderboard = [];
     var players;
+    var current = this;
     this.playerList.subscribe(data => {
       players = data;
-      leaderboard = data['points'];
-      console.log(data);
-      console.log(data["points"]);
     })
-    console.log(leaderboard);
-    leaderboard.sort();
+    leaderboard = players.sort(function(a, b){
+      return b.points-a.points
+    })
+    this.topPlayers = leaderboard.slice(0, 5);
   }
 }

@@ -1,8 +1,10 @@
-<div class="container test">
-  <button type="button" (click)="createGame()">Test creating game</button>
-  <div class="row" *ngFor="let game of games | async">
-    <div (click)="startGame(game)">
-      {{game.id}}
+<body>
+  <div class="container" id="start">
+    <button type="button" (click)="createGame()">Test creating game</button>
+    <div class="row" *ngFor="let game of games | async">
+      <div (click)="startGame(game)">
+        {{game.id}}
+      </div>
     </div>
   </div>
-</div>
+</body>

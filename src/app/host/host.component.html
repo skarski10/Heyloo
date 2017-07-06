@@ -1,5 +1,5 @@
-<body>
-	<div class="container" id='host'>
+<html class='host'>
+	<div class="container host">
 		<div class="row starting" *ngIf="currentGame?.game_state == 'starting' ">
 			<div class="jumbotron">
 				<h1><span class="heyloo">Heyloo!</span></h1>
@@ -11,7 +11,7 @@
 				<h3>Who's here:</h3>
 				<div class="player-list" *ngFor='let player of playerList | async'>
 					<div class="names" (click)='deleteStudent(player)'>
-						{{player.name}}
+						<span class='players'>{{player.name}}</span>
 					</div>
 				</div>
 			</div>
@@ -21,12 +21,36 @@
 			<h1>The next question will start in {{time}}....</h1>
 		</div>
 
+		<div class="row pre-question" *ngIf="currentGame?.game_state == 'prequestion' ">
+			<div class="jumbotron">
+				<div class="row">
+					<h1>{{currentQuestion?.title}}</h1>
+				</div>
+				<div class="row current-question" *ngIf="currentQuestionSubstring == 'https'">
+					{{currentQuestion?.instructions}}
+					<br><br>
+					<img src="{{currentQuestion?.prompt}}">
+				</div>
+				<div class="row current-question" *ngIf="currentQuestionSubstring != 'https'">
+					{{currentQuestion?.instructions}}
+					<br><br>
+					{{currentQuestion?.prompt}}
+				</div>
+			</div>
+			<button class="btn" type="button" (click)='gameStateLeaderboard()'>Skip question</button>
+		</div>
+
 		<div class="row questions" *ngIf="currentGame?.game_state == 'question' ">
 			<div class="jumbotron">
 				<div class="row">
 					<h1>{{currentQuestion?.title}}</h1>
 				</div>
-				<div class="row" id="current-question">
+				<div class="row current-question" *ngIf="currentQuestionSubstring == 'https'">
+					{{currentQuestion?.instructions}}
+					<br><br>
+					<img src="{{currentQuestion?.prompt}}">
+				</div>
+				<div class="row current-question" *ngIf="currentQuestionSubstring != 'https'">
 					{{currentQuestion?.instructions}}
 					<br><br>
 					{{currentQuestion?.prompt}}
@@ -36,32 +60,47 @@
 				<span id='timer'>{{time}}</span>
 			</div>
 				<div class="row">
-					<div class="col-md-6 answer1">
+					<div class="col-md-6" id="answer1">
 						<i class="fa fa-paper-plane fa-5x" aria-hidden="true"></i>
 						<img src="{{currentQuestion?.choices[0]}}">
 					</div>
-					<div class="col-md-6 answer2">
+					<div class="col-md-6" id="answer2">
 						<i class="fa fa-star fa-5x" aria-hidden="true"></i>
 						<img src="{{currentQuestion?.choices[1]}}">
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-6 answer3">
+					<div class="col-md-6" id="answer3">
 						<i class="fa fa-heart fa-5x" aria-hidden="true"></i>
 						<img src="{{currentQuestion?.choices[2]}}">
 					</div>
-					<div class="col-md-6 answer4">
+					<div class="col-md-6" id="answer4">
 						<i class="fa fa-rocket fa-5x" aria-hidden="true"></i>
 						<img src="{{currentQuestion?.choices[3]}}">
 					</div>
 				</div>
-			<button class="btn" type="button" (click)='gameStateLeaderboard()'>Skip question</button>
 		</div>
 
 		<div class="row answer" *ngIf="currentGame?.game_state == 'answer' ">
-			The correct answer was <img src="{{currentGame?.question_list[currentGame?.current_question].choices[currentGame?.question_list[currentGame?.current_question].answer]}}" alt="">
-			<div class="">
-				<app-bar-graph></app-bar-graph>
+			<button (click)="showQuestion=!showQuestion" (click)="hideBarGraph=!hideBarGraph">{{showQuestion ? 'Hide' : 'Show Question'}}</button>
+			The correct answer was
+			<br>
+			<img src="{{currentGame?.question_list[currentGame?.current_question].choices[currentGame?.question_list[currentGame?.current_question].answer]}}" alt="">
+			<br>
+			<div class="row" *ngIf='showQuestion'>
+				<div class="row current-question" *ngIf="currentQuestionSubstring == 'https'">
+					{{currentQuestion?.instructions}}
+					<br><br>
+					<img src="{{currentQuestion?.prompt}}">
+				</div>
+				<div class="row current-question" *ngIf="currentQuestionSubstring != 'https'">
+					{{currentQuestion?.instructions}}
+					<br><br>
+					{{currentQuestion?.prompt}}
+				</div>
+			</div>
+			<div class="bar-graph" *ngIf='hideBarGraph'>
+				<app-bar-graph [thisQuestion]="currentQuestion"></app-bar-graph>
 			</div>
 			<button type="button" (click)='gameStateLeaderboard()'>Go to leaderboard</button>
 			<button type="button" (click)='endGame()'>End Game</button>
@@ -70,8 +109,8 @@
 		<div class="row leaderboard" *ngIf="currentGame?.game_state == 'leaderboard' ">
 			<div class="" *ngIf="currentGame?.game_over == false">
 				<h1>Leaderboard:</h1>
-				<div class="col-md-12" *ngFor='let player of playerList | async'>
-					{{player.points}}
+				<div class="col-md-12" *ngFor='let player of topPlayers'>
+					{{player.name}} - {{player.points}}
 				</div>
 				<button type="button" (click)='gameStateCountdown()'>Next question</button>
 				<button type="button" (click)='endGame()'>End Game</button>
@@ -84,4 +123,4 @@
 			</div>
 		</div>
 	</div>
-</body>
+</html>

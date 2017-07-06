@@ -1,1 +1,7 @@
-
+html {
+  background-color: rgb(159, 156, 153);
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+}

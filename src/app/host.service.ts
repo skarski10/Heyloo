@@ -9,7 +9,6 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import 'rxjs/add/operator/map';
 import { QUESTIONS } from './sample-questions';
 
-
 @Injectable()
 export class HostService {
   games: FirebaseListObservable<any[]>;
@@ -75,8 +74,12 @@ export class HostService {
   }
 
   nextQuestion(game){
+    var nextQuestion;
     var currentGame = this.getGameFromCode(game.id);
-    currentGame.update({current_question: + 1});
+    currentGame.subscribe(data => {
+      nextQuestion = data['current_question'];
+    })
+    currentGame.update({current_question: nextQuestion + 1});
   }
 
   gameOver(game){
@@ -87,5 +90,10 @@ export class HostService {
   updatePlayerList(players, game){
     var currentGame = this.getGameFromCode(game.id);
     currentGame.update({player_list: players});
+  }
+
+  updatePlayerChoice(questions, game){
+    var currentGame = this.getGameFromCode(game.id);
+    currentGame.update({question_list: questions});
   }
 }

@@ -1,6 +1,12 @@
 import { Question } from './question.model';
 
 export const QUESTIONS: Question[] = [
+  new Question("Writing Linear Equations", "Select the equation of the line represented by the two points, table, or graph.", "https://app.chalkdoc.com/cached_latex_images/f92053f28798c473926d91cc5451752d7bfcde8b8f09bbd166b606b24300872b.png", [
+    "https://app.chalkdoc.com/cached_latex_images/a1ad7629db4689efd496afa936fe5281bed12a857ac74a570d3ea14b80f44358.png",
+    "https://app.chalkdoc.com/cached_latex_images/1c8a787c20dcf46c88cce25ebf62e0a53e6b0461137a131ff7d97584dba14aef.png",
+    "https://app.chalkdoc.com/cached_latex_images/1c8a787c20dcf46c88cce25ebf62e0a53e6b0461137a131ff7d97584dba14aef.png",
+    "https://app.chalkdoc.com/cached_latex_images/85e37542ea650d34c23a5467a12ae2f359ef595f80ecf3d652c51b52030ee980.png"
+  ], 0),
   new Question("Writing Linear Equations", "Select the equation of the line represented by the two points, table, or graph.", "(2, -1) and (0, 2)", [
     "https://app.chalkdoc.com/cached_latex_images/a1ad7629db4689efd496afa936fe5281bed12a857ac74a570d3ea14b80f44358.png",
     "https://app.chalkdoc.com/cached_latex_images/1c8a787c20dcf46c88cce25ebf62e0a53e6b0461137a131ff7d97584dba14aef.png",
