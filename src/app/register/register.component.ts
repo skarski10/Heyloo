@@ -45,5 +45,6 @@ export class RegisterComponent implements OnInit {
     this.router.navigate(['student', roomcode, newPlayer.id]);
     // https://stackoverflow.com/questions/39401228/get-child-of-firebaseobjectobservable-angularfire2
   }
+  //the method above make the game wait for all the players fromt he firebase to load before adding and navigating to the student room. 
 
 }

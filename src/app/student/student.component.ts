@@ -47,6 +47,7 @@ export class StudentComponent implements OnInit {
     this.currentStudent.subscribe(data => {
       this.subStudent = data;
     })
+    //lines 33 through 49 are necessary to even load the page properly, would like to cut down somewhat. 
     this.questions = this.hostService.getQuestions();
     this.currentGame.subscribe(data => {
       this.subGame = data;
@@ -66,6 +67,7 @@ export class StudentComponent implements OnInit {
       this.setAnsweredToFalse();
       this.setStartTime();
     }
+    //this is for watching the game_state property so that modifications and setup can be managed automatically
   }
 
   getStudentAnswer(answer: number){
@@ -96,12 +98,14 @@ export class StudentComponent implements OnInit {
     this.currentGame.subscribe(data => {
       this.subGame = data;
     })
+    //this is just for resubscribing the local object
   }
 
   setAnsweredToFalse(){
     if(this.endTime == 0){
       this.answered = false;
     }
+    //more state management
   }
 
   setStartTime(){

@@ -16,6 +16,7 @@ import { Game } from '../game.model';
 export class HostComponent {
   games: FirebaseListObservable<any[]>;
   subGame: FirebaseObjectObservable<any[]>;
+  //we named subGame improperly according to our other naming conventions.  sub{{name}} usually mean it's a subscribed firebase object or list of some kind.  Not in this case.  Our bad. 
   playerList: FirebaseListObservable<any[]>;
   gameId;
   currentGame;
