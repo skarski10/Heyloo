@@ -1,15 +1,14 @@
-<div class="container">
-  Register place
-  <div class="">
-    <form class="" action="index.html" method="post">
-      <label>Name:</label>
-      <input type="text" #username>
+<div class="master">
+  <form class="holder" action="index.html" method="post">
+    <div class="form-group">
+      <label class="form-labels">Name:</label>
+      <input type="text" #username class='form-control'>
       <br>
-      <label>Room code:</label>
-      <input type="number" #roomcode>
+      <label class="form-labels">Room code:</label>
+      <input class='form-control' type="number" #roomcode>
 
       <br>
-      <button type="button" (click)="register(username.value, roomcode.value)">Register</button>
-    </form>
-  </div>
+      <button type="button" class="btn" (click)="register(username.value, roomcode.value)">Register</button>
+    </div>
+  </form>
 </div>

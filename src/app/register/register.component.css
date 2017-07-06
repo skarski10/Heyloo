@@ -1,0 +1,19 @@
+.master {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(159, 156, 153);
+  font-family: 'Acme', sans-serif;
+  font-size: 3vh;
+}
+
+.form-control {
+  width: 40vw;
+}
+
+.holder {
+  position: absolute;
+  top: 5vh;
+  left: 10vw;
+}
