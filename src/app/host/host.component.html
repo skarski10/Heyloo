@@ -124,3 +124,18 @@
 		</div>
 	</div>
 </html>
+
+<!-- media -->
+
+<audio autoplay *ngIf="currentGame?.game_state == 'starting'">
+  <source src="../../assets/media/retrosoul.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+<audio autoplay *ngIf="currentGame?.game_state == 'question' || currentGame?.game_state == 'prequestion'">
+  <source src="../../assets/media/suspense.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+<audio autoplay *ngIf="currentGame?.game_over == true">
+  <source src="../../assets/media/ukulele.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
