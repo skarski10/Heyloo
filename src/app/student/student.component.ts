@@ -91,7 +91,7 @@ export class StudentComponent implements OnInit {
 
   scoringAlgorithm(end, start){
     var dif = (end - start) / 1000
-    var score = (-150 * Math.log(30/(-dif + 30))) + 1000
+    var score = Math.round((-150 * Math.log(30/(-dif + 30))) + 1000)
     return score;
   }
 
