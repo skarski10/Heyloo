@@ -1,7 +1,7 @@
 <div class="master">
   <div class="player-starting" *ngIf="subGame?.game_state == 'starting' ">
     <h2>The game will start soon .. </h2>
-    <div class="spinner">
+    <div class="spinner" *ngIf="subGame?.game_state == 'starting' || subGame?.game_state == 'prequestion'">
       <div class="double-bounce1"></div>
       <div class="double-bounce2"></div>
     </div>
