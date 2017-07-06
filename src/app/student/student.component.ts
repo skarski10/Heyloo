@@ -32,7 +32,7 @@ export class StudentComponent implements OnInit {
   ngOnInit() {
     this.games = this.hostService.getGames();
     this.games.subscribe(data => this.subGames = data);
-    console.log(this.subGames, 'student sub games');
+    // console.log(this.subGames, 'student sub games');
     var currentGameKey;
     var studentId;
     this.route.params.forEach(urlParameters => {
@@ -47,7 +47,7 @@ export class StudentComponent implements OnInit {
     this.currentStudent.subscribe(data => {
       this.subStudent = data;
     })
-    //lines 33 through 49 are necessary to even load the page properly, would like to cut down somewhat. 
+    //lines 33 through 49 are necessary to even load the page properly, would like to cut down somewhat.
     this.questions = this.hostService.getQuestions();
     this.currentGame.subscribe(data => {
       this.subGame = data;
@@ -58,13 +58,14 @@ export class StudentComponent implements OnInit {
   }
 
   ngDoCheck(){
-    console.log(this.subGame);
+    // console.log(this.subGame);
     if(this.subGame['game_state'] == "answer"){
       console.log('game state now answer')
+      this.answered = false;
       this.updateGame();
     }else if(this.subGame['game_state'] == 'question'){
       console.log('game state now question', this.answered, this.endTime)
-      this.setAnsweredToFalse();
+      // this.setAnsweredToFalse();
       this.setStartTime();
     }
     //this is for watching the game_state property so that modifications and setup can be managed automatically
@@ -101,12 +102,12 @@ export class StudentComponent implements OnInit {
     //this is just for resubscribing the local object
   }
 
-  setAnsweredToFalse(){
-    if(this.endTime == 0){
-      this.answered = false;
-    }
-    //more state management
-  }
+  // setAnsweredToFalse(){
+  //   if(this.endTime == 0){
+  //     this.answered = false;
+  //   }
+  //   //more state management
+  // }
 
   setStartTime(){
     if (this.startTime == 0){
