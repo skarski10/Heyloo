@@ -1,6 +1,6 @@
 # Heyloo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.0. It was created by Kory Skarski and Melvin Gruschow for Steve Walker as part of our internship from Epicods.  This application was designed to run parallel and integrate with the ChalkDoc website, taking in math assignment plans and turning it into a game similar to that of the quiz game Kahoot.  
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.0. It was created by Kory Skarbek and Melvin Gruschow for Steve Walker as part of our internship from Epicods.  This application was designed to run parallel and integrate with the ChalkDoc website, taking in math assignment plans and turning it into a game similar to that of the quiz game Kahoot.  
 
 ## Development server
 
