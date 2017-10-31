@@ -16,6 +16,7 @@ import { Game } from '../game.model';
 export class HostComponent {
   games: FirebaseListObservable<any[]>;
   subGame: FirebaseObjectObservable<any[]>;
+  //we named subGame improperly according to our other naming conventions.  sub{{name}} usually mean it's a subscribed firebase object or list of some kind.  Not in this case.  Our bad.
   playerList: FirebaseListObservable<any[]>;
   gameId;
   currentGame;
@@ -117,7 +118,7 @@ export class HostComponent {
   }
 
   thirtySeconds(){
-    this.time = 2;
+    this.time = 30;
     var interval = setInterval(data => {
       // console.log(this.time);
       if(this.time != 0){

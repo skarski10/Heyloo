@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Game } from './game.model';
 import { Player } from './player.model';
 import { Question } from './question.model';
@@ -14,9 +15,10 @@ export class HostService {
   games: FirebaseListObservable<any[]>;
   subGames: Game[];
 
-  constructor(private database: AngularFireDatabase, private http: Http) {
+  constructor(private database: AngularFireDatabase, private http: Http, private router: Router) {
     this.games = database.list('games');
-    this.games.subscribe(data => {this.subGames = data})
+    this.games.subscribe(data => {this.subGames = data
+  })
   }
 
   getGames(){
@@ -28,10 +30,14 @@ export class HostService {
   }
 
   getGameFromCode(roomcode: number){
+    var subGames;
     var thisGame;
-    for(let i=0; i<this.subGames.length; i++){
-      if(this.subGames[i].id == roomcode){
-        thisGame = this.getGame(this.subGames[i]['$key']);
+    this.games.subscribe(data => {
+      subGames = data;
+    })
+    for(let i=0; i<subGames.length; i++){
+      if(subGames[i].id == roomcode){
+        thisGame = this.getGame(subGames[i]['$key']);
       }
     }
     return thisGame;
@@ -51,8 +57,9 @@ export class HostService {
     return Math.floor(Math.random()*90000) + 10000;
   }
 
-  createGame(newGame: Game){
+  startGame(newGame: Game){
     this.games.push(newGame);
+    this.router.navigate(['host', newGame.id]);
     return newGame;
   }
 

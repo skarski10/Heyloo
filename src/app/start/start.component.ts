@@ -23,15 +23,16 @@ export class StartComponent implements OnInit {
     this.games = this.hostService.getGames();
   }
 
-  startGame(clickedGame){
-    this.router.navigate(['host', clickedGame.id]);
+  joinGame(){
+    this.router.navigate(['register']);
   }
+
   randomId(){
     return Math.floor(Math.random()*90000) + 10000;
   }
 
-  createGame(game){
+  createGame(){
     var newGame: Game = new Game(this.randomId(), "starting", false, [], this.questions);
-    this.hostService.createGame(newGame);
+    this.hostService.startGame(newGame);
   }
 }

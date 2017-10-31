@@ -3,7 +3,7 @@
 		<div class="row starting" *ngIf="currentGame?.game_state == 'starting' ">
 			<div class="jumbotron">
 				<h1><span class="heyloo">Heyloo!</span></h1>
-				<h2>Go to https://Heyloo.firebaseapp.com on your smartphone</h2>
+				<h2>Go to https://heyloo-e0dc9.firebaseapp.com/ on your smartphone</h2>
 				<h2>Our PIN code is {{currentGame?.id}}</h2>
 				<p><button class="btn btn-success" (click)='gameStateCountdown()'>Let's begin!</button></p>
 			</div>
@@ -56,25 +56,25 @@
 					{{currentQuestion?.prompt}}
 				</div>
 			</div>
-			<div class="col-md-12">
+			<div class="row">
 				<span id='timer'>{{time}}</span>
 			</div>
 				<div class="row">
-					<div class="col-md-6" id="answer1">
+					<div class="col-md-5" id="answer1">
 						<i class="fa fa-paper-plane fa-5x" aria-hidden="true"></i>
 						<img src="{{currentQuestion?.choices[0]}}">
 					</div>
-					<div class="col-md-6" id="answer2">
+					<div class="col-md-5" id="answer2">
 						<i class="fa fa-star fa-5x" aria-hidden="true"></i>
 						<img src="{{currentQuestion?.choices[1]}}">
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-6" id="answer3">
+					<div class="col-md-5" id="answer3">
 						<i class="fa fa-heart fa-5x" aria-hidden="true"></i>
 						<img src="{{currentQuestion?.choices[2]}}">
 					</div>
-					<div class="col-md-6" id="answer4">
+					<div class="col-md-5" id="answer4">
 						<i class="fa fa-rocket fa-5x" aria-hidden="true"></i>
 						<img src="{{currentQuestion?.choices[3]}}">
 					</div>
@@ -124,3 +124,18 @@
 		</div>
 	</div>
 </html>
+
+<!-- media -->
+
+<audio autoplay *ngIf="currentGame?.game_state == 'starting'">
+  <source src="../../assets/media/retrosoul.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+<audio autoplay *ngIf="currentGame?.game_state == 'question' || currentGame?.game_state == 'prequestion'">
+  <source src="../../assets/media/suspense.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
+<audio autoplay *ngIf="currentGame?.game_over == true">
+  <source src="../../assets/media/ukulele.mp3" type="audio/mpeg">
+Your browser does not support the audio element.
+</audio>
